@@ -1,0 +1,149 @@
+\doxysection{fdrs\+\_\+oled.\+h}
+\hypertarget{fdrs__oled_8h_source}{}\label{fdrs__oled_8h_source}\index{src/fdrs\_oled.h@{src/fdrs\_oled.h}}
+\mbox{\hyperlink{fdrs__oled_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{_s_s_d1306_wire_8h}{ESP8266\_and\_ESP32\_OLED\_driver\_for\_SSD1306\_displays/src/SSD1306Wire.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ DISPLAY\_PAGES\ 4}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ String\ \mbox{\hyperlink{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de}{debug\_buffer}}[5]\ =\ \{\textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}}\};}
+\DoxyCodeLine{00007\ \mbox{\hyperlink{class_s_s_d1306_wire}{SSD1306Wire}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(0x3c,\ I2C\_SDA,\ I2C\_SCL);\ \textcolor{comment}{//\ ADDRESS,\ SDA,\ SCL}}
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{fdrs__oled_8h_af5aa86b3476d0868b38717bb58330106}{displayEvent}}\ =\ 0;}
+\DoxyCodeLine{00009\ uint8\_t\ \mbox{\hyperlink{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}{displayPage}}\ =\ 0;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_ac7be4ddf050f11a4a0320275346e64e8}{draw\_OLED\_header}}()}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ FDRS\_GATEWAY}}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setFont(ArialMT\_Plain\_10);}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.clear();}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aa3b85bc4d8cfda6b273b534eb2e1cebfc}{TEXT\_ALIGN\_LEFT}});}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawString(0,\ 0,\ \textcolor{stringliteral}{"{}MAC:\ "{}}\ +\ String(UNIT\_MAC,\ HEX));}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aa4da3c85cde615e7442df8ef17d0753ba}{TEXT\_ALIGN\_CENTER}});}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawString(63,\ 0,\ OLED\_HEADER);}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aabc81ce8623a972fc7b97f497189c494b}{TEXT\_ALIGN\_RIGHT}});}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawString(127,\ 0,\ \textcolor{stringliteral}{"{}TBD"{}});}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.display();}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aa3b85bc4d8cfda6b273b534eb2e1cebfc}{TEXT\_ALIGN\_LEFT}});}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setFont(ArialMT\_Plain\_10);}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ FDRS\_NODE}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setFont(ArialMT\_Plain\_10);}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.clear();}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aa3b85bc4d8cfda6b273b534eb2e1cebfc}{TEXT\_ALIGN\_LEFT}});}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawString(0,\ 0,\ \textcolor{stringliteral}{"{}ID:\ "{}}\ +\ String(READING\_ID));}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aa4da3c85cde615e7442df8ef17d0753ba}{TEXT\_ALIGN\_CENTER}});}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawString(63,\ 0,\ OLED\_HEADER);}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aabc81ce8623a972fc7b97f497189c494b}{TEXT\_ALIGN\_RIGHT}});}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawString(127,\ 0,\ \textcolor{stringliteral}{"{}GW:\ "{}}\ +\ String(GTWY\_MAC,\ HEX));}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.display();}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aa3b85bc4d8cfda6b273b534eb2e1cebfc}{TEXT\_ALIGN\_LEFT}});}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.setFont(ArialMT\_Plain\_10);}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawHorizontalLine(0,\ 15,\ 128);}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.drawHorizontalLine(0,\ 16,\ 128);}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_a65682b10931a3fc9dc8d7ca3051f7e34}{drawDebugPage}}()\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_ac7be4ddf050f11a4a0320275346e64e8}{draw\_OLED\_header}}();}
+\DoxyCodeLine{00045\ \ \ \ \ uint8\_t\ lineNumber\ =\ 0;}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 0;\ i\ <\ 5;\ i++)}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ uint8\_t\ ret\ =\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.FDRS\_drawStringMaxWidth(0,\ 17\ +\ (lineNumber\ *\ 9),\ 127,\ \mbox{\hyperlink{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de}{debug\_buffer}}[i]);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ lineNumber\ =\ ret\ +\ lineNumber;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lineNumber\ >\ 5)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.display();}
+\DoxyCodeLine{00054\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_ac5dea342d4396f9a234142286f6beec6}{debug\_OLED}}(String\ debug\_text)}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_af5aa86b3476d0868b38717bb58330106}{displayEvent}}\ =\ millis()/1000;\ \textcolor{comment}{//\ Display\ Event\ is\ tracked\ in\ units\ of\ seconds}}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}{displayPage}}\ =\ 0;}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.clear();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ i\ =\ 4;\ i\ >\ 0;\ i-\/-\/)}
+\DoxyCodeLine{00063\ \ \ \ \ \{}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de}{debug\_buffer}}[i]\ =\ \mbox{\hyperlink{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de}{debug\_buffer}}[i\ -\/\ 1];}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de}{debug\_buffer}}[0]\ =\ String(millis()\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ debug\_text;}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a65682b10931a3fc9dc8d7ca3051f7e34}{drawDebugPage}}();}
+\DoxyCodeLine{00069\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_a83f5e46084b7a331ba51da2cebaa2224}{drawBlankPage}}()\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.clear();}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.display();}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_ac3247ac7b2dfd289698938eaf00a89d7}{drawStatusPage}}()\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ draw\_OLED\_header();}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ display.FDRS\_drawStringMaxWidth(0,\ 17,\ 127,\ "{}Status\ Page\ 1\ "{}\ +\ String(millis()/1000));}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//\ display.display();}}
+\DoxyCodeLine{00080\ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_abc2a3141ebd9bed252c600f01e33c25b}{drawPage2}}()\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{//\ draw\_OLED\_header();}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ display.FDRS\_drawStringMaxWidth(0,\ 17,\ 127,\ "{}Page\ 2\ "{}\ +\ String(millis()/1000));}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{//\ display.display();}}
+\DoxyCodeLine{00086\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_a7a419998418401c8e5330ec2690cb14a}{drawPage3}}()\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ draw\_OLED\_header();}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//\ display.FDRS\_drawStringMaxWidth(0,\ 17,\ 127,\ "{}Page\ 3\ "{}\ +\ String(millis()/1000));}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ display.display();}}
+\DoxyCodeLine{00092\ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ write\ display\ content\ to\ display\ buffer}}
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ nextpage\ =\ true\ -\/>\ flip\ 1\ page}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ When\ debug\ info\ comes\ in\ then\ switch\ to\ debug\ page}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ after\ 60\ seconds\ switch\ to\ blank\ page\ to\ save\ screen}}
+\DoxyCodeLine{00098\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_aede8688c940237ef6b03bbf2cf369175}{drawPageOLED}}(\textcolor{keywordtype}{bool}\ nextpage)\ \{}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{if}((millis()/1000\ -\/\ \mbox{\hyperlink{fdrs__oled_8h_af5aa86b3476d0868b38717bb58330106}{displayEvent}})\ >\ OLED\_PAGE\_SECS\ \&\&\ nextpage)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}{displayPage}}\ =\ (\mbox{\hyperlink{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}{displayPage}}\ >=\ \mbox{\hyperlink{fdrs__oled_8h_a3d6e8679a1868c4a294ced76461260ec}{DISPLAY\_PAGES}})\ ?\ 0\ :\ (\mbox{\hyperlink{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}{displayPage}}\ +\ 1);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_af5aa86b3476d0868b38717bb58330106}{displayEvent}}\ =\ millis()/1000;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.clear();}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}{displayPage}})\ \{}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ page\ 0:\ debug\ output}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ page\ 1:\ gateway/node\ status}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ page\ 2:\ to\ be\ defined}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ page\ 3:\ to\ be\ defined}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ page\ 4:\ blank\ (screen\ saver)}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:\ \textcolor{comment}{//\ display\ debug\ output}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a65682b10931a3fc9dc8d7ca3051f7e34}{drawDebugPage}}();}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ \textcolor{comment}{//\ gateway/node\ status}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ drawStatusPage();}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ break;}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ \textcolor{comment}{//\ to\ be\ defined\ later}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ drawPage2();}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ break;}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:\ \textcolor{comment}{//\ to\ be\ defined\ later}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ drawPage3();}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ break;}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4:\ \textcolor{comment}{//\ Blank\ page}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a83f5e46084b7a331ba51da2cebaa2224}{drawBlankPage}}();}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{comment}{//\ Blank\ page}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__oled_8h_a83f5e46084b7a331ba51da2cebaa2224}{drawBlankPage}}();}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__oled_8h_a7146bcf63d6f02cf65be385af76565ed}{init\_oled}}()\{}
+\DoxyCodeLine{00136\ \ \ pinMode(OLED\_RST,\ OUTPUT);}
+\DoxyCodeLine{00137\ \ \ digitalWrite(OLED\_RST,\ LOW);}
+\DoxyCodeLine{00138\ \ \ delay(30);}
+\DoxyCodeLine{00139\ \ \ digitalWrite(OLED\_RST,\ HIGH);}
+\DoxyCodeLine{00140\ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.init();}
+\DoxyCodeLine{00141\ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}.flipScreenVertically();}
+\DoxyCodeLine{00142\ \ \ \mbox{\hyperlink{fdrs__oled_8h_ac7be4ddf050f11a4a0320275346e64e8}{draw\_OLED\_header}}();}
+\DoxyCodeLine{00143\ \ \ \}}
+
+\end{DoxyCode}

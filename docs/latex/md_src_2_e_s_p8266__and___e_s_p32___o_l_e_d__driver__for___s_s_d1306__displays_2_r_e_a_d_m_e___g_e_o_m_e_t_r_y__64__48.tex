@@ -1,0 +1,28 @@
+\chapter{GEOMETRY\+\_\+64\+\_\+48}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e___g_e_o_m_e_t_r_y__64__48}{}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e___g_e_o_m_e_t_r_y__64__48}\index{GEOMETRY\_64\_48@{GEOMETRY\_64\_48}}
+\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e___g_e_o_m_e_t_r_y__64__48_autotoc_md32}%
+\Hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e___g_e_o_m_e_t_r_y__64__48_autotoc_md32}%
+ The 64x48 geometry setting are working with the {\ttfamily Wire.\+h} and {\ttfamily brzo\+\_\+i2c} libraries.
+
+I\textquotesingle{}ve tested it successfully with a WEMOS D1 mini Lite and a WEMOS OLED shield
+
+Initialization code\+:
+
+
+\begin{DoxyItemize}
+\item Wire 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include\ <Wire.h>}
+\DoxyCodeLine{\#include\ <SSD1306Wire.h>}
+\DoxyCodeLine{SSD1306Wire\ display(0x3c,\ D2,\ D1,\ GEOMETRY\_64\_48\ );\ //\ WEMOS\ OLED\ shield}
+
+\end{DoxyCode}
+
+\item BRZO i2c 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include\ <SSD1306Brzo.h>}
+\DoxyCodeLine{SSD1306Brzo\ display(0x3c,\ D2,\ D1,\ GEOMETRY\_64\_48\ );\ //\ WEMOS\ OLED\ Shield}
+
+\end{DoxyCode}
+ 
+\end{DoxyItemize}

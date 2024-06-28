@@ -1,0 +1,350 @@
+\chapter{README}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e}{}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e}\index{README@{README}}
+\href{https://github.com/ThingPulse/esp8266-oled-ssd1306/actions}{\texttt{ }}\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{Thing\+Pulse OLED SSD1306 (ESP8266/\+ESP32/\+Mbed-\/\+OS)}{Thing\+Pulse OLED SSD1306 (ESP8266/\+ESP32/\+Mbed-\/\+OS)}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md8}
+This is a driver for SSD1306 128x64, 128x32, 64x48 and 64x32 OLED displays running on the Arduino/\+ESP8266 \& ESP32 and mbed-\/os platforms. Can be used with either the I2C or SPI version of the display.
+
+This library drives the OLED display included in the \href{https://thingpulse.com/product/esp8266-iot-electronics-starter-kit-weatherstation-planespotter-worldclock/}{\texttt{ Thing\+Pulse IoT starter kit}} aka classic kit aka weather station kit.
+
+\href{https://thingpulse.com/product/esp8266-iot-electronics-starter-kit-weatherstation-planespotter-worldclock/}{\texttt{ }}
+
+You can either download this library as a zip file and unpack it to your Arduino/libraries folder or find it in the Arduino library manager under "{}\+ESP8266 and ESP32 Oled Driver for SSD1306 display"{}. For mbed-\/os a copy of the files are available as an mbed-\/os library.
+
+It is also available as a \href{https://platformio.org/lib/show/2978/ESP8266\%20and\%20ESP32\%20OLED\%20driver\%20for\%20SSD1306\%20displays/examples}{\texttt{ Platform\+IO library}}. Just execute the following command\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{platformio\ lib\ install\ 2978}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{\texorpdfstring{Service level promise}{Service level promise}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md9}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+ &This is a Thing\+Pulse {\itshape prime} project. See our \href{https://thingpulse.com/about/open-source-commitment/}{\texttt{ open-\/source commitment declaration}} for what this means.\\\cline{1-2}
+\end{longtabu}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{Credits}{Credits}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md10}
+This library has initially been written by \href{https://github.com/squix78}{\texttt{ Daniel Eichhorn}}. Many thanks go to \href{https://github.com/FWeinb}{\texttt{ Fabrice Weinberg}} for optimizing and refactoring many aspects of the library. Also many thanks to the many committers who helped to add new features and who fixed many bugs. Mbed-\/\+OS support and other improvements were contributed by \href{https://github.com/helmut64}{\texttt{ Helmut Tschemernjak}}.
+
+The init sequence for the SSD1306 was inspired by Adafruit\textquotesingle{}s library for the same display.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md11}{}\doxysubsection{\texorpdfstring{mbed-\/os}{mbed-\/os}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md11}
+This library has been adopted to support the ARM mbed-\/os environment. A copy of this library is available in mbed-\/os under the name OLED\+\_\+\+SSD1306 by Helmut Tschemernjak. An alternate installation option is to copy the following files into your mbed-\/os project\+: \doxylink{_o_l_e_d_display_8cpp}{OLEDDisplay.\+cpp} \doxylink{_o_l_e_d_display_8h}{OLEDDisplay.\+h} \doxylink{_o_l_e_d_display_fonts_8h}{OLEDDisplay\+Fonts.\+h} \doxylink{_o_l_e_d_display_ui_8cpp}{OLEDDisplay\+Ui.\+cpp} \doxylink{_o_l_e_d_display_ui_8h}{OLEDDisplay\+Ui.\+h} \doxylink{_s_s_d1306_i2_c_8h}{SSD1306\+I2\+C.\+h}\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md12}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md12}
+Check out the examples folder for a few comprehensive demonstrations how to use the library. Also check out the \href{https://github.com/ThingPulse/esp8266-weather-station}{\texttt{ ESP8266 Weather Station}} library which uses the OLED library to display beautiful weather information.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md13}{}\doxysubsection{\texorpdfstring{Upgrade}{Upgrade}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md13}
+The API changed a lot with the 3.\+0 release. If you were using this library with older versions please have a look at the \doxysectlink{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80}{Upgrade Guide}{0}.
+
+Going from 3.\+x version to 4.\+0 a lot of internals changed and compatibility for more displays was added. Please read the \doxysectlink{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-4_80}{Upgrade Guide}{0}.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md14}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md14}
+
+\begin{DoxyItemize}
+\item Draw pixels at given coordinates
+\item Draw lines from given coordinates to given coordinates
+\item Draw or fill a rectangle with given dimensions
+\item Draw Text at given coordinates\+:
+\begin{DoxyItemize}
+\item Define Alignment\+: Left, Right and Center
+\item Set the Fontface you want to use (see section Fonts below)
+\item Limit the width of the text by an amount of pixels. Before this widths will be reached, the renderer will wrap the text to a new line if possible
+\end{DoxyItemize}
+\item Display content in automatically side scrolling carousel
+\begin{DoxyItemize}
+\item Define transition cycles
+\item Define how long one frame will be displayed
+\item Draw the different frames in callback methods
+\item One indicator per frame will be automatically displayed. The active frame will be displayed from inactive once
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md15}{}\doxysubsection{\texorpdfstring{Fonts}{Fonts}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md15}
+Fonts are defined in a proprietary but open format. You can create new font files by choosing from a given list of open sourced Fonts from this web app\+: \href{http://oleddisplay.squix.ch}{\texttt{ http\+://oleddisplay.\+squix.\+ch}} Choose the font family, style and size, check the preview image and if you like what you see click the "{}\+Create"{} button. This will create the font array in a text area form where you can copy and paste it into a new or existing header file.
+
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md16}{}\doxysubsection{\texorpdfstring{Hardware Abstraction}{Hardware Abstraction}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md16}
+The library supports different protocols to access the OLED display. Currently there is support for I2C using the built in Wire.\+h library, I2C by using the much faster \href{https://github.com/pasko-zh/brzo_i2c}{\texttt{ BRZO I2C library}} written in assembler and it also supports displays which come with the SPI interface.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md17}{}\doxysubsubsection{\texorpdfstring{I2C with Wire.\+h}{I2C with Wire.\+h}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md17}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_s_d1306_wire_8h}{SSD1306Wire.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ for\ 128x64\ displays:}}
+\DoxyCodeLine{\mbox{\hyperlink{class_s_s_d1306_wire}{SSD1306Wire}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(0x3c,\ SDA,\ SCL);\ \ \textcolor{comment}{//\ ADDRESS,\ SDA,\ SCL}}
+\DoxyCodeLine{\textcolor{comment}{//\ for\ 128x32\ displays:}}
+\DoxyCodeLine{\textcolor{comment}{//\ SSD1306Wire\ display(0x3c,\ SDA,\ SCL,\ GEOMETRY\_128\_32);\ \ //\ ADDRESS,\ SDA,\ SCL,\ GEOMETRY\_128\_32\ (or\ 128\_64)}}
+\DoxyCodeLine{\textcolor{comment}{//\ for\ using\ 2nd\ Hardware\ I2C\ (if\ available)}}
+\DoxyCodeLine{\textcolor{comment}{//\ SSD1306Wire(0x3c,\ SDA,\ SCL,\ GEOMETRY\_128\_64,\ I2C\_TWO);\ //default\ value\ is\ I2C\_ONE\ if\ not\ mentioned}}
+\DoxyCodeLine{\textcolor{comment}{//\ By\ default\ SD1306Wire\ set\ I2C\ frequency\ to\ 700000,\ you\ can\ use\ set\ either\ another\ frequency\ or\ skip\ setting\ the\ frequency\ by\ providing\ -\/1\ value}}
+\DoxyCodeLine{\textcolor{comment}{//\ SSD1306Wire(0x3c,\ SDA,\ SCL,\ GEOMETRY\_128\_64,\ I2C\_ONE,\ 400000);\ //set\ I2C\ frequency\ to\ 400kHz}}
+\DoxyCodeLine{\textcolor{comment}{//\ SSD1306Wire(0x3c,\ SDA,\ SCL,\ GEOMETRY\_128\_64,\ I2C\_ONE,\ -\/1);\ //skip\ setting\ the\ I2C\ bus\ frequency}}
+
+\end{DoxyCode}
+
+
+for a SH1106\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_h1106_wire_8h}{SH1106Wire.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_s_h1106_wire}{SH1106Wire}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(0x3c,\ SDA,\ SCL);\ \ \textcolor{comment}{//\ ADDRESS,\ SDA,\ SCL}}
+\DoxyCodeLine{\textcolor{comment}{//\ By\ default\ SH1106Wire\ set\ I2C\ frequency\ to\ 700000,\ you\ can\ use\ set\ either\ another\ frequency\ or\ skip\ setting\ the\ frequency\ by\ providing\ -\/1\ value}}
+\DoxyCodeLine{\textcolor{comment}{//\ SH1106Wire(0x3c,\ SDA,\ SCL,\ GEOMETRY\_128\_64,\ I2C\_ONE,\ 400000);\ //set\ I2C\ frequency\ to\ 400kHz}}
+\DoxyCodeLine{\textcolor{comment}{//\ SH1106Wire(0x3c,\ SDA,\ SCL,\ GEOMETRY\_128\_64,\ I2C\_ONE,\ -\/1);\ //skip\ setting\ the\ I2C\ bus\ frequency}}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md18}{}\doxysubsubsection{\texorpdfstring{I2C with brzo\+\_\+i2c}{I2C with brzo\+\_\+i2c}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md18}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <brzo\_i2c.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_s_d1306_brzo_8h}{SSD1306Brzo.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_s_s_d1306_brzo}{SSD1306Brzo}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(0x3c,\ SDA,\ SCL);\ \ \textcolor{comment}{//\ ADDRESS,\ SDA,\ SCL}}
+
+\end{DoxyCode}
+ or for the SH1106\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <brzo\_i2c.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_h1106_brzo_8h}{SH1106Brzo.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_s_h1106_brzo}{SH1106Brzo}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(0x3c,\ SDA,\ SCL);\ \ \textcolor{comment}{//\ ADDRESS,\ SDA,\ SCL}}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md19}{}\doxysubsubsection{\texorpdfstring{SPI}{SPI}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <SPI.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_s_d1306_spi_8h}{SSD1306Spi.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_s_s_d1306_spi}{SSD1306Spi}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(D0,\ D2,\ D8);\ \ \textcolor{comment}{//\ RES,\ DC,\ CS}}
+
+\end{DoxyCode}
+ or for the SH1106\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <SPI.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_h1106_spi_8h}{SH1106Spi.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_s_h1106_spi}{SH1106Spi}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(D0,\ D2);\ \ \textcolor{comment}{//\ RES,\ DC}}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md20}{}\doxysubsection{\texorpdfstring{API}{API}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md20}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md21}{}\doxysubsubsection{\texorpdfstring{Display Control}{Display Control}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md21}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{comment}{//\ Initialize\ the\ display}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_aee8048628ff2b5c026c9e15acdcaacb8}{init}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Free\ the\ memory\ used\ by\ the\ display}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_af0c023ea59c478f4a7abc75237ea6585}{end}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Cycle\ through\ the\ initialization}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a16b8c8ad81bc7b1d2a9c82018fa67c19}{resetDisplay}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Connect\ again\ to\ the\ display\ through\ I2C}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ reconnect(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Turn\ the\ display\ on}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a8b7a54ceff6282372ff3ed3f47896d16}{displayOn}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Turn\ the\ display\ offs}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a7f36ace3484849bfbef2b43784a1edfc}{displayOff}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Clear\ the\ local\ pixel\ buffer}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_ad8f12502b308bce3767a748957037510}{clear}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Write\ the\ buffer\ to\ the\ display\ memory}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Inverted\ display\ mode}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a37e979344dd021f6e57829243d33b367}{invertDisplay}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Normal\ display\ mode}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a048d5437e95d2dd3ef9f25c13d53685d}{normalDisplay}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Set\ display\ contrast}}
+\DoxyCodeLine{\textcolor{comment}{//\ really\ low\ brightness\ \&\ contrast:\ contrast\ =\ 10,\ precharge\ =\ 5,\ comdetect\ =\ 0}}
+\DoxyCodeLine{\textcolor{comment}{//\ normal\ brightness\ \&\ contrast:\ \ contrast\ =\ 100}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_ae81c3b4430ae74234b1d7a1b3401c5ec}{setContrast}}(uint8\_t\ contrast,\ uint8\_t\ precharge\ =\ 241,\ uint8\_t\ comdetect\ =\ 64);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Convenience\ method\ to\ access}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a5dc1f588ef59e9b6dd96b4f16c95aa16}{setBrightness}}(uint8\_t);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Turn\ the\ display\ upside\ down}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a507998aee11b0da91163b173c8d4b9e5}{flipScreenVertically}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ the\ screen\ mirrored}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a5db171b4e66b284c6d6ce48a60e7ebf2}{mirrorScreen}}();}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md22}{}\doxysubsection{\texorpdfstring{Pixel drawing}{Pixel drawing}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*\ Drawing\ functions\ */}}
+\DoxyCodeLine{\textcolor{comment}{//\ Sets\ the\ color\ of\ all\ pixel\ operations}}
+\DoxyCodeLine{\textcolor{comment}{//\ color\ :\ BLACK,\ WHITE,\ INVERSE}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a45e3e7b05a9e861f38b7c5d262fba946}{setColor}}(\mbox{\hyperlink{_o_l_e_d_display_8h_a07c9f20bd5fb880da429cf2cab2485c4}{OLEDDISPLAY\_COLOR}}\ \mbox{\hyperlink{_o_l_e_d_display_8h_ac3eb6eaceda72b5581db4171ecb0fde9}{color}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ a\ pixel\ at\ given\ position}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_addf2122a6468874f0db757d4fd21e364}{setPixel}}(int16\_t\ x,\ int16\_t\ y);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ a\ line\ from\ position\ 0\ to\ position\ 1}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a7f0a0b7a50bd05f01345bae5a748a4a3}{drawLine}}(int16\_t\ x0,\ int16\_t\ y0,\ int16\_t\ x1,\ int16\_t\ y1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ the\ border\ of\ a\ rectangle\ at\ the\ given\ location}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a6d61998d84c16294d8295c9334e839f9}{drawRect}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a4f484904e1dbb0c44da1be8bca116f16}{width}},\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a8b580b55be617781f807dc8fcf78da8d}{height}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Fill\ the\ rectangle}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a13f3718e7f1a4123496387b5571634cc}{fillRect}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a4f484904e1dbb0c44da1be8bca116f16}{width}},\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a8b580b55be617781f807dc8fcf78da8d}{height}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ the\ border\ of\ a\ circle}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_ae6da7df928d3b24847c6952c3815356f}{drawCircle}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ radius);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Fill\ circle}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a0a96973c3d6880752e374f0d2c1341a7}{fillCircle}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ radius);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ an\ empty\ triangle\ i.e.\ only\ the\ outline}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a1e456091a8a59f315d4e5e7370ead7d5}{drawTriangle}}(int16\_t\ x0,\ int16\_t\ y0,\ int16\_t\ x1,\ int16\_t\ y1,\ int16\_t\ x2,\ int16\_t\ y2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ a\ solid\ triangle\ i.e.\ filled}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a13095b9aacce2a0cf79c38443a69252f}{fillTriangle}}(int16\_t\ x0,\ int16\_t\ y0,\ int16\_t\ x1,\ int16\_t\ y1,\ int16\_t\ x2,\ int16\_t\ y2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ a\ line\ horizontally}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a1d8f17b21eec04c17261c24863b635db}{drawHorizontalLine}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ length);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ a\ lin\ vertically}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_aa7ccb24bc7d08869a0508a64807ee95b}{drawVerticalLine}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ length);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draws\ a\ rounded\ progress\ bar\ with\ the\ outer\ dimensions\ given\ by\ width\ and\ height.\ Progress\ is}}
+\DoxyCodeLine{\textcolor{comment}{//\ a\ unsigned\ byte\ value\ between\ 0\ and\ 100}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_ad289c217153b3103a08fbae37ff5684d}{drawProgressBar}}(uint16\_t\ x,\ uint16\_t\ y,\ uint16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a4f484904e1dbb0c44da1be8bca116f16}{width}},\ uint16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a8b580b55be617781f807dc8fcf78da8d}{height}},\ uint8\_t\ progress);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ a\ bitmap\ in\ the\ internal\ image\ format}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_a380cc76e82fe766324200d0fce7c708a}{drawFastImage}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a4f484904e1dbb0c44da1be8bca116f16}{width}},\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a8b580b55be617781f807dc8fcf78da8d}{height}},\ \textcolor{keyword}{const}\ uint8\_t\ *image);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Draw\ a\ XBM}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_ab85ba3f21e161ff31a01b1f2acf5cc76}{drawXbm}}(int16\_t\ x,\ int16\_t\ y,\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a4f484904e1dbb0c44da1be8bca116f16}{width}},\ int16\_t\ \mbox{\hyperlink{_o_l_e_d_display_8h_a8b580b55be617781f807dc8fcf78da8d}{height}},\ \textcolor{keyword}{const}\ uint8\_t\ *xbm);}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md23}{}\doxysubsection{\texorpdfstring{Text operations}{Text operations}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md23}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ C++}
+\DoxyCodeLine{//\ Draws\ a\ string\ at\ the\ given\ location,\ returns\ how\ many\ chars\ have\ been\ written}
+\DoxyCodeLine{uint16\_t\ drawString(int16\_t\ x,\ int16\_t\ y,\ const\ String\ \&text);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Draws\ a\ String\ with\ a\ maximum\ width\ at\ the\ given\ location.}
+\DoxyCodeLine{//\ If\ the\ given\ String\ is\ wider\ than\ the\ specified\ width}
+\DoxyCodeLine{//\ The\ text\ will\ be\ wrapped\ to\ the\ next\ line\ at\ a\ space\ or\ dash}
+\DoxyCodeLine{//\ returns\ 0\ if\ everything\ fits\ on\ the\ screen\ or\ the\ numbers\ of\ characters\ in\ the}
+\DoxyCodeLine{//\ first\ line\ if\ not}
+\DoxyCodeLine{uint16\_t\ drawStringMaxWidth(int16\_t\ x,\ int16\_t\ y,\ uint16\_t\ maxLineWidth,\ const\ String\ \&text);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Returns\ the\ width\ of\ the\ const\ char*\ with\ the\ current}
+\DoxyCodeLine{//\ font\ settings}
+\DoxyCodeLine{uint16\_t\ getStringWidth(const\ char*\ text,\ uint16\_t\ length,\ bool\ utf8\ =\ false);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Convencience\ method\ for\ the\ const\ char\ version}
+\DoxyCodeLine{uint16\_t\ getStringWidth(const\ String\ \&text);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Specifies\ relative\ to\ which\ anchor\ point}
+\DoxyCodeLine{//\ the\ text\ is\ rendered.\ Available\ constants:}
+\DoxyCodeLine{//\ TEXT\_ALIGN\_LEFT,\ TEXT\_ALIGN\_CENTER,\ TEXT\_ALIGN\_RIGHT,\ TEXT\_ALIGN\_CENTER\_BOTH}
+\DoxyCodeLine{void\ setTextAlignment(OLEDDISPLAY\_TEXT\_ALIGNMENT\ textAlignment);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Sets\ the\ current\ font.\ Available\ default\ fonts}
+\DoxyCodeLine{//\ ArialMT\_Plain\_10,\ ArialMT\_Plain\_16,\ ArialMT\_Plain\_24}
+\DoxyCodeLine{//\ Or\ create\ one\ with\ the\ font\ tool\ at\ http://oleddisplay.squix.ch}
+\DoxyCodeLine{void\ setFont(const\ uint8\_t*\ fontData);}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md24}{}\doxysubsection{\texorpdfstring{Ui Library (OLEDDisplay\+Ui)}{Ui Library (OLEDDisplay\+Ui)}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md24}
+The Ui Library is used to provide a basic set of user interface elements called {\ttfamily Frames} and {\ttfamily Overlays}. A {\ttfamily Frame} is used to provide information to the user. The default behaviour is to display a {\ttfamily Frame} for a defined time and than move to the next {\ttfamily Frame}. The library also provides an {\ttfamily Indicator} element that will be updated accordingly. An {\ttfamily Overlay} on the other hand is a piece of information (e.\+g. a clock) that is always displayed at the same position.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_o_l_e_d_display_8h_aee8048628ff2b5c026c9e15acdcaacb8}{init}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setTargetFPS(uint8\_t\ fps);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ enableAutoTransition();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ disableAutoTransition();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setAutoTransitionForwards();}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setAutoTransitionBackwards();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setTimePerFrame(uint16\_t\ time);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setTimePerTransition(uint16\_t\ time);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ enableIndicator();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ disableIndicator();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ enableAllIndicators();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ disableAllIndicators();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setIndicatorPosition(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003}{IndicatorPosition}}\ pos);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setIndicatorDirection(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775}{IndicatorDirection}}\ dir);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setActiveSymbol(\textcolor{keyword}{const}\ uint8\_t*\ symbol);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setInactiveSymbol(\textcolor{keyword}{const}\ uint8\_t*\ symbol);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setFrameAnimation(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e}{AnimationDirection}}\ dir);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setFrames(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_aa08c7f90d19bac6f6cdcf2e7d302c00a}{FrameCallback}}*\ frameFunctions,\ uint8\_t\ frameCount);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setOverlays(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a72182c58cbe8a45a9548ce7cbdf605e8}{OverlayCallback}}*\ overlayFunctions,\ uint8\_t\ overlayCount);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ setLoadingDrawFunction(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a98662f57440ea2c71e4d242026e1f79c}{LoadingDrawFunction}}\ loadingDrawFunction);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ runLoadingProcess(\mbox{\hyperlink{struct_loading_stage}{LoadingStage}}*\ stages,\ uint8\_t\ stagesCount);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Manual\ control}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ nextFrame();}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ previousFrame();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ switchToFrame(uint8\_t\ frame);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ transitionToFrame(uint8\_t\ frame);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ State\ Info}}
+\DoxyCodeLine{\mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}*\ getUiState();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ This\ needs\ to\ be\ called\ in\ the\ main\ loop}}
+\DoxyCodeLine{\textcolor{comment}{//\ the\ returned\ value\ is\ the\ remaining\ time\ (in\ ms)}}
+\DoxyCodeLine{\textcolor{comment}{//\ you\ have\ to\ draw\ after\ drawing\ to\ keep\ the\ frame\ budget.}}
+\DoxyCodeLine{int8\_t\ update();}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md25}{}\doxysubsection{\texorpdfstring{Example\+: SSD1306\+Demo}{Example\+: SSD1306\+Demo}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md25}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md26}{}\doxysubsubsection{\texorpdfstring{Frame 1}{Frame 1}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md26}
+
+
+This frame shows three things\+:
+\begin{DoxyItemize}
+\item How to draw an XMB image
+\item How to draw static text which is not moved by the frame transition
+\item The active/inactive frame indicators
+\end{DoxyItemize}\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md27}{}\doxysubsubsection{\texorpdfstring{Frame 2}{Frame 2}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md27}
+
+
+Currently there are one fontface with three sizes included in the library\+: Arial 10, 16 and 24. Once the converter is published you will be able to convert any ttf font into the used format.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md28}{}\doxysubsubsection{\texorpdfstring{Frame 3}{Frame 3}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md28}
+
+
+This frame demonstrates the text alignment. The coordinates in the frame show relative to which position the texts have been rendered.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md29}{}\doxysubsubsection{\texorpdfstring{Frame 4}{Frame 4}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md29}
+
+
+This shows how to use define a maximum width after which the driver automatically wraps a word to the next line. This comes in very handy if you have longer texts to display.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md30}{}\doxysubsubsection{\texorpdfstring{SPI version}{SPI version}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md30}
+
+
+This shows the code working on the SPI version of the display. See demo code for ESP8266 pins used.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md31}{}\doxysubsection{\texorpdfstring{Selection of projects using this library}{Selection of projects using this library}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_r_e_a_d_m_e_autotoc_md31}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/anunpanya/ESP8266_QRcode}{\texttt{ QRCode ESP8266}} (by @anunpanya)
+\item \href{https://github.com/hallard/Scan-I2C-WiFi}{\texttt{ Scan I2C}} (by @hallard)
+\item \href{https://github.com/ThingPulse/esp8266-weather-station}{\texttt{ Thing\+Pulse Weather Station}}
+\item \href{https://www.meshtastic.org/}{\texttt{ Meshtastic}} -\/ an open source GPS communicator mesh radio
+\item Yours? 
+\end{DoxyItemize}

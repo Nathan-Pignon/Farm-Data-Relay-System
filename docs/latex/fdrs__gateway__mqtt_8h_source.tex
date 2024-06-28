@@ -1,0 +1,204 @@
+\doxysection{fdrs\+\_\+gateway\+\_\+mqtt.\+h}
+\hypertarget{fdrs__gateway__mqtt_8h_source}{}\label{fdrs__gateway__mqtt_8h_source}\index{src/fdrs\_gateway\_mqtt.h@{src/fdrs\_gateway\_mqtt.h}}
+\mbox{\hyperlink{fdrs__gateway__mqtt_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <PubSubClient.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <ArduinoJson.h>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ select\ MQTT\ server\ address}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#if\ defined(MQTT\_ADDR)}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_ADDR\ MQTT\_ADDR}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_MQTT\_ADDR)}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_ADDR\ GLOBAL\_MQTT\_ADDR}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ ASSERT("{}NO\ MQTT\ address\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{});}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MQTT\_ADDR}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ select\ MQTT\ server\ port}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#if\ defined(MQTT\_PORT)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_PORT\ MQTT\_PORT}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_MQTT\_PORT)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_PORT\ GLOBAL\_MQTT\_PORT}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_PORT\ 1883}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MQTT\_PORT}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ select\ MQTT\ user\ name}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#if\ defined(MQTT\_USER)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_USER\ MQTT\_USER}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_MQTT\_USER)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_USER\ GLOBAL\_MQTT\_USER}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ ASSERT("{}NO\ MQTT\ user\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{});}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MQTT\_USER}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ select\ MQTT\ user\ password}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#if\ defined(MQTT\_PASS)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_PASS\ MQTT\_PASS}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_MQTT\_PASS)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_PASS\ GLOBAL\_MQTT\_PASS}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ ASSERT("{}NO\ MQTT\ password\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{});}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MQTT\_PASS}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#if\ defined(MQTT\_AUTH)\ ||\ defined(GLOBAL\_MQTT\_AUTH)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ FDRS\_MQTT\_AUTH}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MQTT\_AUTH}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#if\ defined(TOPIC\_DATA)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ FDRS\_TOPIC\_DATA\ TOPIC\_DATA}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ FDRS\_TOPIC\_DATA\ GLOBAL\_TOPIC\_DATA}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TOPIC\_DATA}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#if\ defined(TOPIC\_STATUS)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ FDRS\_TOPIC\_STATUS\ TOPIC\_STATUS}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ FDRS\_TOPIC\_STATUS\ GLOBAL\_TOPIC\_STATUS}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TOPIC\_STATUS}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#if\ defined(TOPIC\_COMMAND)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ FDRS\_TOPIC\_COMMAND\ TOPIC\_COMMAND}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ FDRS\_TOPIC\_COMMAND\ GLOBAL\_TOPIC\_COMMAND}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TOPIC\_COMMAND}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ MQTT\_MAX\_BUFF\_SIZE\ 1024}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ WiFiClient\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_abd77e757e4b3bb6f1e4b42b21ea9e040}{espClient}};}
+\DoxyCodeLine{00064\ PubSubClient\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_abd77e757e4b3bb6f1e4b42b21ea9e040}{espClient}});}
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_ab963e681c2d4c8aa5fdfe5ecb7e48529}{lastMqttConnectAttempt}}\ =\ 0;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{fdrs__gateway__mqtt_8h_ae62fa8557ef4586408dcbe2f1a09e839}{mqtt\_server}}\ =\ FDRS\_MQTT\_ADDR;}
+\DoxyCodeLine{00068\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_ae4f28c882f3fb17a47d7bfea3dd5cc02}{mqtt\_port}}\ =\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a72506225cc5180e83a36bde2c9917af2}{FDRS\_MQTT\_PORT}};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#ifdef\ FDRS\_MQTT\_AUTH}}
+\DoxyCodeLine{00072\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a93a283c3feee8f058d304f3b4b029f06}{mqtt\_user}}\ =\ FDRS\_MQTT\_USER;}
+\DoxyCodeLine{00073\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{fdrs__gateway__mqtt_8h_adeb138e616f71b553fa946eb42fbba2e}{mqtt\_pass}}\ =\ FDRS\_MQTT\_PASS;}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00075\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a93a283c3feee8f058d304f3b4b029f06}{mqtt\_user}}\ =\ NULL;}
+\DoxyCodeLine{00076\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{fdrs__gateway__mqtt_8h_adeb138e616f71b553fa946eb42fbba2e}{mqtt\_pass}}\ =\ NULL;}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FDRS\_MQTT\_AUTH}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a7668f0732ce850781a49e94aef6af247}{reconnect\_mqtt}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ attempts,\ \textcolor{keywordtype}{bool}\ silent)}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (!silent)}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Connecting\ MQTT..."{}});}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <=\ attempts;\ i++)}
+\DoxyCodeLine{00085\ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Attempt\ to\ connect}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.connect(\textcolor{stringliteral}{"{}FDRS\_GATEWAY"{}},\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a93a283c3feee8f058d304f3b4b029f06}{mqtt\_user}},\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_adeb138e616f71b553fa946eb42fbba2e}{mqtt\_pass}}))}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Subscribe}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.subscribe(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a0b1034e9ddb5776b6e9da1f6ad0dfaf5}{FDRS\_TOPIC\_COMMAND}});}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!silent)}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}\ MQTT\ Connected"{}});}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!silent)}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ msg[23];}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(msg,\ \textcolor{stringliteral}{"{}\ Attempt\ \%d/\%d"{}},\ i,\ attempts);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(msg);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((attempts\ !=\ 1))}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ delay(3000);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{if}\ (!silent)}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}\ Connecting\ MQTT\ failed."{}});}
+\DoxyCodeLine{00112\ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a7668f0732ce850781a49e94aef6af247}{reconnect\_mqtt}}(\textcolor{keywordtype}{int}\ attempts)}
+\DoxyCodeLine{00115\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a7668f0732ce850781a49e94aef6af247}{reconnect\_mqtt}}(attempts,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00117\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ Handles\ MQTT\ in\ loop()}}
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a926aeaa7d52ebd60e289af8d6ef98600}{handleMQTT}}()}
+\DoxyCodeLine{00121\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.connected())}
+\DoxyCodeLine{00123\ \ \ \ \ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__time_8h_a21663dd18026eef043bcf3e1467bf8ae}{TDIFF}}(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_ab963e681c2d4c8aa5fdfe5ecb7e48529}{lastMqttConnectAttempt}},5000))\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a7668f0732ce850781a49e94aef6af247}{reconnect\_mqtt}}(1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_ab963e681c2d4c8aa5fdfe5ecb7e48529}{lastMqttConnectAttempt}}\ =\ millis();}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.loop();\ \textcolor{comment}{//\ for\ recieving\ incoming\ messages\ and\ maintaining\ connection}}
+\DoxyCodeLine{00130\ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a09ac4676d5a6cd8dfd58373a20196965}{mqtt\_callback}}(\textcolor{keywordtype}{char}\ *topic,\ \textcolor{keywordtype}{byte}\ *message,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ length)}
+\DoxyCodeLine{00133\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ String\ incomingString;}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(topic);}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ length;\ i++)}
+\DoxyCodeLine{00137\ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ incomingString\ +=\ (char)message[i];}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
+\DoxyCodeLine{00140\ \ \ \ \ JsonDocument\ doc;}
+\DoxyCodeLine{00141\ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(doc,\ incomingString);}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{if}\ (error)}
+\DoxyCodeLine{00143\ \ \ \ \ \{\ \textcolor{comment}{//\ Test\ if\ parsing\ succeeds.}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_a3710656646b77d04495c18395a69549a}{DBG2}}(\textcolor{stringliteral}{"{}json\ parse\ err"{}});}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_a3710656646b77d04495c18395a69549a}{DBG2}}(incomingString);}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00147\ \ \ \ \ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00149\ \ \ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ s\ =\ doc.size();}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UART\_IF.println(s);}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ s;\ i++)}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i].id\ =\ doc[i][\textcolor{stringliteral}{"{}id"{}}];}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i].t\ =\ doc[i][\textcolor{stringliteral}{"{}type"{}}];}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i].d\ =\ doc[i][\textcolor{stringliteral}{"{}data"{}}];}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_aabf3459d6bb55f6124eaba25e6ad6609}{ln}}\ =\ s;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a21b4ef48eaa41b25a7933ead71d376c4}{newData}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a06fc87d81c62e9abb8790b6e5713c55ba9d2a68d6a6c5bcddbd3f3be9c6f26a7e}{event\_mqtt}};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Incoming\ MQTT."{}});}
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a2751f97a7dfb044c1ad6e5b7530f086c}{begin\_mqtt}}()}
+\DoxyCodeLine{00165\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.setServer(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_ae62fa8557ef4586408dcbe2f1a09e839}{mqtt\_server}},\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_ae4f28c882f3fb17a47d7bfea3dd5cc02}{mqtt\_port}});}
+\DoxyCodeLine{00167\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.setBufferSize(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a418bdda2a6329b22157e78acff07436e}{MQTT\_MAX\_BUFF\_SIZE}});}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.connected())}
+\DoxyCodeLine{00170\ \ \ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a7668f0732ce850781a49e94aef6af247}{reconnect\_mqtt}}(5);}
+\DoxyCodeLine{00172\ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.setCallback(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a09ac4676d5a6cd8dfd58373a20196965}{mqtt\_callback}});}
+\DoxyCodeLine{00174\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_acb72cf08f6acc4390b13fcaf69e0843f}{mqtt\_publish}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *payload)}
+\DoxyCodeLine{00177\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{fdrs__gateway__mqtt_8h_aee63e84c606cfaefce454689113c636c}{client}}.publish(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a138051c1305320a9ed66519854b3d9a5}{FDRS\_TOPIC\_DATA}},\ payload))}
+\DoxyCodeLine{00179\ \ \ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}\ Error\ on\ sending\ MQTT"{}});}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_a38149ac048bc6636d72a01059a0192a8}{sendMQTT}}()}
+\DoxyCodeLine{00186\ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Sending\ MQTT."{}});}
+\DoxyCodeLine{00188\ \ \ \ \ JsonDocument\ doc;}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{fdrs__gateway_8h_aabf3459d6bb55f6124eaba25e6ad6609}{ln}};\ i++)}
+\DoxyCodeLine{00190\ \ \ \ \ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ doc[i][\textcolor{stringliteral}{"{}id"{}}]\ =\ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i].id;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ doc[i][\textcolor{stringliteral}{"{}type"{}}]\ =\ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i].t;}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ doc[i][\textcolor{stringliteral}{"{}data"{}}]\ =\ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i].d;}
+\DoxyCodeLine{00194\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ String\ outgoingString;}
+\DoxyCodeLine{00196\ \ \ \ \ serializeJson(doc,\ outgoingString);}
+\DoxyCodeLine{00197\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__mqtt_8h_acb72cf08f6acc4390b13fcaf69e0843f}{mqtt\_publish}}((\textcolor{keywordtype}{char}\ *)outgoingString.c\_str());}
+\DoxyCodeLine{00198\ \}}
+
+\end{DoxyCode}

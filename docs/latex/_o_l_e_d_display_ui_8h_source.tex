@@ -1,0 +1,218 @@
+\doxysection{OLEDDisplay\+Ui.\+h}
+\hypertarget{_o_l_e_d_display_ui_8h_source}{}\label{_o_l_e_d_display_ui_8h_source}\index{src/ESP8266\_and\_ESP32\_OLED\_driver\_for\_SSD1306\_displays/src/OLEDDisplayUi.h@{src/ESP8266\_and\_ESP32\_OLED\_driver\_for\_SSD1306\_displays/src/OLEDDisplayUi.h}}
+\mbox{\hyperlink{_o_l_e_d_display_ui_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#ifndef\ OLEDDISPLAYUI\_h}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ OLEDDISPLAYUI\_h}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#ifdef\ ARDUINO}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#elif\ \_\_MBED\_\_}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ <mbed.h>}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#error\ "{}Unkown\ operating\ system"{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_o_l_e_d_display_8h}{OLEDDisplay.h}}"{}}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{comment}{//\#define\ DEBUG\_OLEDDISPLAYUI(...)\ Serial.printf(\ \_\_VA\_ARGS\_\_\ )}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#ifndef\ DEBUG\_OLEDDISPLAYUI}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ DEBUG\_OLEDDISPLAYUI(...)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e}{AnimationDirection}}\ \{}
+\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea4b23bfd92e72f1382f42c9351b87044c}{SLIDE\_UP}},}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ead97f4128d341e96b83ababca6d69d724}{SLIDE\_DOWN}},}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea16293eb818668db86add6fd62836f537}{SLIDE\_LEFT}},}
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea709da4f2f3f54dc43237fced5d2dcc84}{SLIDE\_RIGHT}}}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003}{IndicatorPosition}}\ \{}
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003a0ad44897a70fba309c24a5b6007de3e3}{TOP}},}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003aec8379af7490bb9eaaf579cf17876f38}{RIGHT}},}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003a8c371f4e766fb2c49c219bbc88989461}{BOTTOM}},}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003adb45120aafd37a973140edee24708065}{LEFT}}}
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775}{IndicatorDirection}}\ \{}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775ad3c4489ac127dbd0aa5233d2b766ebf6}{LEFT\_RIGHT}},}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775a2bb1e9393137d1c5264313854ddf8d29}{RIGHT\_LEFT}}}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7}{FrameState}}\ \{}
+\DoxyCodeLine{00071\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7aae871df80426c89a7605fb21231eebfe}{IN\_TRANSITION}},}
+\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7a9b5eccb7f8f027c46f2018d07c74f384}{FIXED}}}
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{const}\ uint8\_t\ ANIMATION\_activeSymbol[]\ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a19b8a5bb6860a286f72d25fcace75756}{PROGMEM}}\ =\ \{}
+\DoxyCodeLine{00077\ \ \ 0x00,\ 0x18,\ 0x3c,\ 0x7e,\ 0x7e,\ 0x3c,\ 0x18,\ 0x00}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{const}\ uint8\_t\ ANIMATION\_inactiveSymbol[]\ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a19b8a5bb6860a286f72d25fcace75756}{PROGMEM}}\ =\ \{}
+\DoxyCodeLine{00081\ \ \ 0x00,\ 0x0,\ 0x0,\ 0x18,\ 0x18,\ 0x0,\ 0x0,\ 0x00}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ Structure\ of\ the\ UiState}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}\ \{}
+\DoxyCodeLine{00087\ \ \ uint64\_t\ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_a1a65a095765e8ef1ef2a369451194b74}{lastUpdate}};}
+\DoxyCodeLine{00088\ \ \ uint16\_t\ \ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_ae91d38a5736239649ddf16e86592f029}{ticksSinceLastStateSwitch}};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7}{FrameState}}\ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_a7bd46dd6a87c62561bea158188d4460d}{frameState}};}
+\DoxyCodeLine{00091\ \ \ uint8\_t\ \ \ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_a818cba8789eb2923cecdc3961db08c10}{currentFrame}};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_ad8e7db8c5944b25fa6552c3092e1dd5a}{isIndicatorDrawn}};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \textcolor{comment}{//\ Normal\ =\ 1,\ Inverse\ =\ -\/1;}}
+\DoxyCodeLine{00096\ \ \ int8\_t\ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_aa36a23553d18fd31995fc094c15df91c}{frameTransitionDirection}};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_ab22acfb98d3e575e04be92b0ac96e416}{manualControl}};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \textcolor{comment}{//\ Custom\ data\ that\ can\ be\ used\ by\ the\ user}}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state_a3334ee6537e9edf7f35907abeea57652}{userData}};}
+\DoxyCodeLine{00102\ \};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_loading_stage}{LoadingStage}}\ \{}
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{struct_loading_stage_a501d834686186e717bf63ae76b789212}{process}};}
+\DoxyCodeLine{00106\ \ \ void\ (*\mbox{\hyperlink{struct_loading_stage_a60bd5b5908cf924b13b3be3dcc9be0a3}{callback}})();}
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_o_l_e_d_display_ui_8h_aa08c7f90d19bac6f6cdcf2e7d302c00a}{FrameCallback}})(OLEDDisplay\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}*\ state,\ int16\_t\ x,\ int16\_t\ y);}
+\DoxyCodeLine{00110\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a72182c58cbe8a45a9548ce7cbdf605e8}{OverlayCallback}})(OLEDDisplay\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}*\ state);}
+\DoxyCodeLine{00111\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a98662f57440ea2c71e4d242026e1f79c}{LoadingDrawFunction}})(OLEDDisplay\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \mbox{\hyperlink{struct_loading_stage}{LoadingStage}}*\ stage,\ uint8\_t\ progress);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_l_e_d_display_ui}{OLEDDisplayUi}}\ \{}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00115\ \ \ \ \ OLEDDisplay\ \ \ \ \ \ \ \ \ \ \ \ \ *display;}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{//\ Symbols\ for\ the\ Indicator}}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003}{IndicatorPosition}}\ \ \ indicatorPosition;}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775}{IndicatorDirection}}\ \ indicatorDirection;}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \ \ \ \ \ \ \ \ activeSymbol;}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \ \ \ \ \ \ \ \ inactiveSymbol;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shouldDrawIndicators;}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//\ Values\ for\ the\ Frames}}
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e}{AnimationDirection}}\ \ frameAnimationDirection;}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ int8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ lastTransitionDirection;}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ ticksPerFrame;\ \ \ \ \ \ \textcolor{comment}{//\ \string~\ 5000ms\ at\ 30\ FPS}}
+\DoxyCodeLine{00132\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ ticksPerTransition;\ \textcolor{comment}{//\ \string~\ \ 500ms\ at\ 30\ FPS}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ autoTransition;}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_aa08c7f90d19bac6f6cdcf2e7d302c00a}{FrameCallback}}*\ \ \ \ \ \ frameFunctions;}
+\DoxyCodeLine{00137\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ frameCount;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//\ Internally\ used\ to\ transition\ to\ a\ specific\ frame}}
+\DoxyCodeLine{00140\ \ \ \ \ int8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ nextFrameNumber;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//\ Values\ for\ Overlays}}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a72182c58cbe8a45a9548ce7cbdf605e8}{OverlayCallback}}*\ \ \ \ overlayFunctions;}
+\DoxyCodeLine{00144\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ overlayCount;}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\ Will\ the\ Indicator\ be\ drawn}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{//\ 3\ Not\ drawn\ in\ both\ frames}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{comment}{//\ 2\ Drawn\ this\ frame\ but\ not\ next}}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//\ 1\ Not\ drawn\ this\ frame\ but\ next}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{//\ 0\ Not\ known\ yet}}
+\DoxyCodeLine{00151\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indicatorDrawState;}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ Loading\ screen}}
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a98662f57440ea2c71e4d242026e1f79c}{LoadingDrawFunction}}\ loadingDrawFunction;}
+\DoxyCodeLine{00155\ \ \ \ \ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{//\ UI\ State}}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}\ \ \ \ \ \ state;}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{//\ Bookeeping\ for\ update}}
+\DoxyCodeLine{00160\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ updateInterval\ \ \ \ \ \ \ \ \ \ \ \ =\ 33;}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ timePerFrame;}
+\DoxyCodeLine{00163\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ timePerTransition;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ getNextFrameNumber();}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ drawIndicator();}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ drawFrame();}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ drawOverlays();}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tick();}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resetState();}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{class_o_l_e_d_display_ui_a51653c0045bc0309a1a2fe80403f5abd}{OLEDDisplayUi}}(OLEDDisplay\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}});}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a76db9b6906eedf71de6ce38906a3c9ce}{init}}();}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a2871a7adc5b0dc5df747c8d049ae6517}{setTargetFPS}}(uint8\_t\ fps);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{comment}{//\ Automatic\ Control}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a36e033f93399cc6e730c13780382e9b8}{enableAutoTransition}}();}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a5c5b0aa6749d24e91de55e3172fa61fc}{disableAutoTransition}}();}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a649aa74f1413a6325a6c1e85b04984ac}{setAutoTransitionForwards}}();}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_ad7ac58a3d8da6e48664f0b67ba146f52}{setAutoTransitionBackwards}}();}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a6a865160ac8935271fa6a4533e972d03}{setTimePerFrame}}(uint16\_t\ time);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a5e4509275acd34e27a744ff011fe911e}{setTimePerTransition}}(uint16\_t\ time);}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{comment}{//\ Customize\ indicator\ position\ and\ style}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a70cbd66b5bdb6fedc33011da50016c5e}{enableIndicator}}();}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a1a3592a2e40f776b4cc5d8c268853bea}{disableIndicator}}();}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a2748e79309de4f88de4c6e6f12b86b53}{enableAllIndicators}}();}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a3c812dbd36918621106a81105a66038d}{disableAllIndicators}}();}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a7e3b8108424e0d5d4bc26a7c2e8f04ff}{setIndicatorPosition}}(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003}{IndicatorPosition}}\ pos);}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a7d42a4ac8407f1b5ee089fc1719972f3}{setIndicatorDirection}}(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775}{IndicatorDirection}}\ dir);}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_acf65b13e7f4be747a42ce684bfd315a4}{setActiveSymbol}}(\textcolor{keyword}{const}\ uint8\_t*\ symbol);}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_af9d61018ac8d1e38aef8f1a614dbda84}{setInactiveSymbol}}(\textcolor{keyword}{const}\ uint8\_t*\ symbol);}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{comment}{//\ Frame\ settings}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a97eb5138298bac6f99ba8c4eca67114b}{setFrameAnimation}}(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e}{AnimationDirection}}\ dir);}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a003fcfef7c8cc88da9cd3aec0c492e9f}{setFrames}}(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_aa08c7f90d19bac6f6cdcf2e7d302c00a}{FrameCallback}}*\ frameFunctions,\ uint8\_t\ frameCount);}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{comment}{//\ Overlay}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a179e31dcd0e4e141e1b39903b1f7e011}{setOverlays}}(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a72182c58cbe8a45a9548ce7cbdf605e8}{OverlayCallback}}*\ overlayFunctions,\ uint8\_t\ overlayCount);}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{comment}{//\ Loading\ animation}}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_acb7d4e69df0a035145e9c8c4f36d7248}{setLoadingDrawFunction}}(\mbox{\hyperlink{_o_l_e_d_display_ui_8h_a98662f57440ea2c71e4d242026e1f79c}{LoadingDrawFunction}}\ loadingFunction);}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_ad250b3262aba0615ab71459a5e201e17}{runLoadingProcess}}(\mbox{\hyperlink{struct_loading_stage}{LoadingStage}}*\ stages,\ uint8\_t\ stagesCount);}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{comment}{//\ Manual\ Control}}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a8db932a8f48832da6840cb9bcfcc0b36}{nextFrame}}();}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a8e5e78c97e33867b4b52dcf9dd608c84}{previousFrame}}();}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_ac559a0deae2a0ca8d53d2c2470ee93a0}{switchToFrame}}(uint8\_t\ frame);}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a280dd6d61370be81652cddf4cade8960}{transitionToFrame}}(uint8\_t\ frame);}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{comment}{//\ State\ Info}}
+\DoxyCodeLine{00311\ \ \ \ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}*\ \mbox{\hyperlink{class_o_l_e_d_display_ui_a8d9bad4de11b416c4bfb3fac5cf747f1}{getUiState}}();}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \ \ int16\_t\ \mbox{\hyperlink{class_o_l_e_d_display_ui_ab0f5ef8723044223221eb0f8eb5a724e}{update}}();}
+\DoxyCodeLine{00314\ \};}
+\DoxyCodeLine{00315\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

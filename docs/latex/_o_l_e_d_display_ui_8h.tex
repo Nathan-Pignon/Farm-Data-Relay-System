@@ -1,0 +1,193 @@
+\doxysection{src/\+ESP8266\+\_\+and\+\_\+\+ESP32\+\_\+\+OLED\+\_\+driver\+\_\+for\+\_\+\+SSD1306\+\_\+displays/src/\+OLEDDisplay\+Ui.h File Reference}
+\hypertarget{_o_l_e_d_display_ui_8h}{}\label{_o_l_e_d_display_ui_8h}\index{src/ESP8266\_and\_ESP32\_OLED\_driver\_for\_SSD1306\_displays/src/OLEDDisplayUi.h@{src/ESP8266\_and\_ESP32\_OLED\_driver\_for\_SSD1306\_displays/src/OLEDDisplayUi.h}}
+{\ttfamily \#include "{}OLEDDisplay.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplay\+Ui\+State}}
+\item 
+struct \mbox{\hyperlink{struct_loading_stage}{Loading\+Stage}}
+\item 
+class \mbox{\hyperlink{class_o_l_e_d_display_ui}{OLEDDisplay\+Ui}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_o_l_e_d_display_ui_8h_afd6bf74578e7f54dd5b4f0e7caa163c3}{DEBUG\+\_\+\+OLEDDISPLAYUI}}(...)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_o_l_e_d_display_ui_8h_aa08c7f90d19bac6f6cdcf2e7d302c00a}{Frame\+Callback}}) (\mbox{\hyperlink{_o_l_e_d_display_8h_a3a10805f01b48d476d72bcf1e555854e}{OLEDDisplay}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}, \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplay\+Ui\+State}} \texorpdfstring{$\ast$}{*}state, int16\+\_\+t x, int16\+\_\+t y)
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a72182c58cbe8a45a9548ce7cbdf605e8}{Overlay\+Callback}}) (\mbox{\hyperlink{_o_l_e_d_display_8h_a3a10805f01b48d476d72bcf1e555854e}{OLEDDisplay}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}, \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplay\+Ui\+State}} \texorpdfstring{$\ast$}{*}state)
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a98662f57440ea2c71e4d242026e1f79c}{Loading\+Draw\+Function}}) (\mbox{\hyperlink{_o_l_e_d_display_8h_a3a10805f01b48d476d72bcf1e555854e}{OLEDDisplay}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}, \mbox{\hyperlink{struct_loading_stage}{Loading\+Stage}} \texorpdfstring{$\ast$}{*}stage, uint8\+\_\+t progress)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e}{Animation\+Direction}} \{ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea4b23bfd92e72f1382f42c9351b87044c}{SLIDE\+\_\+\+UP}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ead97f4128d341e96b83ababca6d69d724}{SLIDE\+\_\+\+DOWN}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea16293eb818668db86add6fd62836f537}{SLIDE\+\_\+\+LEFT}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea709da4f2f3f54dc43237fced5d2dcc84}{SLIDE\+\_\+\+RIGHT}}
+ \}
+\item 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003}{Indicator\+Position}} \{ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003a0ad44897a70fba309c24a5b6007de3e3}{TOP}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003aec8379af7490bb9eaaf579cf17876f38}{RIGHT}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003a8c371f4e766fb2c49c219bbc88989461}{BOTTOM}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003adb45120aafd37a973140edee24708065}{LEFT}}
+ \}
+\item 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775}{Indicator\+Direction}} \{ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775ad3c4489ac127dbd0aa5233d2b766ebf6}{LEFT\+\_\+\+RIGHT}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775a2bb1e9393137d1c5264313854ddf8d29}{RIGHT\+\_\+\+LEFT}}
+ \}
+\item 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7}{Frame\+State}} \{ \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7aae871df80426c89a7605fb21231eebfe}{IN\+\_\+\+TRANSITION}}
+, \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7a9b5eccb7f8f027c46f2018d07c74f384}{FIXED}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t ANIMATION\+\_\+active\+Symbol\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a19b8a5bb6860a286f72d25fcace75756}{PROGMEM}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_o_l_e_d_display_ui_8h_afd6bf74578e7f54dd5b4f0e7caa163c3}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!DEBUG\_OLEDDISPLAYUI@{DEBUG\_OLEDDISPLAYUI}}
+\index{DEBUG\_OLEDDISPLAYUI@{DEBUG\_OLEDDISPLAYUI}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{DEBUG\_OLEDDISPLAYUI}{DEBUG\_OLEDDISPLAYUI}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_afd6bf74578e7f54dd5b4f0e7caa163c3} 
+\#define DEBUG\+\_\+\+OLEDDISPLAYUI(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+The MIT License (MIT)
+
+Copyright (c) 2018 by Thing\+Pulse, Daniel Eichhorn Copyright (c) 2018 by Fabrice Weinberg Copyright (c) 2019 by Helmut Tschemernjak -\/ www.\+radioshuttle.\+de
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Thing\+Pulse invests considerable time and money to develop these open source libraries. Please support us by buying our products (and not the clones) from \href{https://thingpulse.com}{\texttt{ https\+://thingpulse.\+com}} 
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_o_l_e_d_display_ui_8h_aa08c7f90d19bac6f6cdcf2e7d302c00a}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!FrameCallback@{FrameCallback}}
+\index{FrameCallback@{FrameCallback}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{FrameCallback}{FrameCallback}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_aa08c7f90d19bac6f6cdcf2e7d302c00a} 
+typedef void(\texorpdfstring{$\ast$}{*} Frame\+Callback) (\mbox{\hyperlink{_o_l_e_d_display_8h_a3a10805f01b48d476d72bcf1e555854e}{OLEDDisplay}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}, \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplay\+Ui\+State}} \texorpdfstring{$\ast$}{*}state, int16\+\_\+t x, int16\+\_\+t y)}
+
+\Hypertarget{_o_l_e_d_display_ui_8h_a98662f57440ea2c71e4d242026e1f79c}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!LoadingDrawFunction@{LoadingDrawFunction}}
+\index{LoadingDrawFunction@{LoadingDrawFunction}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{LoadingDrawFunction}{LoadingDrawFunction}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_a98662f57440ea2c71e4d242026e1f79c} 
+typedef void(\texorpdfstring{$\ast$}{*} Loading\+Draw\+Function) (\mbox{\hyperlink{_o_l_e_d_display_8h_a3a10805f01b48d476d72bcf1e555854e}{OLEDDisplay}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}, \mbox{\hyperlink{struct_loading_stage}{Loading\+Stage}} \texorpdfstring{$\ast$}{*}stage, uint8\+\_\+t progress)}
+
+\Hypertarget{_o_l_e_d_display_ui_8h_a72182c58cbe8a45a9548ce7cbdf605e8}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!OverlayCallback@{OverlayCallback}}
+\index{OverlayCallback@{OverlayCallback}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{OverlayCallback}{OverlayCallback}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_a72182c58cbe8a45a9548ce7cbdf605e8} 
+typedef void(\texorpdfstring{$\ast$}{*} Overlay\+Callback) (\mbox{\hyperlink{_o_l_e_d_display_8h_a3a10805f01b48d476d72bcf1e555854e}{OLEDDisplay}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}, \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplay\+Ui\+State}} \texorpdfstring{$\ast$}{*}state)}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!AnimationDirection@{AnimationDirection}}
+\index{AnimationDirection@{AnimationDirection}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{AnimationDirection}{AnimationDirection}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e} 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e}{Animation\+Direction}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLIDE\_UP@{SLIDE\_UP}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!SLIDE\_UP@{SLIDE\_UP}}}\Hypertarget{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea4b23bfd92e72f1382f42c9351b87044c}\label{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e} 
+SLIDE\+\_\+\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLIDE\_DOWN@{SLIDE\_DOWN}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!SLIDE\_DOWN@{SLIDE\_DOWN}}}\Hypertarget{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ead97f4128d341e96b83ababca6d69d724}\label{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e} 
+SLIDE\+\_\+\+DOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLIDE\_LEFT@{SLIDE\_LEFT}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!SLIDE\_LEFT@{SLIDE\_LEFT}}}\Hypertarget{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea16293eb818668db86add6fd62836f537}\label{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e} 
+SLIDE\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLIDE\_RIGHT@{SLIDE\_RIGHT}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!SLIDE\_RIGHT@{SLIDE\_RIGHT}}}\Hypertarget{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6ea709da4f2f3f54dc43237fced5d2dcc84}\label{_o_l_e_d_display_ui_8h_a70cf3f4f0d1e741d0cb63aff969dfc6e} 
+SLIDE\+\_\+\+RIGHT&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!FrameState@{FrameState}}
+\index{FrameState@{FrameState}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{FrameState}{FrameState}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7} 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7}{Frame\+State}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IN\_TRANSITION@{IN\_TRANSITION}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!IN\_TRANSITION@{IN\_TRANSITION}}}\Hypertarget{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7aae871df80426c89a7605fb21231eebfe}\label{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7} 
+IN\+\_\+\+TRANSITION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FIXED@{FIXED}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!FIXED@{FIXED}}}\Hypertarget{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7a9b5eccb7f8f027c46f2018d07c74f384}\label{_o_l_e_d_display_ui_8h_a9104142d74f294b3d48993bd357ccea7} 
+FIXED&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!IndicatorDirection@{IndicatorDirection}}
+\index{IndicatorDirection@{IndicatorDirection}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{IndicatorDirection}{IndicatorDirection}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775} 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775}{Indicator\+Direction}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEFT\_RIGHT@{LEFT\_RIGHT}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!LEFT\_RIGHT@{LEFT\_RIGHT}}}\Hypertarget{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775ad3c4489ac127dbd0aa5233d2b766ebf6}\label{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775} 
+LEFT\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RIGHT\_LEFT@{RIGHT\_LEFT}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!RIGHT\_LEFT@{RIGHT\_LEFT}}}\Hypertarget{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775a2bb1e9393137d1c5264313854ddf8d29}\label{_o_l_e_d_display_ui_8h_ad2f1f9ecc5497801c70ab1d243ebf775} 
+RIGHT\+\_\+\+LEFT&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!IndicatorPosition@{IndicatorPosition}}
+\index{IndicatorPosition@{IndicatorPosition}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{IndicatorPosition}{IndicatorPosition}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003} 
+enum \mbox{\hyperlink{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003}{Indicator\+Position}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOP@{TOP}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!TOP@{TOP}}}\Hypertarget{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003a0ad44897a70fba309c24a5b6007de3e3}\label{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003} 
+TOP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RIGHT@{RIGHT}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!RIGHT@{RIGHT}}}\Hypertarget{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003aec8379af7490bb9eaaf579cf17876f38}\label{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003} 
+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BOTTOM@{BOTTOM}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!BOTTOM@{BOTTOM}}}\Hypertarget{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003a8c371f4e766fb2c49c219bbc88989461}\label{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003} 
+BOTTOM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEFT@{LEFT}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!LEFT@{LEFT}}}\Hypertarget{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003adb45120aafd37a973140edee24708065}\label{_o_l_e_d_display_ui_8h_a8e88cc61b9abeb7c6c9c9136bcbd7003} 
+LEFT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_o_l_e_d_display_ui_8h_a19b8a5bb6860a286f72d25fcace75756}\index{OLEDDisplayUi.h@{OLEDDisplayUi.h}!PROGMEM@{PROGMEM}}
+\index{PROGMEM@{PROGMEM}!OLEDDisplayUi.h@{OLEDDisplayUi.h}}
+\doxysubsubsection{\texorpdfstring{PROGMEM}{PROGMEM}}
+{\footnotesize\ttfamily \label{_o_l_e_d_display_ui_8h_a19b8a5bb6860a286f72d25fcace75756} 
+const uint8\+\_\+t ANIMATION\+\_\+inactive\+Symbol \mbox{[}$\,$\mbox{]} PROGMEM}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ 0x00,\ 0x18,\ 0x3c,\ 0x7e,\ 0x7e,\ 0x3c,\ 0x18,\ 0x00}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

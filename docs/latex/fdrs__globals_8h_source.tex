@@ -1,0 +1,68 @@
+\doxysection{fdrs\+\_\+globals.\+h}
+\hypertarget{fdrs__globals_8h_source}{}\label{fdrs__globals_8h_source}\index{src/fdrs\_globals.h@{src/fdrs\_globals.h}}
+\mbox{\hyperlink{fdrs__globals_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ \_\_FDRS\_GLOBALS\_h\_\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ \_\_FDRS\_GLOBALS\_h\_\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ GLOBAL\_DBG\_LEVEL\ 0}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ GLOBAL\_WIFI\_SSID\ \ \ \ \ \ \ \ "{}Your\ SSID"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ GLOBAL\_WIFI\_PASS\ \ \ \ \ \ \ \ "{}Password"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ GLOBAL\_DNS1\_IPADDRESS\ \ \ \ "{}8.8.8.8"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ GLOBAL\_DNS2\_IPADDRESS\ \ \ \ "{}8.8.4.4"{}}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ GLOBAL\_MQTT\_ADDR\ "{}192.168.0.8"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ GLOBAL\_MQTT\_PORT\ 1883}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\#define\ GLOBAL\_MQTT\_AUTH\ \ \ //\ Décommenter\ pour\ activer\ l'authentification\ MQTT}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ GLOBAL\_MQTT\_USER\ \ \ "{}Your\ MQTT\ Username"{}}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ GLOBAL\_MQTT\_PASS\ \ \ "{}Your\ MQTT\ Password"{}}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ GLOBAL\_TOPIC\_DATA\ \ \ \ "{}fdrs/data"{}}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ GLOBAL\_TOPIC\_STATUS\ \ "{}fdrs/status"{}}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ GLOBAL\_TOPIC\_COMMAND\ "{}fdrs/command"{}}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ GLOBAL\_DST\_RULE\ \ \ \ \ \ \ \ USDST}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ GLOBAL\_TIME\_SERVER\ \ \ \ \ \ "{}0.us.pool.ntp.org"{}}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ GLOBAL\_STD\_OFFSET\ \ \ \ \ \ (-\/6)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ GLOBAL\_DST\_OFFSET\ \ \ \ \ \ (STD\_OFFSET\ +\ 1)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ GLOBAL\_TIME\_FETCHNTP\ \ \ \ 60}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ GLOBAL\_TIME\_PRINTTIME\ \ \ 15}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ GLOBAL\_TIME\_SEND\_INTERVAL\ 60}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ GLOBAL\_LORA\_FREQUENCY\ 915.0}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ GLOBAL\_LORA\_SF\ 7}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ GLOBAL\_LORA\_BANDWIDTH\ 125.0}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ GLOBAL\_LORA\_CR\ 5}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ GLOBAL\_LORA\_SYNCWORD\ 0x12}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ GLOBAL\_LORA\_INTERVAL\ 5000}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ MAC\_PREFIX\ \ 0xAA,\ 0xBB,\ 0xCC,\ 0xDD,\ 0xEE}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#if\ defined(USE\_OLED)\ ||\ defined(USE\_RTC\_DS3231)\ ||\ defined(USE\_RTC\_DS1307)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\ \ \ \ \#define\ USE\_I2C}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#if\ defined(USE\_RTC\_DS3231)\ ||\ defined(USE\_RTC\_DS1307)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ \#define\ USE\_RTC}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#if\ defined(USE\_GPS)\ \&\&\ defined(ESP8266)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \#error\ "{}For\ ESP8266\ only\ one\ UART\ has\ both\ Tx\ and\ Rx\ capabilities.\ GPS\ not\ supported\ for\ ESP8266"{}}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#if\ defined(USE\_ETHERNET)\ \&\&\ !defined(ESP32)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \#error\ "{}Ethernet\ only\ supported\ for\ ESP32."{}}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#if\ defined(USE\_OLED)\ \&\&\ (!defined(ESP32)\ \&\&\ !defined(ESP8266))}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ \#warning\ "{}OLED\ current\ supported\ for\ only\ ESP32\ or\ ESP8266."{}}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ \#undef\ USE\_OLED}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_FDRS\_GLOBALS\_h\_\_}}
+
+\end{DoxyCode}

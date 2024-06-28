@@ -1,0 +1,537 @@
+\doxysection{fdrs\+\_\+gateway\+\_\+espnow.\+h}
+\hypertarget{fdrs__gateway__espnow_8h_source}{}\label{fdrs__gateway__espnow_8h_source}\index{src/fdrs\_gateway\_espnow.h@{src/fdrs\_gateway\_espnow.h}}
+\mbox{\hyperlink{fdrs__gateway__espnow_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifdef\ ESP8266}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <ESP8266WiFi.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <espnow.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#elif\ defined(ESP32)}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <esp\_now.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <WiFi.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <esp\_wifi.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ PEER\_TIMEOUT\ 300000}}
+\DoxyCodeLine{00011\ \mbox{\hyperlink{struct_f_d_r_s_peer}{FDRSPeer}}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[16];}
+\DoxyCodeLine{00012\ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}}\ =\ 250\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}});}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifdef\ ESP32}}
+\DoxyCodeLine{00015\ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a93bacc03cf5da2df43a607e92e79817f}{esp\_now\_sent\_flag}};}
+\DoxyCodeLine{00019\ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a34d4c0660922c991d45752f5704407bb}{broadcast\_mac}}[]\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_ae05be0ffbd5af2f1983c5d4bdbdc34ea}{mac\_prefix}}[]\ =\ \{\mbox{\hyperlink{fdrs__globals_8h_a1c8c5652d0d3f46c81014158b9a58cb5}{MAC\_PREFIX}}\};}
+\DoxyCodeLine{00022\ uint8\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a78d61ab3b22fe965f5f3bc4dbc19ca38}{selfAddress}}[]\ =\ \{\mbox{\hyperlink{fdrs__globals_8h_a1c8c5652d0d3f46c81014158b9a58cb5}{MAC\_PREFIX}},\ UNIT\_MAC\};}
+\DoxyCodeLine{00023\ uint8\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[6];}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ uint8\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}}[]\ =\ \{\mbox{\hyperlink{fdrs__globals_8h_a1c8c5652d0d3f46c81014158b9a58cb5}{MAC\_PREFIX}},\ ESPNOW\_NEIGHBOR\_1\};}
+\DoxyCodeLine{00026\ uint8\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}}[]\ =\ \{\mbox{\hyperlink{fdrs__globals_8h_a1c8c5652d0d3f46c81014158b9a58cb5}{MAC\_PREFIX}},\ ESPNOW\_NEIGHBOR\_2\};}
+\DoxyCodeLine{00027\ \textcolor{keyword}{extern}\ time\_t\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}};}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ JL\ -\/\ pingFlagEspNow\ var\ probably\ to\ be\ removed}}
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a76b5ddabe9d1ec6b16a04c30aa12ace8}{pingFlagEspNow}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ Set\ ESP-\/NOW\ send\ and\ receive\ callbacks\ for\ either\ ESP8266\ or\ ESP32}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#if\ defined(ESP8266)}}
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ OnDataSent(uint8\_t\ *mac\_addr,\ uint8\_t\ sendStatus)}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a93bacc03cf5da2df43a607e92e79817f}{esp\_now\_sent\_flag}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00036\ \}}
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ OnDataRecv(uint8\_t\ *mac,\ uint8\_t\ *incomingData,\ uint8\_t\ len)}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ memcpy(\&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ mac,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}));}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#elif\ defined(ESP32)}}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ OnDataSent(\textcolor{keyword}{const}\ uint8\_t\ *mac\_addr,\ esp\_now\_send\_status\_t\ status)}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a93bacc03cf5da2df43a607e92e79817f}{esp\_now\_sent\_flag}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00044\ \}}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ OnDataRecv(\textcolor{keyword}{const}\ esp\_now\_recv\_info\ *pkt\_info,\ \textcolor{keyword}{const}\ uint8\_t\ *incomingData,\ \textcolor{keywordtype}{int}\ len)}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \ \ memcpy(\&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ pkt\_info-\/>src\_addr,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}));}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordflow}{if}\ (len\ <\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}))}
+\DoxyCodeLine{00050\ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Incoming\ ESP-\/NOW\ System\ Packet\ from\ 0x"{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[5],\ HEX));}
+\DoxyCodeLine{00052\ \ \ \ \ memcpy(\&\mbox{\hyperlink{fdrs__gateway_8h_a09e50746f692a85d268b2d1ae9c0a92e}{theCmd}},\ incomingData,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__gateway_8h_a09e50746f692a85d268b2d1ae9c0a92e}{theCmd}}));}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ processing\ is\ handled\ in\ the\ handlecommands()\ function\ in\ gateway.h\ -\/\ do\ not\ process\ here}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ memcpy(\&\mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}},\ incomingData,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}));}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Incoming\ ESP-\/NOW\ DataReading\ from\ 0x"{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[5],\ HEX));}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}\ =\ len\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}});}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (memcmp(\&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ \&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}},\ 6)\ ==\ 0)}
+\DoxyCodeLine{00061\ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a560a1a5894d9cbb9103757d451132483}{newData}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a06fc87d81c62e9abb8790b6e5713c55ba94663cae587b39d2c3cdb595f2bf96d5}{event\_espnow1}};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (memcmp(\&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ \&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}},\ 6)\ ==\ 0)}
+\DoxyCodeLine{00066\ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a560a1a5894d9cbb9103757d451132483}{newData}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a06fc87d81c62e9abb8790b6e5713c55ba37bf953622fd42a8bb3ef349a7a4cbbb}{event\_espnow2}};}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a560a1a5894d9cbb9103757d451132483}{newData}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a06fc87d81c62e9abb8790b6e5713c55ba2183577594301e415bbd84300b101c6d}{event\_espnowg}};}
+\DoxyCodeLine{00071\ \ \ \}}
+\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_ac68e435c8ac0d13375bbe754d47dd856}{begin\_espnow}}()}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Initializing\ ESP-\/NOW!"{}});}
+\DoxyCodeLine{00077\ \ \ WiFi.mode(WIFI\_STA);}
+\DoxyCodeLine{00078\ \ \ WiFi.disconnect();}
+\DoxyCodeLine{00079\ \ \ \textcolor{comment}{//\ Init\ ESP-\/NOW\ for\ either\ ESP8266\ or\ ESP32\ and\ set\ MAC\ address}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#if\ defined(ESP8266)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#ifdef\ USE\_LR}}
+\DoxyCodeLine{00082\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}\ LR\ mode\ is\ only\ available\ on\ ESP32.\ ESP-\/NOW\ will\ begin\ in\ normal\ mode."{}});}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00084\ \ \ wifi\_set\_macaddr(STATION\_IF,\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a78d61ab3b22fe965f5f3bc4dbc19ca38}{selfAddress}});}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_init()\ !=\ 0)}
+\DoxyCodeLine{00086\ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00088\ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ esp\_now\_set\_self\_role(ESP\_NOW\_ROLE\_COMBO);}
+\DoxyCodeLine{00091\ \ \ esp\_now\_register\_send\_cb(OnDataSent);}
+\DoxyCodeLine{00092\ \ \ esp\_now\_register\_recv\_cb(OnDataRecv);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#elif\ defined(ESP32)}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#ifdef\ USE\_LR}}
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}\ ESP-\/NOW\ LR\ mode\ is\ active!"{}});}
+\DoxyCodeLine{00097\ \ \ esp\_wifi\_set\_protocol(WIFI\_IF\_STA,\ WIFI\_PROTOCOL\_LR);}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00099\ \ \ esp\_wifi\_set\_mac(WIFI\_IF\_STA,\ \&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a78d61ab3b22fe965f5f3bc4dbc19ca38}{selfAddress}}[0]);}
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_init()\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00101\ \ \ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Error\ initializing\ ESP-\/NOW"{}});}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00104\ \ \ \}}
+\DoxyCodeLine{00105\ \ \ esp\_now\_register\_send\_cb(OnDataSent);}
+\DoxyCodeLine{00106\ \ \ esp\_now\_register\_recv\_cb(OnDataRecv);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00109\ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ memcpy(peerInfo.peer\_addr,\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a34d4c0660922c991d45752f5704407bb}{broadcast\_mac}},\ 6);}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_add\_peer(\&peerInfo)\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00113\ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer\ bcast"{}});}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00116\ \ \ \}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ESP8266}}
+\DoxyCodeLine{00118\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}\ ESP-\/NOW\ Initialized."{}});}
+\DoxyCodeLine{00119\ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{comment}{//\ Returns\ an\ expired\ entry\ in\ peer\_list,\ -\/1\ if\ full.}}
+\DoxyCodeLine{00122\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a41bacfc7faaa11f4e26a2f467e76f6b3}{find\_espnow\_peer}}()}
+\DoxyCodeLine{00123\ \{}
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ i++)}
+\DoxyCodeLine{00125\ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[i].last\_seen\ ==\ 0)}
+\DoxyCodeLine{00127\ \ \ \ \ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Using\ peer\ entry\ "{}}\ +\ String(i));}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{00130\ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ i++)}
+\DoxyCodeLine{00133\ \ \ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fdrs__time_8h_a21663dd18026eef043bcf3e1467bf8ae}{TDIFF}}(\mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[i].last\_seen,\mbox{\hyperlink{fdrs__gateway__espnow_8h_adbc95e235475e9e8df7f1ee7c23b6c3f}{PEER\_TIMEOUT}}))}
+\DoxyCodeLine{00135\ \ \ \ \ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Recycling\ peer\ entry\ "{}}\ +\ String(i));}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ esp\_now\_del\_peer(\mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[i].mac);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{00140\ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}No\ open\ peers"{}});}
+\DoxyCodeLine{00143\ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00144\ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{comment}{//\ Returns\ the\ index\ of\ the\ peer\ list\ array\ element\ that\ contains\ the\ provided\ MAC\ address,\ -\/1\ if\ not\ found}}
+\DoxyCodeLine{00147\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a34dcfd8aa942b7ae0e90e1724d3e3b8d}{getFDRSPeer}}(uint8\_t\ *mac)}
+\DoxyCodeLine{00148\ \{}
+\DoxyCodeLine{00149\ \ \ \mbox{\hyperlink{fdrs__debug_8h_a3710656646b77d04495c18395a69549a}{DBG2}}(\textcolor{stringliteral}{"{}Getting\ peer\ \#"{}});}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ i++)}
+\DoxyCodeLine{00152\ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{if}\ (memcmp(mac,\ \&\mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[i].mac,\ 6)\ ==\ 0)}
+\DoxyCodeLine{00154\ \ \ \ \ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Peer\ is\ entry\ \#"{}}\ +\ String(i));}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{00157\ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Couldn't\ find\ peer"{}});}
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00162\ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a7f810781dbbb63254161106058e21ecd}{add\_espnow\_peer}}()}
+\DoxyCodeLine{00165\ \{}
+\DoxyCodeLine{00166\ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Device\ requesting\ peer\ registration"{}});}
+\DoxyCodeLine{00167\ \ \ \textcolor{keywordtype}{int}\ peer\_num\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a34dcfd8aa942b7ae0e90e1724d3e3b8d}{getFDRSPeer}}(\&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[0]);}
+\DoxyCodeLine{00168\ \ \ \textcolor{keywordflow}{if}\ (peer\_num\ ==\ -\/1)\ \textcolor{comment}{//\ if\ the\ device\ isn't\ registered}}
+\DoxyCodeLine{00169\ \ \ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{int}\ open\_peer\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a41bacfc7faaa11f4e26a2f467e76f6b3}{find\_espnow\_peer}}();\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ find\ open\ spot\ in\ peer\_list}}
+\DoxyCodeLine{00171\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Registering\ new\ peer.\ Slot:\ "{}}\ +\ String(open\_peer));}
+\DoxyCodeLine{00172\ \ \ \ \ memcpy(\&\mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[open\_peer].mac,\ \&\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ 6);\ \textcolor{comment}{//\ save\ MAC\ to\ open\ spot}}
+\DoxyCodeLine{00173\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[open\_peer].\mbox{\hyperlink{struct_f_d_r_s_peer_a2b802b4dc240ddf180383c5313d8ad7c}{last\_seen}}\ =\ millis();}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#if\ defined(ESP32)}}
+\DoxyCodeLine{00175\ \ \ \ \ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00176\ \ \ \ \ peerInfo.ifidx\ =\ WIFI\_IF\_STA;}
+\DoxyCodeLine{00177\ \ \ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00178\ \ \ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00179\ \ \ \ \ memcpy(peerInfo.peer\_addr,\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ 6);}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_add\_peer(\&peerInfo)\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00181\ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00184\ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\#if\ defined(ESP8266)}}
+\DoxyCodeLine{00187\ \ \ \ \ esp\_now\_add\_peer(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ ESP\_NOW\_ROLE\_COMBO,\ 0,\ NULL,\ 0);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00190\ \ \ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}\ sys\_packet\ =\ \{.cmd\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7a68be1663ccc07658d86f96f32c25febf}{cmd\_add}},\ .param\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_adbc95e235475e9e8df7f1ee7c23b6c3f}{PEER\_TIMEOUT}}\};}
+\DoxyCodeLine{00191\ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ (uint8\_t\ *)\&sys\_packet,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}));}
+\DoxyCodeLine{00192\ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00194\ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Refreshing\ existing\ peer\ registration"{}});}
+\DoxyCodeLine{00196\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[peer\_num].\mbox{\hyperlink{struct_f_d_r_s_peer_a2b802b4dc240ddf180383c5313d8ad7c}{last\_seen}}\ =\ millis();}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}\ sys\_packet\ =\ \{.cmd\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7a68be1663ccc07658d86f96f32c25febf}{cmd\_add}},\ .param\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_adbc95e235475e9e8df7f1ee7c23b6c3f}{PEER\_TIMEOUT}}\};}
+\DoxyCodeLine{00199\ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ (uint8\_t\ *)\&sys\_packet,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}));}
+\DoxyCodeLine{00200\ \ \ \}}
+\DoxyCodeLine{00201\ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__time_8h_a8cfe4db356f08875d8cdb8f004e5f0db}{validTimeFlag}})\{}
+\DoxyCodeLine{00202\ \ \ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}\ sys\_packet\ =\ \{\ .cmd\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7ae8c4c8b96c31a124ba227f864bf69a28}{cmd\_time}},\ .param\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}}\ \};}
+\DoxyCodeLine{00203\ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ (uint8\_t\ *)\&sys\_packet,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}));}
+\DoxyCodeLine{00204\ \ \ \}}
+\DoxyCodeLine{00205\ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{comment}{//\ Sends\ ping\ reply\ to\ sender}}
+\DoxyCodeLine{00208\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a021e430c9d0fcd40157e786a10a33871}{pingback\_espnow}}()}
+\DoxyCodeLine{00209\ \{}
+\DoxyCodeLine{00210\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Sending\ ESP-\/NOW\ Ping\ Reply"{}});}
+\DoxyCodeLine{00211\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}\ sys\_packet;}
+\DoxyCodeLine{00212\ \ \ sys\_packet\ =\ \{\ .cmd\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7a4da9c09ff21a0893109b13aad2f7ff54}{cmd\_ping}},\ .param\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_aa4dafeab552538320e86e60510104161a24208d40d11ed471b5e5ad6544cd7d3d}{ping\_reply}}\ \};}
+\DoxyCodeLine{00213\ \ \ \textcolor{keywordflow}{if}\ (!esp\_now\_is\_peer\_exist(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}))}
+\DoxyCodeLine{00214\ \ \ \{}
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#ifdef\ ESP8266}}
+\DoxyCodeLine{00216\ \ \ \ \ esp\_now\_add\_peer(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ ESP\_NOW\_ROLE\_COMBO,\ 0,\ NULL,\ 0);}
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#if\ defined(ESP32)}}
+\DoxyCodeLine{00219\ \ \ \ \ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00220\ \ \ \ \ peerInfo.ifidx\ =\ WIFI\_IF\_STA;}
+\DoxyCodeLine{00221\ \ \ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00222\ \ \ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00223\ \ \ \ \ memcpy(peerInfo.peer\_addr,\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ 6);}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_add\_peer(\&peerInfo)\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00225\ \ \ \ \ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00230\ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ (uint8\_t\ *)\&sys\_packet,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}));}
+\DoxyCodeLine{00231\ \ \ \ \ esp\_now\_del\_peer(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}});}
+\DoxyCodeLine{00232\ \ \ \}}
+\DoxyCodeLine{00233\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00234\ \ \ \{}
+\DoxyCodeLine{00235\ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}},\ (uint8\_t\ *)\&sys\_packet,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}));}
+\DoxyCodeLine{00236\ \ \ \}}
+\DoxyCodeLine{00237\ \}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_aa6c85e178f41dba677fd5b701ac63a1d}{sendESPNowNbr}}(uint8\_t\ interface)}
+\DoxyCodeLine{00240\ \{}
+\DoxyCodeLine{00241\ \ \ \textcolor{keywordflow}{switch}\ (interface)}
+\DoxyCodeLine{00242\ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00244\ \ \ \ \ \{\ \textcolor{comment}{//\ These\ brackets\ are\ required!}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Sending\ DR\ to\ ESP-\/NOW\ Neighbor\ \#1"{}});}
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\#if\ defined(ESP32)}}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ peerInfo.ifidx\ =\ WIFI\_IF\_STA;}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ memcpy(peerInfo.peer\_addr,\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}},\ 6);}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_add\_peer(\&peerInfo)\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ESP32}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}\ thePacket[\mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}];}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}};\ i++)}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ >\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}})}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ j\ =\ 0;}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}},\ (uint8\_t\ *)\&thePacket,\ \textcolor{keyword}{sizeof}(thePacket));}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ thePacket[j]\ =\ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i];}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ j++;}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}},\ (uint8\_t\ *)\&thePacket,\ j\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}));}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ esp\_now\_del\_peer(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}});}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00275\ \ \ \ \ \}\ \textcolor{comment}{//\ These\ brackets\ are\ required!}}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00277\ \ \ \ \ \{}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Sending\ DR\ to\ ESP-\/NOW\ Neighbor\ \#2"{}});}
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\#if\ defined(ESP32)}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ peerInfo.ifidx\ =\ WIFI\_IF\_STA;}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ memcpy(peerInfo.peer\_addr,\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}},\ 6);}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_add\_peer(\&peerInfo)\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00290\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ESP32}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}\ thePacket[\mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}];}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}};\ i++)}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ >\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}})}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ j\ =\ 0;}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}},\ (uint8\_t\ *)\&thePacket,\ \textcolor{keyword}{sizeof}(thePacket));}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ thePacket[j]\ =\ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i];}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ j++;}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}},\ (uint8\_t\ *)\&thePacket,\ j\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}));}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ esp\_now\_del\_peer(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}});}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00307\ \ \ \ \ \}}
+\DoxyCodeLine{00308\ \ \ \}}
+\DoxyCodeLine{00309\ \}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1328766f5705ddd0737776c1deb0e5f6}{sendESPNowPeers}}()}
+\DoxyCodeLine{00312\ \{}
+\DoxyCodeLine{00313\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Sending\ DR\ to\ ESP-\/NOW\ peers."{}});}
+\DoxyCodeLine{00314\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}\ thePacket[\mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}];}
+\DoxyCodeLine{00315\ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{00316\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}};\ i++)}
+\DoxyCodeLine{00317\ \ \ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ >\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}})}
+\DoxyCodeLine{00319\ \ \ \ \ \{}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ j\ =\ 0;}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ esp\_now\_send(0,\ (uint8\_t\ *)\&thePacket,\ \textcolor{keyword}{sizeof}(thePacket));}
+\DoxyCodeLine{00322\ \ \ \ \ \}}
+\DoxyCodeLine{00323\ \ \ \ \ thePacket[j]\ =\ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i];}
+\DoxyCodeLine{00324\ \ \ \ \ j++;}
+\DoxyCodeLine{00325\ \ \ \}}
+\DoxyCodeLine{00326\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ i++)}
+\DoxyCodeLine{00327\ \ \ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[i].last\_seen\ !=\ 0\ \&\&\ (millis()\ -\/\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[i].last\_seen)\ <\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_adbc95e235475e9e8df7f1ee7c23b6c3f}{PEER\_TIMEOUT}})}
+\DoxyCodeLine{00329\ \ \ \ \ \{}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \textcolor{comment}{//uint32\_t\ clktm\ =\ millis();}}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a93bacc03cf5da2df43a607e92e79817f}{esp\_now\_sent\_flag}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ esp\_now\_send(\mbox{\hyperlink{fdrs__gateway__espnow_8h_af92946a0def0cd37e864ddeb1313d5ec}{peer\_list}}[i].mac,\ (uint8\_t\ *)\&thePacket,\ j\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}));}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{fdrs__gateway__espnow_8h_a93bacc03cf5da2df43a607e92e79817f}{esp\_now\_sent\_flag}})\ yield();}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \textcolor{comment}{//DBG(millis()\ -\/\ clktm);}}
+\DoxyCodeLine{00335\ \ \ \ \ \}}
+\DoxyCodeLine{00336\ \ \ \}}
+\DoxyCodeLine{00337\ \}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \textcolor{comment}{//\ Lower\ level\ function\ meant\ to\ be\ called\ by\ other\ functions\ }}
+\DoxyCodeLine{00340\ \textcolor{comment}{//\ Sends\ SystemPacket\ via\ ESP-\/NOW}}
+\DoxyCodeLine{00341\ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a2b24fc52cf5c1d071b7c8b02227b9590}{sendESPNow}}(uint8\_t\ *dest,\ \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}\ *data)\ \{}
+\DoxyCodeLine{00342\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ sendResult;}
+\DoxyCodeLine{00343\ \ \ \textcolor{keywordflow}{if}\ (dest\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ !esp\_now\_is\_peer\_exist(dest))}
+\DoxyCodeLine{00344\ \ \ \{}
+\DoxyCodeLine{00345\ \textcolor{preprocessor}{\#ifdef\ ESP8266}}
+\DoxyCodeLine{00346\ \ \ \ \ sendResult\ =\ esp\_now\_add\_peer(dest,\ ESP\_NOW\_ROLE\_COMBO,\ 0,\ NULL,\ 0);}
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordflow}{if}\ (sendResult\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00348\ \ \ \ \ \{}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00351\ \ \ \ \ \}}
+\DoxyCodeLine{00352\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00353\ \textcolor{preprocessor}{\#if\ defined(ESP32)}}
+\DoxyCodeLine{00354\ \ \ \ \ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00355\ \ \ \ \ peerInfo.ifidx\ =\ WIFI\_IF\_STA;}
+\DoxyCodeLine{00356\ \ \ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00357\ \ \ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00358\ \ \ \ \ memcpy(peerInfo.peer\_addr,\ dest,\ 6);}
+\DoxyCodeLine{00359\ \ \ \ \ sendResult\ =\ esp\_now\_add\_peer(\&peerInfo);}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordflow}{if}\ (sendResult\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00361\ \ \ \ \ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00364\ \ \ \ \ \}}
+\DoxyCodeLine{00365\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00366\ \ \ \ \ sendResult\ =\ esp\_now\_send(dest,\ (uint8\_t\ *)data,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}));}
+\DoxyCodeLine{00367\ \ \ \ \ esp\_now\_del\_peer(dest);}
+\DoxyCodeLine{00368\ \ \ \}}
+\DoxyCodeLine{00369\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00370\ \ \ \{}
+\DoxyCodeLine{00371\ \ \ \ \ sendResult\ =\ esp\_now\_send(dest,\ (uint8\_t\ *)data,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}));}
+\DoxyCodeLine{00372\ \ \ \}}
+\DoxyCodeLine{00373\ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00374\ \}}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \textcolor{comment}{//\ Lower\ level\ function\ meant\ to\ be\ called\ by\ other\ functions\ }}
+\DoxyCodeLine{00377\ \textcolor{comment}{//\ Sends\ DataReading\ via\ ESP-\/NOW}}
+\DoxyCodeLine{00378\ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a2b24fc52cf5c1d071b7c8b02227b9590}{sendESPNow}}(uint8\_t\ *dest,\ \mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}\ *data)\ \{}
+\DoxyCodeLine{00379\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ sendResult;}
+\DoxyCodeLine{00380\ \ \ \textcolor{keywordtype}{bool}\ tempPeerFlag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \ \ \textcolor{keywordflow}{if}\ (dest\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ !esp\_now\_is\_peer\_exist(dest))}
+\DoxyCodeLine{00384\ \ \ \{}
+\DoxyCodeLine{00385\ \ \ \ \ tempPeerFlag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#ifdef\ ESP8266}}
+\DoxyCodeLine{00387\ \ \ \ \ sendResult\ =\ esp\_now\_add\_peer(dest,\ ESP\_NOW\_ROLE\_COMBO,\ 0,\ NULL,\ 0);}
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{keywordflow}{if}\ (sendResult\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00389\ \ \ \ \ \{}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00392\ \ \ \ \ \}}
+\DoxyCodeLine{00393\ \ \ \}}
+\DoxyCodeLine{00394\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00395\ \textcolor{preprocessor}{\#if\ defined(ESP32)}}
+\DoxyCodeLine{00396\ \ \ \ \ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00397\ \ \ \ \ peerInfo.ifidx\ =\ WIFI\_IF\_STA;}
+\DoxyCodeLine{00398\ \ \ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00399\ \ \ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00400\ \ \ \ \ memcpy(peerInfo.peer\_addr,\ dest,\ 6);}
+\DoxyCodeLine{00401\ \ \ \ \ sendResult\ =\ esp\_now\_add\_peer(\&peerInfo);}
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keywordflow}{if}\ (sendResult\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00403\ \ \ \ \ \{}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00406\ \ \ \ \ \}}
+\DoxyCodeLine{00407\ \ \ \}}
+\DoxyCodeLine{00408\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ESP32}}
+\DoxyCodeLine{00409\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}};\ )\ \{}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}\ >\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}})\ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ sendResult\ =\ esp\_now\_send(dest,\ (uint8\_t\ *)\&data[i],\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}}\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}));}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(sendResult\ ==\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})\ \{}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ i\ +=\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}};}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ failed!}}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ delay(10);}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ sendResult\ =\ esp\_now\_send(dest,\ (uint8\_t\ *)\&data[i],\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}));}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(sendResult\ ==\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})\ \{}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}\ =\ 0;}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ Failed!}}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ delay(10);}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00432\ \ \ \ \ \}\ }
+\DoxyCodeLine{00433\ \ \ \ \ \textcolor{keywordflow}{if}(tempPeerFlag)\ \{}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ esp\_now\_del\_peer(dest);}
+\DoxyCodeLine{00435\ \ \ \ \ \}}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{return}\ sendResult;}
+\DoxyCodeLine{00437\ \}}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00441\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a2b24fc52cf5c1d071b7c8b02227b9590}{sendESPNow}}(uint8\_t\ address)}
+\DoxyCodeLine{00442\ \{}
+\DoxyCodeLine{00443\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Sending\ ESP-\/NOW\ DR."{}});}
+\DoxyCodeLine{00444\ \ \ uint8\_t\ temp\_peer[]\ =\ \{\mbox{\hyperlink{fdrs__globals_8h_a1c8c5652d0d3f46c81014158b9a58cb5}{MAC\_PREFIX}},\ address\};}
+\DoxyCodeLine{00445\ \textcolor{preprocessor}{\#if\ defined(ESP32)}}
+\DoxyCodeLine{00446\ \ \ esp\_now\_peer\_info\_t\ peerInfo;}
+\DoxyCodeLine{00447\ \ \ peerInfo.ifidx\ =\ WIFI\_IF\_STA;}
+\DoxyCodeLine{00448\ \ \ peerInfo.channel\ =\ 0;}
+\DoxyCodeLine{00449\ \ \ peerInfo.encrypt\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00450\ \ \ memcpy(peerInfo.peer\_addr,\ temp\_peer,\ 6);}
+\DoxyCodeLine{00451\ \ \ \textcolor{keywordflow}{if}\ (esp\_now\_add\_peer(\&peerInfo)\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})}
+\DoxyCodeLine{00452\ \ \ \{}
+\DoxyCodeLine{00453\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Failed\ to\ add\ peer"{}});}
+\DoxyCodeLine{00454\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00455\ \ \ \}}
+\DoxyCodeLine{00456\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ESP32}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}\ thePacket[\mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}}];}
+\DoxyCodeLine{00459\ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{00460\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_af88972ea83855ede48abf058eaa70925}{ln}};\ i++)}
+\DoxyCodeLine{00461\ \ \ \{}
+\DoxyCodeLine{00462\ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ >\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_abc7792d3301f5d1e50c8ef12232f7564}{espnow\_size}})}
+\DoxyCodeLine{00463\ \ \ \ \ \{}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ j\ =\ 0;}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ esp\_now\_send(temp\_peer,\ (uint8\_t\ *)\&thePacket,\ \textcolor{keyword}{sizeof}(thePacket));}
+\DoxyCodeLine{00466\ \ \ \ \ \}}
+\DoxyCodeLine{00467\ \ \ \ \ thePacket[j]\ =\ \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{theData}}[i];}
+\DoxyCodeLine{00468\ \ \ \ \ j++;}
+\DoxyCodeLine{00469\ \ \ \}}
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00471\ \ \ esp\_now\_send(temp\_peer,\ (uint8\_t\ *)\&thePacket,\ j\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}));}
+\DoxyCodeLine{00472\ \ \ esp\_now\_del\_peer(temp\_peer);}
+\DoxyCodeLine{00473\ \}}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00475\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__node__espnow_8h_a840a3e5ad6e3435b44e337ad9e726e86}{recvTimeEspNow}}(uint32\_t\ t)\ \{}
+\DoxyCodeLine{00476\ \ \ \textcolor{comment}{//\ Process\ time\ if\ there\ is\ no\ time\ source\ set\ yet\ or\ if\ LoRa\ is\ the\ time\ source\ or\ if\ we\ are\ already\ the\ time\ source}}
+\DoxyCodeLine{00477\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_a94d9f4625ede8aeb5191e8a9463b18bc}{tmNetIf}}\ <=\ \mbox{\hyperlink{fdrs__datatypes_8h_ac11f08c2870e2d2711e6ad57b57b81e0a3542506a9fa30fed36d8fcddace9f472}{TMIF\_ESPNOW}}\ )\ \{}
+\DoxyCodeLine{00478\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Received\ time\ via\ ESP-\/NOW\ from\ 0x"{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[5],\ HEX));}
+\DoxyCodeLine{00479\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_a94d9f4625ede8aeb5191e8a9463b18bc}{tmNetIf}}\ <\ \mbox{\hyperlink{fdrs__datatypes_8h_ac11f08c2870e2d2711e6ad57b57b81e0a3542506a9fa30fed36d8fcddace9f472}{TMIF\_ESPNOW}})\ \{}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_a94d9f4625ede8aeb5191e8a9463b18bc}{tmNetIf}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_ac11f08c2870e2d2711e6ad57b57b81e0a3542506a9fa30fed36d8fcddace9f472}{TMIF\_ESPNOW}};}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aec3ea3d9186e839fa7915c6518cf4ab3}{tmAddress}}\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[4]\ <<\ 8\ |\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[5];}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aade6613821732512338366ebfd320f00}{tmSource}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_af74fa2f072a46f0f62317e415a6d3d2cae0186f84dd17aeeffa5dbd15b28173ce}{TMS\_NET}};}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}ESP-\/NOW\ time\ source\ is\ 0x"{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[5],\ HEX));}
+\DoxyCodeLine{00484\ \ \ \ \ \}}
+\DoxyCodeLine{00485\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aec3ea3d9186e839fa7915c6518cf4ab3}{tmAddress}}\ ==\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[4]\ <<\ 8\ |\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[5])\ \{}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__time_8h_af35daa77797bfa09ee892fbeef694e2d}{setTime}}(t))\ \{}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aaa6414b912b7ed0d9f66f52acf28acc7}{tmLastTimeSet}}\ =\ millis();}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00489\ \ \ \ \ \}}
+\DoxyCodeLine{00490\ \ \ \}}
+\DoxyCodeLine{00491\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00492\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_a3710656646b77d04495c18395a69549a}{DBG2}}(\textcolor{stringliteral}{"{}ESP-\/NOW\ 0x"{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a1989a6c476a1dc6a3b37cebb2b1bc3f9}{incMAC}}[5],\ HEX)\ +\ \textcolor{stringliteral}{"{}\ is\ not\ time\ source,\ discarding\ request"{}});}
+\DoxyCodeLine{00493\ \ \ \}}
+\DoxyCodeLine{00494\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00495\ \}}
+\DoxyCodeLine{00496\ }
+\DoxyCodeLine{00497\ \textcolor{comment}{//\ Sends\ time\ to\ both\ neighbors\ and\ all\ peers}}
+\DoxyCodeLine{00498\ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ \mbox{\hyperlink{fdrs__gateway_8h_a4a3493bd7c048fd6a4d72800abf84549}{sendTimeESPNow}}()\ \{}
+\DoxyCodeLine{00499\ \ \ }
+\DoxyCodeLine{00500\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ result1\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}},\ result2\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}},\ result3\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}};}
+\DoxyCodeLine{00501\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}\ sys\_packet\ =\ \{\ .cmd\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7ae8c4c8b96c31a124ba227f864bf69a28}{cmd\_time}},\ .param\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}}\ \};}
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00503\ \ \ \textcolor{keywordflow}{if}((\mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aec3ea3d9186e839fa7915c6518cf4ab3}{tmAddress}}\ !=\ (\mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}}[4]\ <<\ 8\ |\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}}[5]))\ \&\&\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}}[5]\ !=\ 0x00)\ \{}
+\DoxyCodeLine{00504\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Sending\ time\ to\ ESP-\/NOW\ Peer\ 1"{}});}
+\DoxyCodeLine{00505\ \ \ \ \ result1\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a2b24fc52cf5c1d071b7c8b02227b9590}{sendESPNow}}(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a890974a215fb361f83324dd9aa1a3c9d}{ESPNOW1}},\ \&sys\_packet);}
+\DoxyCodeLine{00506\ \ \ \}}
+\DoxyCodeLine{00507\ \ \ \textcolor{keywordflow}{if}((\mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aec3ea3d9186e839fa7915c6518cf4ab3}{tmAddress}}\ !=\ (\mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}}[4]\ <<\ 8\ |\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}}[5]))\ \&\&\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}}[5]\ !=\ 0x00)\ \{}
+\DoxyCodeLine{00508\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Sending\ time\ to\ ESP-\/NOW\ Peer\ 2"{}});}
+\DoxyCodeLine{00509\ \ \ \ \ result2\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a2b24fc52cf5c1d071b7c8b02227b9590}{sendESPNow}}(\mbox{\hyperlink{fdrs__gateway__espnow_8h_a03401479bd3b042baecdc1c634238d90}{ESPNOW2}},\ \&sys\_packet);}
+\DoxyCodeLine{00510\ \ \ \}}
+\DoxyCodeLine{00511\ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Sending\ time\ to\ ESP-\/NOW\ registered\ peers"{}});}
+\DoxyCodeLine{00512\ \ \ result3\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a2b24fc52cf5c1d071b7c8b02227b9590}{sendESPNow}}(\textcolor{keyword}{nullptr},\ \&sys\_packet);}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00514\ \ \ \textcolor{keywordflow}{if}(result1\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}}\ ||\ result2\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}}\ ||\ result3\ !=\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}})\{}
+\DoxyCodeLine{00515\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{fdrs__datatypes_8h_a3792b0d09c0170e4a3b5bb9b6f6fa72b}{ESP\_FAIL}};}
+\DoxyCodeLine{00516\ \ \ \}}
+\DoxyCodeLine{00517\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00518\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{fdrs__datatypes_8h_abdbffa06442bc1fe3d65dbb8d17656d1}{ESP\_OK}};}
+\DoxyCodeLine{00519\ \ \ \}}
+\DoxyCodeLine{00520\ \}}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \textcolor{comment}{//\ Send\ the\ time\ to\ a\ specific\ node}}
+\DoxyCodeLine{00523\ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ \mbox{\hyperlink{fdrs__gateway_8h_a4a3493bd7c048fd6a4d72800abf84549}{sendTimeESPNow}}(uint8\_t\ *addr)\ \{}
+\DoxyCodeLine{00524\ \ \ }
+\DoxyCodeLine{00525\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\_err\_t}}\ result\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a3792b0d09c0170e4a3b5bb9b6f6fa72b}{ESP\_FAIL}};}
+\DoxyCodeLine{00526\ \ \ \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}\ sys\_packet\ =\ \{\ .cmd\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7ae8c4c8b96c31a124ba227f864bf69a28}{cmd\_time}},\ .param\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}}\ \};}
+\DoxyCodeLine{00527\ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Sending\ time\ to\ ESP-\/NOW\ address\ 0x"{}}\ +\ String(addr[5],HEX));}
+\DoxyCodeLine{00528\ \ \ result\ =\ \mbox{\hyperlink{fdrs__gateway__espnow_8h_a2b24fc52cf5c1d071b7c8b02227b9590}{sendESPNow}}(addr,\ \&sys\_packet);}
+\DoxyCodeLine{00529\ }
+\DoxyCodeLine{00530\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00531\ \}}
+
+\end{DoxyCode}

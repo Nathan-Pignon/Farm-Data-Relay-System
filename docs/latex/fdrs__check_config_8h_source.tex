@@ -1,0 +1,409 @@
+\doxysection{fdrs\+\_\+check\+Config.\+h}
+\hypertarget{fdrs__check_config_8h_source}{}\label{fdrs__check_config_8h_source}\index{src/fdrs\_checkConfig.h@{src/fdrs\_checkConfig.h}}
+\mbox{\hyperlink{fdrs__check_config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ \ FARM\ DATA\ RELAY\ SYSTEM}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ \ DETAILED\ NODES'\ CONFIGURATION\ CHECK}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ \ Make\ sure\ \#define\ DEBUG\_CONFIG\ is\ not\ uncommented\ in\ your\ node's\ config}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ (fdrs\_node\_config.h\ or\ fdrs\_gateway\_config.h).\ Otherwise\ check\ will\ be\ ignored.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \ When\ the\ node\ powers\ up,\ it's\ full\ config\ will\ be\ printed\ to\ the\ serial\ console\ once.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \ Be\ sure\ to\ add\ further\ checks\ as\ new\ configuration\ possibilities\ are\ added\ to\ FDRS.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ \ Contributed\ by\ Sascha\ Juch\ (sascha.juch@gmail.com)}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ \_\_FDRS\_CHECKCONFIG\_h\_\_}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ \_\_FDRS\_CHECKCONFIG\_h\_\_}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{fdrs__check_config_8h_a4c2ab2f5abfd13a360d5929581431633}{separatorLine}}\ \ \ =\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}};}
+\DoxyCodeLine{00016\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{fdrs__check_config_8h_abda5c6f0aa220ec48b73538c2fea1e33}{headerAndFooter}}\ =\ \textcolor{stringliteral}{"{}=============================================================="{}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ helper\ function\ for\ obfuscating\ passwords}}
+\DoxyCodeLine{00020\ String\ \mbox{\hyperlink{fdrs__check_config_8h_af2e48c72e4af389202e9523d9fb1e936}{obfuscatePassword}}(String\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_aa4a2ebcb494493f648ae1e6975672575}{password}})\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{char}\ obfuscatedPass[\mbox{\hyperlink{fdrs__gateway__wifi_8h_aa4a2ebcb494493f648ae1e6975672575}{password}}.length()];}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ TO\ DO:\ The\ following\ line\ is\ disabled\ due\ to\ AVR\ incompatibility.}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ std::fill(obfuscatedPass,\ obfuscatedPass\ +\ password.length(),\ '*');\ }}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ String(obfuscatedPass);}
+\DoxyCodeLine{00025\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ helper\ function\ for\ small\ header\ above\ each\ sub\ section}}
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_ade278f8744710286c3611281851f9595}{printSmallSectionHeader}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ headerText)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\mbox{\hyperlink{fdrs__check_config_8h_a4c2ab2f5abfd13a360d5929581431633}{separatorLine}});}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(headerText);}
+\DoxyCodeLine{00032\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ helper\ function\ for\ a\ nice\ little\ header\ above\ each\ section}}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_affe78a9c63b650254274d3766cd3f189}{printSectionHeader}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ headerText)\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\mbox{\hyperlink{fdrs__check_config_8h_a4c2ab2f5abfd13a360d5929581431633}{separatorLine}});}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(headerText);}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\mbox{\hyperlink{fdrs__check_config_8h_a4c2ab2f5abfd13a360d5929581431633}{separatorLine}});}
+\DoxyCodeLine{00040\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ helper\ function\ for\ a\ nice\ little\ header\ above\ each\ main\ section}}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_a919959e5792d319061126df8f8b3f8fd}{printConfigHeader}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ headerText)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\mbox{\hyperlink{fdrs__check_config_8h_abda5c6f0aa220ec48b73538c2fea1e33}{headerAndFooter}});}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(headerText);}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\mbox{\hyperlink{fdrs__check_config_8h_abda5c6f0aa220ec48b73538c2fea1e33}{headerAndFooter}});}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ check\ which\ logging\ method(s)\ have\ been\ activated\ for\ a\ node}}
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_aa773394acf8d2cddec3ac6183f38f431}{printLoggingInformation}}()\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_affe78a9c63b650254274d3766cd3f189}{printSectionHeader}}(\textcolor{stringliteral}{"{}LOG\ SETTINGS\ OF\ DEVICE"{}});}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#if\ defined(USE\_SD\_LOG)\ \&\&\ defined(USE\_FS\_LOG)}}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Logging\ to\ SD\ card\ AND\ file\ system\ is\ active!\ You\ should\ better\ use\ only\ one\ of\ them\ at\ a\ time"{}});}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#ifdef\ USE\_SD\_LOG}}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Logging\ to\ SD-\/Card\ \ \ \ :\ enabled"{}});}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#ifdef\ LOGBUF\_DELAY}}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ buffer\ delay\ in\ ms:\ "{}}\ +\ String(LOGBUF\_DELAY));}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ buffer\ delay\ in\ ms:\ NOT\ SPECIFIED\ -\/\ check\ config!"{}});}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#ifdef\ LOG\_FILENAME}}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ filename\ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ LOG\_FILENAME);}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ filename\ \ \ \ \ \ \ \ \ \ :\ NOT\ SPECIFIED\ -\/\ check\ config!"{}});}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Logging\ to\ SD-\/Card\ \ \ \ :\ disabled"{}});}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//USE\_SD\_LOG}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#ifdef\ USE\_FS\_LOG}}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Logging\ to\ file\ system:\ enabled"{}});}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#ifdef\ LOGBUF\_DELAY}}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ buffer\ delay\ in\ ms:\ "{}}\ +\ String(LOGBUF\_DELAY));}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ buffer\ delay\ in\ ms:\ NOT\ SPECIFIED\ -\/\ check\ config!"{}});}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#ifdef\ LOG\_FILENAME}}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ filename\ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ LOG\_FILENAME);}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}log\ filename\ \ \ \ \ \ \ \ \ \ :\ NOT\ SPECIFIED\ -\/\ check\ config!"{}});}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WARNING:\ Permanently\ logging\ to\ flash\ memory\ may\ destroy\ the\ flash\ memory\ of\ your\ device!"{}});}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Logging\ to\ file\ system:\ disabled"{}});}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//USE\_FS\_LOG}}
+\DoxyCodeLine{00091\ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ check\ which\ protocols\ are\ activated\ and\ which\ are\ deactivated}}
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_ae720a0c2e18b04c37f93285e7e4e516a}{printActivatedProtocols}}()\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ current\ candidates\ are:\ ESPNOW,\ LORA\ and\ MQTT\ (WIFI)}}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_affe78a9c63b650254274d3766cd3f189}{printSectionHeader}}(\textcolor{stringliteral}{"{}ACTIVATED\ PROTOCOLS"{}});}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#ifdef\ USE\_LORA}}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ \ \ :\ ENABLED"{}});}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ \ \ :\ DISABLED"{}});}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#ifdef\ USE\_ESPNOW}}
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}ESPNow\ :\ ENABLED"{}});}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}ESPNow\ :\ DISABLED"{}});}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#ifdef\ USE\_WIFI}}
+\DoxyCodeLine{00112\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WiFi\ \ \ :\ ENABLED"{}});}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WiFi\ \ \ :\ DISABLED"{}});}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#if\ defined(USE\_WIFI)\ \&\&\ defined(USE\_ESPNOW)}}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WARNING:\ You\ must\ not\ use\ USE\_ESPNOW\ and\ USE\_WIFI\ together!\ USE\_WIFI\ is\ only\ needed\ for\ MQTT!"{}});}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#ifdef\ USE\_STATIC\_IPADDRESS}}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Using\ Static\ IP\ Address"{}});}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Using\ DHCP"{}});}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00126\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_a7a86e689cb48305d634b29a45f6c0475}{printEspnowDetails}}()\ \{}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#ifdef\ USE\_ESPNOW}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#ifdef\ UNIT\_MAC}}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_ade278f8744710286c3611281851f9595}{printSmallSectionHeader}}(\textcolor{stringliteral}{"{}ESP-\/Now\ Details:"{}});}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Neighbor\ 1\ address:\ "{}}\ +\ String(ESPNOW\_NEIGHBOR\_1,\ HEX));}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Neighbor\ 2\ address:\ "{}}\ +\ String(ESPNOW\_NEIGHBOR\_2,\ HEX));}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//UNIT\_MAC}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//USE\_ESPNOW}}
+\DoxyCodeLine{00139\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_a5ee4de2da281f282119ea350b60755b9}{printWifiDetails}}()\ \{}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#ifdef\ USE\_WIFI}}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_ade278f8744710286c3611281851f9595}{printSmallSectionHeader}}(\textcolor{stringliteral}{"{}WiFi\ Details:"{}});}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#if\ defined(WIFI\_SSID)}}
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WiFi\ SSID\ used\ from\ WIFI\_SSID\ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_WIFI\_SSID));}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_WIFI\_SSID)}}
+\DoxyCodeLine{00149\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WiFi\ SSID\ used\ from\ GLOBAL\_WIFI\_SSID\ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_WIFI\_SSID));}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00151\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ WiFi\ SSID\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//WIFI\_SSID}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#if\ defined(WIFI\_PASS)}}
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WiFi\ password\ used\ from\ WIFI\_PASS\ \ \ \ \ \ \ \ :\ "{}}\ +\ \mbox{\hyperlink{fdrs__check_config_8h_af2e48c72e4af389202e9523d9fb1e936}{obfuscatePassword}}(FDRS\_WIFI\_PASS));}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_WIFI\_SSID)}}
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}WiFi\ password\ used\ from\ GLOBAL\_WIFI\_PASS\ \ \ \ \ \ :\ "{}}\ +\ \mbox{\hyperlink{fdrs__check_config_8h_af2e48c72e4af389202e9523d9fb1e936}{obfuscatePassword}}(FDRS\_WIFI\_PASS));}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ WiFi\ password\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//WIFI\_PASS}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#ifdef\ USE\_STATIC\_IPADDRESS}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#if\ defined(HOST\_IPADDRESS)}}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Host\ IP\ Address\ used\ from\ HOST\_IPADDRESS\ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_HOST\_IPADDRESS));}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_HOST\_IPADDRESS)}}
+\DoxyCodeLine{00168\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Host\ IP\ Address\ used\ from\ GLOBAL\_HOST\_IPADDRESS\ \ \ \ \ :\ "{}}\ +\ String(FDRS\_HOST\_IPADDRESS));}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ Host\ IP\ Address\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HOST\_IPADDRESS}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#if\ defined(GW\_IPADDRESS)}}
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Gateway\ IP\ Address\ used\ from\ GW\_IPADDRESS\ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_GW\_IPADDRESS));}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_GW\_IPADDRESS)}}
+\DoxyCodeLine{00177\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Gateway\ IP\ Address\ used\ from\ GLOBAL\_GW\_IPADDRESS\ \ \ \ \ :\ "{}}\ +\ String(FDRS\_GW\_IPADDRESS));}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00179\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ Gateway\ IP\ Address\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GW\_IPADDRESS}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#if\ defined(SUBNET\_ADDRESS)}}
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Subnet\ Address\ used\ from\ SUBNET\_ADDRESS\ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_SUBNET\_ADDRESS));}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_SUBNET\_ADDRESS)}}
+\DoxyCodeLine{00186\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Subnet\ Address\ used\ from\ GLOBAL\_SUBNET\_ADDRESS\ \ \ \ \ :\ "{}}\ +\ String(FDRS\_SUBNET\_ADDRESS));}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00188\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ Subnet\ Address\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SUBNET\_ADDRESS}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \textcolor{preprocessor}{\#if\ defined(DNS2\_IPADDRESS)}}
+\DoxyCodeLine{00193\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}DNS2\ IP\ Address\ used\ from\ DNS2\_IPADDRESS\ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_DNS2\_IPADDRESS));}
+\DoxyCodeLine{00194\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_DNS2\_IPADDRESS)}}
+\DoxyCodeLine{00195\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}DNS2\ IP\ Address\ used\ from\ GLOBAL\_DNS2\_IPADDRESS\ \ \ \ \ :\ "{}}\ +\ String(FDRS\_DNS2\_IPADDRESS));}
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DNS2\_IPADDRESS}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ USE\_STATIC\_IPADDRESS}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#if\ defined(DNS1\_IPADDRESS)}}
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}DNS1\ IP\ Address\ used\ from\ DNS1\_IPADDRESS\ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_DNS1\_IPADDRESS));}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_DNS1\_IPADDRESS)}}
+\DoxyCodeLine{00202\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}DNS1\ IP\ Address\ used\ from\ GLOBAL\_DNS1\_IPADDRESS\ \ \ \ \ :\ "{}}\ +\ String(FDRS\_DNS1\_IPADDRESS));}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ DNS1\ IP\ Address\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DNS1\_IPADDRESS}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_ade278f8744710286c3611281851f9595}{printSmallSectionHeader}}(\textcolor{stringliteral}{"{}MQTT\ BROKER\ CONFIG:"{}});}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\#if\ defined(MQTT\_ADDR)}}
+\DoxyCodeLine{00212\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ address\ used\ from\ MQTT\_ADDR\ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_MQTT\_ADDR));}
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_MQTT\_ADDR)}}
+\DoxyCodeLine{00214\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ address\ used\ from\ GLOBAL\_MQTT\_ADDR\ \ :\ "{}}\ +\ String(FDRS\_MQTT\_ADDR));}
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ MQTT\ address\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//MQTT\_ADDR}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\#if\ defined(MQTT\_PORT)}}
+\DoxyCodeLine{00221\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ port\ used\ from\ MQTT\_PORT\ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a72506225cc5180e83a36bde2c9917af2}{FDRS\_MQTT\_PORT}}));}
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_MQTT\_PORT)}}
+\DoxyCodeLine{00223\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ port\ used\ from\ GLOBAL\_MQTT\_ADDR\ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a72506225cc5180e83a36bde2c9917af2}{FDRS\_MQTT\_PORT}}));}
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00225\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Using\ default\ MQTT\ port\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a72506225cc5180e83a36bde2c9917af2}{FDRS\_MQTT\_PORT}}));}
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//MQTT\_PORT}}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \textcolor{preprocessor}{\#ifdef\ FDRS\_MQTT\_AUTH}}
+\DoxyCodeLine{00229\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_ade278f8744710286c3611281851f9595}{printSmallSectionHeader}}(\textcolor{stringliteral}{"{}MQTT\ AUTHENTIFICATION\ CONFIG:"{}});}
+\DoxyCodeLine{00230\ \textcolor{comment}{//GLOBAL\_MQTT\_AUTH}}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#if\ defined(MQTT\_USER)}}
+\DoxyCodeLine{00232\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ username\ used\ from\ MQTT\_USER\ \ \ \ \ \ \ \ :\ "{}}\ +\ String(FDRS\_MQTT\_USER));}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_MQTT\_USER)}}
+\DoxyCodeLine{00234\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ username\ used\ from\ GLOBAL\_MQTT\_USER\ :\ "{}}\ +\ String(FDRS\_MQTT\_USER));}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00236\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ MQTT\ username\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00238\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//MQTT\_USER}}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\#if\ defined(MQTT\_PASS)}}
+\DoxyCodeLine{00241\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ password\ used\ from\ MQTT\_PASS\ \ \ \ \ \ \ \ :\ "{}}\ +\ \mbox{\hyperlink{fdrs__check_config_8h_af2e48c72e4af389202e9523d9fb1e936}{obfuscatePassword}}(FDRS\_MQTT\_PASS));}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_MQTT\_PASS)}}
+\DoxyCodeLine{00243\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ password\ used\ from\ GLOBAL\_MQTT\_PASS\ :\ "{}}\ +\ \mbox{\hyperlink{fdrs__check_config_8h_af2e48c72e4af389202e9523d9fb1e936}{obfuscatePassword}}(FDRS\_MQTT\_PASS));}
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ MQTT\ password\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//MQTT\_PASS}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FDRS\_MQTT\_AUTH}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#if\ defined(TOPIC\_DATA)}}
+\DoxyCodeLine{00252\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ topic\ (TOPIC\_DATA)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a138051c1305320a9ed66519854b3d9a5}{FDRS\_TOPIC\_DATA}}));}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_TOPIC\_DATA)}}
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ topic\ used\ from\ GLOBAL\_TOPIC\_DATA\ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a138051c1305320a9ed66519854b3d9a5}{FDRS\_TOPIC\_DATA}}));}
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00256\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ MQTT\ topic\ defined!\ Please\ define\ TOPIC\_DATA\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00258\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//TOPIC\_DATA}}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \textcolor{preprocessor}{\#if\ defined(TOPIC\_STATUS)}}
+\DoxyCodeLine{00261\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ topic\ (TOPIC\_STATUS)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a00728dc30eb67ea733723b4fc903b800}{FDRS\_TOPIC\_STATUS}}));}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_TOPIC\_STATUS)}}
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ topic\ used\ from\ GLOBAL\_TOPIC\_STATUS\ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a00728dc30eb67ea733723b4fc903b800}{FDRS\_TOPIC\_STATUS}}));}
+\DoxyCodeLine{00264\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00265\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ MQTT\ topic\ defined!\ Please\ define\ TOPIC\_STATUS\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//TOPIC\_STATUS}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#if\ defined(TOPIC\_COMMAND)}}
+\DoxyCodeLine{00270\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ topic\ (TOPIC\_COMMAND)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a0b1034e9ddb5776b6e9da1f6ad0dfaf5}{FDRS\_TOPIC\_COMMAND}}));}
+\DoxyCodeLine{00271\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined\ (GLOBAL\_TOPIC\_COMMAND)}}
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}MQTT\ topic\ used\ from\ GLOBAL\_TOPIC\_COMMAND\ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__mqtt_8h_a0b1034e9ddb5776b6e9da1f6ad0dfaf5}{FDRS\_TOPIC\_COMMAND}}));}
+\DoxyCodeLine{00273\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00274\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ MQTT\ topic\ defined!\ Please\ define\ TOPIC\_COMMAND\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h\ /\ fdrs\_gateway\_config.h"{}});}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//TOPIC\_COMMAND}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\mbox{\hyperlink{fdrs__check_config_8h_a4c2ab2f5abfd13a360d5929581431633}{separatorLine}});}
+\DoxyCodeLine{00279\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\mbox{\hyperlink{fdrs__check_config_8h_a4c2ab2f5abfd13a360d5929581431633}{separatorLine}});}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//USE\_WIFI}}
+\DoxyCodeLine{00282\ \}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_a6dab56e43ee42266c2a932cb1ff4d283}{printLoraDetails}}()\ \{}
+\DoxyCodeLine{00286\ \textcolor{preprocessor}{\#ifdef\ USE\_LORA}}
+\DoxyCodeLine{00287\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_ade278f8744710286c3611281851f9595}{printSmallSectionHeader}}(\textcolor{stringliteral}{"{}LoRa\ Details:"{}});}
+\DoxyCodeLine{00288\ \ \ \ \ }
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#if\ defined(FDRS\_LORA\_FREQUENCY)}}
+\DoxyCodeLine{00290\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ frequency\ used\ from\ FDRS\_LORA\_FREQUENCY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__lora_8h_a0d8f69fcbd35ccb4d008ba7a483ef847}{FDRS\_LORA\_FREQUENCY}}));}
+\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_FDRS\_LORA\_FREQUENCY)}}
+\DoxyCodeLine{00292\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ frequency\ used\ from\ GLOBAL\_FDRS\_LORA\_FREQUENCY\ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__lora_8h_a0d8f69fcbd35ccb4d008ba7a483ef847}{FDRS\_LORA\_FREQUENCY}}));}
+\DoxyCodeLine{00293\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00294\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ FDRS\_LORA\_FREQUENCY\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{}});}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00296\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//LORA-\/FREQUENCY}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \textcolor{preprocessor}{\#if\ defined(LORA\_SF)}}
+\DoxyCodeLine{00299\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ SF\ used\ from\ LORA\_SF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__lora_8h_ab6a9cf593ff68d0fd3690d7bfed9e9a1}{FDRS\_LORA\_SF}}));}
+\DoxyCodeLine{00300\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_LORA\_SF)}}
+\DoxyCodeLine{00301\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ SF\ used\ from\ GLOBAL\_LORA\_SF\ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__lora_8h_ab6a9cf593ff68d0fd3690d7bfed9e9a1}{FDRS\_LORA\_SF}}));}
+\DoxyCodeLine{00302\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00303\ \textcolor{comment}{//\ \ ASSERT("{}NO\ LORA-\/SF\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{});}}
+\DoxyCodeLine{00304\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ LORA\_SF\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{}});}
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00306\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//LORA\_SF}}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \textcolor{preprocessor}{\#if\ defined(LORA\_TXPWR)}}
+\DoxyCodeLine{00309\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ TXPWR\ used\ from\ LORA\_TXPWR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__lora_8h_aa4f4bd97bffc9506a3d11dbc8ac9fc7e}{FDRS\_LORA\_TXPWR}}));}
+\DoxyCodeLine{00310\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_LORA\_TXPWR)}}
+\DoxyCodeLine{00311\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ TXPWR\ used\ from\ GLOBAL\_LORA\_TXPWR\ \ \ \ \ \ \ \ :\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__lora_8h_aa4f4bd97bffc9506a3d11dbc8ac9fc7e}{FDRS\_LORA\_TXPWR}}));}
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00313\ \textcolor{comment}{//\ \ ASSERT("{}NO\ LORA-\/TXPWR\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{});}}
+\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ LORA\_TXPWR\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{}});}
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{comment}{//exit(0);}}
+\DoxyCodeLine{00316\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//LORA\_TXPWR}}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \textcolor{preprocessor}{\#if\ defined(LORA\_ACK)}}
+\DoxyCodeLine{00319\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ acknowledgement\ used\ from\ LORA\_ACK\ \ \ \ \ \ \ :\ enabled"{}});}
+\DoxyCodeLine{00320\ \textcolor{preprocessor}{\#elif\ defined\ (GLOBAL\_LORA\_ACK)}}
+\DoxyCodeLine{00321\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ acknowledgement\ used\ from\ GLOBAL\_LORA\_ACK:\ enabled"{}});}
+\DoxyCodeLine{00322\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00323\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ acknowledgement\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ disabled"{}});}
+\DoxyCodeLine{00324\ \textcolor{preprocessor}{\#endif\ \ }}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \textcolor{preprocessor}{\#if\ defined(LORA\_ACK)\ ||\ defined(GLOBAL\_LORA\_ACK)}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \textcolor{preprocessor}{\#if\ defined(LORA\_ACK\_TIMEOUT)}}
+\DoxyCodeLine{00329\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Timeout\ for\ Lora\ acknowledment\ (LORA\_ACK)\ \ \ \ \ :\ "{}}\ +\ String(LORA\_ACK\_TIMEOUT));}
+\DoxyCodeLine{00330\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00331\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ LORA\_ACK\_TIMEOUT\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{}});}
+\DoxyCodeLine{00332\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LORA\_ACK\_TIMEOUT}}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \textcolor{preprocessor}{\#if\ defined(LORA\_RETRIES)}}
+\DoxyCodeLine{00335\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Number\ of\ ack\ retries\ (LORA\_RETRIES)\ \ \ \ \ \ \ \ \ \ :\ "{}}\ +\ String(LORA\_RETRIES));}
+\DoxyCodeLine{00336\ \ \ \ \ }
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{keywordflow}{if}\ (LORA\_RETRIES\ >=\ 0\ \&\&\ LORA\_RETRIES\ <=\ 3)\ }
+\DoxyCodeLine{00338\ \ \ \ \ \{}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Number\ of\ ack\ retries\ (LORA\_RETRIES)\ \ \ \ \ \ \ \ \ \ :\ within\ allowed\ range."{}});}
+\DoxyCodeLine{00340\ \ \ \ \ \}}
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Number\ of\ ack\ retries\ (LORA\_RETRIES)\ \ \ \ \ \ \ \ \ \ :\ not\ within\ allowed\ range\ [0\ -\/\ 3]!\ Please\ change\ to\ correct\ value."{}});}
+\DoxyCodeLine{00343\ \ \ \ \ \}\ \textcolor{comment}{//\ LORA\_RETRIES\ RANGE\ CHECK}}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00346\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}NO\ LORA\_RETRIES\ defined!\ Defaulting\ to\ 0.\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{}});}
+\DoxyCodeLine{00347\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LORA\_RETRIES}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//LORA\_ACK\ ||\ GLOBAL\_LORA\_ACK}}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \textcolor{preprocessor}{\#ifdef\ UNIT\_MAC}}
+\DoxyCodeLine{00353\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}LoRa\ Neighbors"{}});}
+\DoxyCodeLine{00354\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Neighbor\ 1\ address:\ "{}}\ +\ String(LORA\_NEIGHBOR\_1,\ HEX));}
+\DoxyCodeLine{00355\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Neighbor\ 2\ address:\ "{}}\ +\ String(LORA\_NEIGHBOR\_2,\ HEX));}
+\DoxyCodeLine{00356\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//UNIT\_MAC}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//USE\_LORA}}
+\DoxyCodeLine{00359\ \}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__check_config_8h_ac278ca9c2789ae3014fd6e2523edcf20}{checkConfig}}()\ \{}
+\DoxyCodeLine{00363\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_a919959e5792d319061126df8f8b3f8fd}{printConfigHeader}}(\textcolor{stringliteral}{"{}NODE\ CONFIGURATION\ OVERVIEW"{}});}
+\DoxyCodeLine{00364\ \textcolor{preprocessor}{\#ifdef\ UNIT\_MAC}}
+\DoxyCodeLine{00365\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Device\ Type\ \ \ \ \ \ \ :\ Gateway"{}});}
+\DoxyCodeLine{00366\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Gateway\ ID\ \ \ \ \ \ :\ "{}}\ +\ String(UNIT\_MAC,\ HEX));}
+\DoxyCodeLine{00367\ \textcolor{preprocessor}{\#elif\ defined\ (READING\_ID)}}
+\DoxyCodeLine{00368\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Device\ Type\ \ \ \ \ \ \ :\ Node"{}});}
+\DoxyCodeLine{00369\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Reading\ ID\ \ \ \ \ \ :\ "{}}\ +\ String(READING\_ID));}
+\DoxyCodeLine{00370\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Node's\ Gateway:\ "{}}\ +\ String(GTWY\_MAC,\ HEX));}
+\DoxyCodeLine{00371\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00372\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Device\ Type\ \ \ \ \ \ \ :\ UNKNOWN!"{}});}
+\DoxyCodeLine{00373\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Please\ check\ config!"{}});}
+\DoxyCodeLine{00374\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}If\ you\ have\ just\ created\ a\ new\ node\ type,"{}});}
+\DoxyCodeLine{00375\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}please\ add\ it's\ config\ check\ to:"{}});}
+\DoxyCodeLine{00376\ \ \ \ \ DGB(\textcolor{stringliteral}{"{}fdrs\_checkConfig.h"{}});}
+\DoxyCodeLine{00377\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00378\ \ \ \ \ }
+\DoxyCodeLine{00379\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_ae720a0c2e18b04c37f93285e7e4e516a}{printActivatedProtocols}}();}
+\DoxyCodeLine{00380\ \ \ \ \ }
+\DoxyCodeLine{00381\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_ade278f8744710286c3611281851f9595}{printSmallSectionHeader}}(\textcolor{stringliteral}{"{}PROTOCOL\ DETAILS"{}});}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \textcolor{preprocessor}{\#ifdef\ USE\_LORA}}
+\DoxyCodeLine{00384\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_a6dab56e43ee42266c2a932cb1ff4d283}{printLoraDetails}}();}
+\DoxyCodeLine{00385\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \textcolor{preprocessor}{\#ifdef\ USE\_ESPNOW}}
+\DoxyCodeLine{00388\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_a7a86e689cb48305d634b29a45f6c0475}{printEspnowDetails}}();}
+\DoxyCodeLine{00389\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \textcolor{preprocessor}{\#ifdef\ USE\_WIFI}}
+\DoxyCodeLine{00392\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_a5ee4de2da281f282119ea350b60755b9}{printWifiDetails}}();}
+\DoxyCodeLine{00393\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00395\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_aa773394acf8d2cddec3ac6183f38f431}{printLoggingInformation}}();}
+\DoxyCodeLine{00396\ \ \ \ \ }
+\DoxyCodeLine{00397\ \ \ \ \ \mbox{\hyperlink{fdrs__check_config_8h_a919959e5792d319061126df8f8b3f8fd}{printConfigHeader}}(\textcolor{stringliteral}{"{}NODE\ CONFIGURATION\ OVERVIEW\ END"{}});}
+\DoxyCodeLine{00398\ \ \ \ \ \textcolor{comment}{//DBG(separatorLine);}}
+\DoxyCodeLine{00399\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00400\ \}}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\_\_FDRS\_CHECKCONFIG\_h\_\_}}
+\DoxyCodeLine{00403\ }
+
+\end{DoxyCode}

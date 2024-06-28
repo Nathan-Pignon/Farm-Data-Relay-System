@@ -1,7 +1,9 @@
-//  FARM DATA RELAY SYSTEM
-//
-//  GATEWAY Main Functions
-//  Developed by Timm Bogner (timmbogner@gmail.com)
+/**
+ * @file fdrs_gateway_main.cpp
+ * @brief Fonctions principales pour la passerelle du système Farm Data Relay System (FDRS).
+ *
+ * Développé par Timm Bogner (timmbogner@gmail.com)
+ */
 
 #include "fdrs_datatypes.h"
 #include "fdrs_globals.h"
@@ -47,10 +49,10 @@ uint8_t ln;
 uint8_t newData = event_clear;
 uint8_t newCmd = cmd_clear;
 
-DataReading fdrsData[256]; // buffer for loadFDRS()
+DataReading fdrsData[256]; // buffer pour loadFDRS()
 uint8_t data_count = 0;
 
-// Function Prototypes needed due to #ifdefs being moved outside of function definitions in header files 
+// Prototypes de fonctions nécessaires en raison des #ifdefs déplacés en dehors des définitions de fonctions dans les fichiers d'en-tête
 void broadcastLoRa();
 void sendLoRaNbr(uint8_t);
 void timeFDRSLoRa(uint8_t *);
@@ -95,17 +97,23 @@ void printFDRS(DataReading*, int);
   #include "fdrs_checkConfig.h"
 #endif
 
-
-// Print type DataReading for debugging purposes
+/**
+ * @brief Affiche les données de type DataReading pour les besoins de débogage.
+ *
+ * @param dr Pointeur vers un tableau de DataReading.
+ * @param len Longueur du tableau de DataReading.
+ */
 void printFDRS(DataReading * dr, int len) {
   DBG("----- printFDRS: " + String(len) + " records -----");
   for(int i = 0; i < len; i++) {
     DBG("Index: " + String(i) + "| id: " + String(dr[i].id) + "| type: " + String(dr[i].t) + "| data: " + String(dr[i].d));
   }
   DBG("----- End printFDRS -----");
-
 }
 
+/**
+ * @brief Envoie les données FDRS si elles sont disponibles.
+ */
 void sendFDRS()
 {
   if(data_count > 0) {
@@ -122,9 +130,16 @@ void sendFDRS()
   }
 }
 
+/**
+ * @brief Charge les données FDRS dans le tampon.
+ *
+ * @param d Donnée à charger.
+ * @param t Type de donnée.
+ * @param id Identifiant de la donnée.
+ */
 void loadFDRS(float d, uint8_t t, uint16_t id)
 {
-  // guard against buffer overflow
+  // Protéger contre le dépassement de tampon
   if(data_count > 253) {
     sendFDRS();
   }
@@ -137,6 +152,9 @@ void loadFDRS(float d, uint8_t t, uint16_t id)
   data_count++;
 }
 
+/**
+ * @brief Initialise la passerelle FDRS.
+ */
 void beginFDRS()
 {
 #if defined(ESP8266)
@@ -187,14 +205,16 @@ void beginFDRS()
   begin_espnow();
 #endif
 
-
 #ifdef USE_WIFI
   client.publish(FDRS_TOPIC_STATUS, "FDRS initialized");
   scheduleFDRS(fetchNtpTime,1000*60*FDRS_TIME_FETCHNTP);
 #endif
-scheduleFDRS(printTime,1000*60*FDRS_TIME_PRINTTIME);
+  scheduleFDRS(printTime,1000*60*FDRS_TIME_PRINTTIME);
 }
 
+/**
+ * @brief Gère les commandes reçues.
+ */
 void handleCommands()
 {
   switch (theCmd.cmd)
@@ -231,6 +251,9 @@ void handleCommands()
   theCmd.param = 0;
 }
 
+/**
+ * @brief Gère les actions en fonction des événements.
+ */
 void handleActions() {
   if (newData != event_clear)
   {
@@ -268,7 +291,9 @@ void handleActions() {
   }
 }
 
-
+/**
+ * @brief Boucle principale pour le fonctionnement continu de la passerelle FDRS.
+ */
 void loopFDRS()
 {
   handleTime();
@@ -284,7 +309,7 @@ void loopFDRS()
   handleActions();
 }
 
-// "Skeleton Functions related to FDRS Actions"
+// Fonctions squelettes liées aux actions FDRS
 #ifndef USE_LORA
   void broadcastLoRa() {}
   void sendLoRaNbr(uint8_t address) {}

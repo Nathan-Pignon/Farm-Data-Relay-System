@@ -1,0 +1,505 @@
+\doxysection{src/fdrs\+\_\+lora.h File Reference}
+\hypertarget{fdrs__lora_8h}{}\label{fdrs__lora_8h}\index{src/fdrs\_lora.h@{src/fdrs\_lora.h}}
+{\ttfamily \#include $<$Radio\+Lib.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a6f10ea73e86eee8dcf2e54c500db772d}{GLOBAL\+\_\+\+ACK\+\_\+\+TIMEOUT}}~400
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a7b2fe786528c3609a483b30ba1d74c1b}{GLOBAL\+\_\+\+LORA\+\_\+\+RETRIES}}~2
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a8dd8e7d42123ee9c682ed3d099b5d7f5}{GLOBAL\+\_\+\+LORA\+\_\+\+TXPWR}}~17
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a4e8988ccf8df847db6ee047234d63718}{TXDELAYMS}}~300
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a3cef938fb755d77891188e33ff5cabce}{SPBUFFSIZE}}~10
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a364091ba725ebfafacaf152abe6a6398}{LORASIZE}}~(250 / sizeof(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}}))
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a2998b6458318bdacc096e5456f256711}{DRBUFFSIZE}}~100
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a19b3ce753b03a0d7ac5bff588aa68924}{ISBUFFEMPTY}}(buff)~((buff.\+end\+Idx == buff.\+start\+Idx) ? true\+: false)
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a5574e9ef98c09926b8b80d4ae41f09fd}{ISBUFFFULL}}(buff)~(((buff.\+end\+Idx + 1) \% buff.\+size) == buff.\+start\+Idx ? true\+: false)
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_af43d1a73cc05315ae8de6c47d2874786}{BUFFINCSTART}}(buff)~(buff.\+start\+Idx = (buff.\+start\+Idx + 1) \% buff.\+size)
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a69f5d57e9c2c80a1dca2f2f035ace2a4}{BUFFINCEND}}(buff)~(buff.\+end\+Idx = (buff.\+end\+Idx + 1) \% buff.\+size)
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a6826b93cd23f3f2cdd5009dad659296b}{BUFFCLEAR}}(buff)~(buff.\+start\+Idx = buff.\+end\+Idx)
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a0d8f69fcbd35ccb4d008ba7a483ef847}{FDRS\+\_\+\+LORA\+\_\+\+FREQUENCY}}~\mbox{\hyperlink{fdrs__globals_8h_ae7c93afbb07a2459e64e0c6b5eb60682}{GLOBAL\+\_\+\+LORA\+\_\+\+FREQUENCY}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_ab6a9cf593ff68d0fd3690d7bfed9e9a1}{FDRS\+\_\+\+LORA\+\_\+\+SF}}~\mbox{\hyperlink{fdrs__globals_8h_a9c2d4bd82814371284f447a68e25b97f}{GLOBAL\+\_\+\+LORA\+\_\+\+SF}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a325e8942ca595ccf0434ac50e49851e8}{FDRS\+\_\+\+ACK\+\_\+\+TIMEOUT}}~\mbox{\hyperlink{fdrs__lora_8h_a6f10ea73e86eee8dcf2e54c500db772d}{GLOBAL\+\_\+\+ACK\+\_\+\+TIMEOUT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_af707fbbcd7b84fd0c843c7732e63e8b8}{FDRS\+\_\+\+LORA\+\_\+\+RETRIES}}~\mbox{\hyperlink{fdrs__lora_8h_a7b2fe786528c3609a483b30ba1d74c1b}{GLOBAL\+\_\+\+LORA\+\_\+\+RETRIES}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_aa4f4bd97bffc9506a3d11dbc8ac9fc7e}{FDRS\+\_\+\+LORA\+\_\+\+TXPWR}}~\mbox{\hyperlink{fdrs__lora_8h_a8dd8e7d42123ee9c682ed3d099b5d7f5}{GLOBAL\+\_\+\+LORA\+\_\+\+TXPWR}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a3660e0f9c4e0ed10fecd245c00e92802}{FDRS\+\_\+\+LORA\+\_\+\+BANDWIDTH}}~\mbox{\hyperlink{fdrs__globals_8h_ad49d4bebb0b798c2f6769c654323a245}{GLOBAL\+\_\+\+LORA\+\_\+\+BANDWIDTH}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a62d1019ec7e0c6a2be02eae6c3127f84}{FDRS\+\_\+\+LORA\+\_\+\+CR}}~\mbox{\hyperlink{fdrs__globals_8h_afe287cddfbc75678b32805dbb36dd137}{GLOBAL\+\_\+\+LORA\+\_\+\+CR}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a66d7815a575deb69cf1576c650f4af19}{FDRS\+\_\+\+LORA\+\_\+\+SYNCWORD}}~\mbox{\hyperlink{fdrs__globals_8h_abfb431bb5711687b3f8a4fd15328359f}{GLOBAL\+\_\+\+LORA\+\_\+\+SYNCWORD}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a0297115bff6a10c91a3dcd552df4fc2a}{FDRS\+\_\+\+LORA\+\_\+\+INTERVAL}}~\mbox{\hyperlink{fdrs__globals_8h_ae9654a2a2b78bd49ce8c5e217bfc105b}{GLOBAL\+\_\+\+LORA\+\_\+\+INTERVAL}}
+\item 
+\#define \mbox{\hyperlink{fdrs__lora_8h_a78ae43f69a4405c4c3f1927930c8bf3e}{LORA\+\_\+\+BUSY}}~RADIOLIB\+\_\+\+NC
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_a4949bc2533dea211ffee4479c9ea246e}{set\+Flag}} (void)
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_af6c66e36d41879b7be1b1249c254e66b}{print\+Lora\+Packet}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}p, int size)
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_a9ceffe7af0f9922bf5c7003ee8fe0972}{transmit\+Lo\+Ra}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}dest\+Mac, \mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \texorpdfstring{$\ast$}{*}packet, uint8\+\_\+t len)
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_a16c974c13fc07891b333db42dd814f5d}{transmit\+Lo\+Ra}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}dest\+Mac, \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{System\+Packet}} \texorpdfstring{$\ast$}{*}packet, uint8\+\_\+t len)
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_a891be47f9b62be2d0335d591e4f3fc0e}{begin\+\_\+lora}} ()
+\item 
+bool \mbox{\hyperlink{fdrs__lora_8h_a6c7409e91d4bbc41a6fba6852be9ed42}{transmit\+Lo\+Ra\+Async}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}dest\+Addr, \mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{System\+Packet}} \texorpdfstring{$\ast$}{*}sp, uint8\+\_\+t len)
+\item 
+bool \mbox{\hyperlink{fdrs__lora_8h_add395facca0afd156a0d4a562684702f}{transmit\+Lo\+Ra\+Async}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}dest\+Addr, \mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \texorpdfstring{$\ast$}{*}dr, uint8\+\_\+t len)
+\item 
+uint \mbox{\hyperlink{fdrs__lora_8h_a966f72b5662abef538f8611d6e50798f}{transmit\+Same\+Addr\+Lo\+Ra}} ()
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_a181e287094b776a5461ee501144b60de}{send\+Time\+Lo\+Ra}} ()
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_a755568970109aafbdc45e703620f3e9a}{send\+Time\+Lo\+Ra}} (uint16\+\_\+t addr)
+\item 
+bool \mbox{\hyperlink{fdrs__lora_8h_acc09bae7abef05baefa389035bcc1b9b}{ping\+Reply\+Lo\+Ra}} (uint16\+\_\+t address)
+\item 
+\mbox{\hyperlink{fdrs__datatypes_8h_a837c0fc43b79ca95e0a7141424043560}{crc\+Result}} \mbox{\hyperlink{fdrs__lora_8h_abcacf76f32a98451684e7a2ed4a353a5}{receive\+Lo\+Ra}} ()
+\item 
+\mbox{\hyperlink{fdrs__datatypes_8h_a837c0fc43b79ca95e0a7141424043560}{crc\+Result}} \mbox{\hyperlink{fdrs__lora_8h_a094456191931f3c05e93a11d8a6e51f9}{Lo\+Ra\+Tx\+Rx\+Operation}} ()
+\item 
+int \mbox{\hyperlink{fdrs__lora_8h_acb6e120ce92a8851fe1cb471da64409d}{ping\+Request\+Lo\+Ra}} (uint16\+\_\+t address, uint32\+\_\+t timeout)
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_adbc61d9a3623cc657286bfc8405a7f1a}{broadcast\+Lo\+Ra}} ()
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_a1a7268338826ad6bb40a70f615c730a8}{send\+Lo\+Ra\+Nbr}} (uint8\+\_\+t interface)
+\item 
+void \mbox{\hyperlink{fdrs__lora_8h_afcfa506ffe12e69a13e036bf2c186df8}{handle\+Lo\+Ra}} ()
+\item 
+bool \mbox{\hyperlink{fdrs__lora_8h_a1dbf8358f6b651f668b09459d6a43cd8}{req\+Time\+Lo\+Ra}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+RADIOLIB\+\_\+\+MODULE \mbox{\hyperlink{fdrs__lora_8h_ad06a65e54e876d013b735043dbdf5005}{radio}} = new Module(LORA\+\_\+\+SS, LORA\+\_\+\+DIO, LORA\+\_\+\+RST, \mbox{\hyperlink{fdrs__lora_8h_a78ae43f69a4405c4c3f1927930c8bf3e}{LORA\+\_\+\+BUSY}})
+\item 
+bool \mbox{\hyperlink{fdrs__lora_8h_aee9399e0ee90a2982d7de00ac826f097}{ack}} = false
+\item 
+\mbox{\hyperlink{struct_ping}{Ping}} \mbox{\hyperlink{fdrs__lora_8h_accd94183b4e296b919c89fa4240404cb}{lora\+Ping}}
+\item 
+\mbox{\hyperlink{struct_d_r_ring_buffer}{DRRing\+Buffer}} \mbox{\hyperlink{fdrs__lora_8h_a887ff2e2650aba2f11e13d7849284209}{dr\+Buff}}
+\item 
+\mbox{\hyperlink{struct_s_p_ring_buffer}{SPRing\+Buffer}} \mbox{\hyperlink{fdrs__lora_8h_a9adc4024f41366316f4e3981126c5964}{sp\+Buff}}
+\item 
+int \mbox{\hyperlink{fdrs__lora_8h_ac51d637ae9396d144760d4e3e09143c2}{lora\+Tx\+State}} = \mbox{\hyperlink{fdrs__datatypes_8h_a7278d16487e30af3bfe098dab93e3a15a115a67279b5c113df80f6b7e6b42a90c}{st\+Ready}}
+\item 
+int \mbox{\hyperlink{fdrs__lora_8h_a171826655215796b93f9fdf1be7c12a4}{lora\+Ack\+State}} = \mbox{\hyperlink{fdrs__datatypes_8h_a7278d16487e30af3bfe098dab93e3a15a115a67279b5c113df80f6b7e6b42a90c}{st\+Ready}}
+\item 
+volatile bool \mbox{\hyperlink{fdrs__lora_8h_a09fc5ccb165c85a893083f66bcf6707e}{transmit\+Flag}} = false
+\item 
+volatile bool \mbox{\hyperlink{fdrs__lora_8h_af78d7af059e439bcd8015ed07513499b}{enable\+FDRSInterrupt}} = true
+\item 
+volatile bool \mbox{\hyperlink{fdrs__lora_8h_a53896c79caaa5baeab6a96ab3365dcaf}{operation\+Done}} = false
+\item 
+unsigned long \mbox{\hyperlink{fdrs__lora_8h_a69a087bfc34b62d53dbba9720f0bad87}{lora\+Ack\+Timeout}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__lora_8h_a95837beac679b370b386022cd310d1b7}{rx\+Count\+DR}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__lora_8h_abd895bcd719e719cbbe6b8427e7b4eae}{rx\+Count\+SP}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__lora_8h_ae9f7e5dca7e70b1946e0f125f72f5126}{rx\+Count\+Crc\+Ok}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__lora_8h_af1ff085b3dd4a61d04fd806ad43dbfa9}{tx\+Count\+DR}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__lora_8h_a2d5be132cf96e263372a18dbac40389a}{tx\+Count\+SP}} = 0
+\item 
+time\+\_\+t \mbox{\hyperlink{fdrs__lora_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}}
+\item 
+time\+\_\+t \mbox{\hyperlink{fdrs__lora_8h_a48b52f719835d08f27b20cad3069d5f5}{net\+Time\+Offset}} = UINT32\+\_\+\+MAX
+\item 
+unsigned long \mbox{\hyperlink{fdrs__lora_8h_ad32e5278380d7510ef27e528d32a3672}{tx\+\_\+start\+\_\+time}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{fdrs__lora_8h_a6826b93cd23f3f2cdd5009dad659296b}\index{fdrs\_lora.h@{fdrs\_lora.h}!BUFFCLEAR@{BUFFCLEAR}}
+\index{BUFFCLEAR@{BUFFCLEAR}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{BUFFCLEAR}{BUFFCLEAR}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a6826b93cd23f3f2cdd5009dad659296b} 
+\#define BUFFCLEAR(\begin{DoxyParamCaption}\item[{}]{buff}{}\end{DoxyParamCaption})~(buff.\+start\+Idx = buff.\+end\+Idx)}
+
+\Hypertarget{fdrs__lora_8h_a69f5d57e9c2c80a1dca2f2f035ace2a4}\index{fdrs\_lora.h@{fdrs\_lora.h}!BUFFINCEND@{BUFFINCEND}}
+\index{BUFFINCEND@{BUFFINCEND}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{BUFFINCEND}{BUFFINCEND}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a69f5d57e9c2c80a1dca2f2f035ace2a4} 
+\#define BUFFINCEND(\begin{DoxyParamCaption}\item[{}]{buff}{}\end{DoxyParamCaption})~(buff.\+end\+Idx = (buff.\+end\+Idx + 1) \% buff.\+size)}
+
+\Hypertarget{fdrs__lora_8h_af43d1a73cc05315ae8de6c47d2874786}\index{fdrs\_lora.h@{fdrs\_lora.h}!BUFFINCSTART@{BUFFINCSTART}}
+\index{BUFFINCSTART@{BUFFINCSTART}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{BUFFINCSTART}{BUFFINCSTART}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_af43d1a73cc05315ae8de6c47d2874786} 
+\#define BUFFINCSTART(\begin{DoxyParamCaption}\item[{}]{buff}{}\end{DoxyParamCaption})~(buff.\+start\+Idx = (buff.\+start\+Idx + 1) \% buff.\+size)}
+
+\Hypertarget{fdrs__lora_8h_a2998b6458318bdacc096e5456f256711}\index{fdrs\_lora.h@{fdrs\_lora.h}!DRBUFFSIZE@{DRBUFFSIZE}}
+\index{DRBUFFSIZE@{DRBUFFSIZE}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{DRBUFFSIZE}{DRBUFFSIZE}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a2998b6458318bdacc096e5456f256711} 
+\#define DRBUFFSIZE~100}
+
+\Hypertarget{fdrs__lora_8h_a325e8942ca595ccf0434ac50e49851e8}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_ACK\_TIMEOUT@{FDRS\_ACK\_TIMEOUT}}
+\index{FDRS\_ACK\_TIMEOUT@{FDRS\_ACK\_TIMEOUT}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_ACK\_TIMEOUT}{FDRS\_ACK\_TIMEOUT}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a325e8942ca595ccf0434ac50e49851e8} 
+\#define FDRS\+\_\+\+ACK\+\_\+\+TIMEOUT~\mbox{\hyperlink{fdrs__lora_8h_a6f10ea73e86eee8dcf2e54c500db772d}{GLOBAL\+\_\+\+ACK\+\_\+\+TIMEOUT}}}
+
+\Hypertarget{fdrs__lora_8h_a3660e0f9c4e0ed10fecd245c00e92802}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_BANDWIDTH@{FDRS\_LORA\_BANDWIDTH}}
+\index{FDRS\_LORA\_BANDWIDTH@{FDRS\_LORA\_BANDWIDTH}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_BANDWIDTH}{FDRS\_LORA\_BANDWIDTH}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a3660e0f9c4e0ed10fecd245c00e92802} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+BANDWIDTH~\mbox{\hyperlink{fdrs__globals_8h_ad49d4bebb0b798c2f6769c654323a245}{GLOBAL\+\_\+\+LORA\+\_\+\+BANDWIDTH}}}
+
+\Hypertarget{fdrs__lora_8h_a62d1019ec7e0c6a2be02eae6c3127f84}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_CR@{FDRS\_LORA\_CR}}
+\index{FDRS\_LORA\_CR@{FDRS\_LORA\_CR}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_CR}{FDRS\_LORA\_CR}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a62d1019ec7e0c6a2be02eae6c3127f84} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+CR~\mbox{\hyperlink{fdrs__globals_8h_afe287cddfbc75678b32805dbb36dd137}{GLOBAL\+\_\+\+LORA\+\_\+\+CR}}}
+
+\Hypertarget{fdrs__lora_8h_a0d8f69fcbd35ccb4d008ba7a483ef847}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_FREQUENCY@{FDRS\_LORA\_FREQUENCY}}
+\index{FDRS\_LORA\_FREQUENCY@{FDRS\_LORA\_FREQUENCY}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_FREQUENCY}{FDRS\_LORA\_FREQUENCY}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a0d8f69fcbd35ccb4d008ba7a483ef847} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+FREQUENCY~\mbox{\hyperlink{fdrs__globals_8h_ae7c93afbb07a2459e64e0c6b5eb60682}{GLOBAL\+\_\+\+LORA\+\_\+\+FREQUENCY}}}
+
+\Hypertarget{fdrs__lora_8h_a0297115bff6a10c91a3dcd552df4fc2a}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_INTERVAL@{FDRS\_LORA\_INTERVAL}}
+\index{FDRS\_LORA\_INTERVAL@{FDRS\_LORA\_INTERVAL}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_INTERVAL}{FDRS\_LORA\_INTERVAL}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a0297115bff6a10c91a3dcd552df4fc2a} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+INTERVAL~\mbox{\hyperlink{fdrs__globals_8h_ae9654a2a2b78bd49ce8c5e217bfc105b}{GLOBAL\+\_\+\+LORA\+\_\+\+INTERVAL}}}
+
+\Hypertarget{fdrs__lora_8h_af707fbbcd7b84fd0c843c7732e63e8b8}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_RETRIES@{FDRS\_LORA\_RETRIES}}
+\index{FDRS\_LORA\_RETRIES@{FDRS\_LORA\_RETRIES}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_RETRIES}{FDRS\_LORA\_RETRIES}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_af707fbbcd7b84fd0c843c7732e63e8b8} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+RETRIES~\mbox{\hyperlink{fdrs__lora_8h_a7b2fe786528c3609a483b30ba1d74c1b}{GLOBAL\+\_\+\+LORA\+\_\+\+RETRIES}}}
+
+\Hypertarget{fdrs__lora_8h_ab6a9cf593ff68d0fd3690d7bfed9e9a1}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_SF@{FDRS\_LORA\_SF}}
+\index{FDRS\_LORA\_SF@{FDRS\_LORA\_SF}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_SF}{FDRS\_LORA\_SF}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_ab6a9cf593ff68d0fd3690d7bfed9e9a1} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+SF~\mbox{\hyperlink{fdrs__globals_8h_a9c2d4bd82814371284f447a68e25b97f}{GLOBAL\+\_\+\+LORA\+\_\+\+SF}}}
+
+\Hypertarget{fdrs__lora_8h_a66d7815a575deb69cf1576c650f4af19}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_SYNCWORD@{FDRS\_LORA\_SYNCWORD}}
+\index{FDRS\_LORA\_SYNCWORD@{FDRS\_LORA\_SYNCWORD}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_SYNCWORD}{FDRS\_LORA\_SYNCWORD}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a66d7815a575deb69cf1576c650f4af19} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+SYNCWORD~\mbox{\hyperlink{fdrs__globals_8h_abfb431bb5711687b3f8a4fd15328359f}{GLOBAL\+\_\+\+LORA\+\_\+\+SYNCWORD}}}
+
+\Hypertarget{fdrs__lora_8h_aa4f4bd97bffc9506a3d11dbc8ac9fc7e}\index{fdrs\_lora.h@{fdrs\_lora.h}!FDRS\_LORA\_TXPWR@{FDRS\_LORA\_TXPWR}}
+\index{FDRS\_LORA\_TXPWR@{FDRS\_LORA\_TXPWR}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_LORA\_TXPWR}{FDRS\_LORA\_TXPWR}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_aa4f4bd97bffc9506a3d11dbc8ac9fc7e} 
+\#define FDRS\+\_\+\+LORA\+\_\+\+TXPWR~\mbox{\hyperlink{fdrs__lora_8h_a8dd8e7d42123ee9c682ed3d099b5d7f5}{GLOBAL\+\_\+\+LORA\+\_\+\+TXPWR}}}
+
+\Hypertarget{fdrs__lora_8h_a6f10ea73e86eee8dcf2e54c500db772d}\index{fdrs\_lora.h@{fdrs\_lora.h}!GLOBAL\_ACK\_TIMEOUT@{GLOBAL\_ACK\_TIMEOUT}}
+\index{GLOBAL\_ACK\_TIMEOUT@{GLOBAL\_ACK\_TIMEOUT}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{GLOBAL\_ACK\_TIMEOUT}{GLOBAL\_ACK\_TIMEOUT}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a6f10ea73e86eee8dcf2e54c500db772d} 
+\#define GLOBAL\+\_\+\+ACK\+\_\+\+TIMEOUT~400}
+
+\Hypertarget{fdrs__lora_8h_a7b2fe786528c3609a483b30ba1d74c1b}\index{fdrs\_lora.h@{fdrs\_lora.h}!GLOBAL\_LORA\_RETRIES@{GLOBAL\_LORA\_RETRIES}}
+\index{GLOBAL\_LORA\_RETRIES@{GLOBAL\_LORA\_RETRIES}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{GLOBAL\_LORA\_RETRIES}{GLOBAL\_LORA\_RETRIES}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a7b2fe786528c3609a483b30ba1d74c1b} 
+\#define GLOBAL\+\_\+\+LORA\+\_\+\+RETRIES~2}
+
+\Hypertarget{fdrs__lora_8h_a8dd8e7d42123ee9c682ed3d099b5d7f5}\index{fdrs\_lora.h@{fdrs\_lora.h}!GLOBAL\_LORA\_TXPWR@{GLOBAL\_LORA\_TXPWR}}
+\index{GLOBAL\_LORA\_TXPWR@{GLOBAL\_LORA\_TXPWR}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{GLOBAL\_LORA\_TXPWR}{GLOBAL\_LORA\_TXPWR}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a8dd8e7d42123ee9c682ed3d099b5d7f5} 
+\#define GLOBAL\+\_\+\+LORA\+\_\+\+TXPWR~17}
+
+\Hypertarget{fdrs__lora_8h_a19b3ce753b03a0d7ac5bff588aa68924}\index{fdrs\_lora.h@{fdrs\_lora.h}!ISBUFFEMPTY@{ISBUFFEMPTY}}
+\index{ISBUFFEMPTY@{ISBUFFEMPTY}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{ISBUFFEMPTY}{ISBUFFEMPTY}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a19b3ce753b03a0d7ac5bff588aa68924} 
+\#define ISBUFFEMPTY(\begin{DoxyParamCaption}\item[{}]{buff}{}\end{DoxyParamCaption})~((buff.\+end\+Idx == buff.\+start\+Idx) ? true\+: false)}
+
+\Hypertarget{fdrs__lora_8h_a5574e9ef98c09926b8b80d4ae41f09fd}\index{fdrs\_lora.h@{fdrs\_lora.h}!ISBUFFFULL@{ISBUFFFULL}}
+\index{ISBUFFFULL@{ISBUFFFULL}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{ISBUFFFULL}{ISBUFFFULL}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a5574e9ef98c09926b8b80d4ae41f09fd} 
+\#define ISBUFFFULL(\begin{DoxyParamCaption}\item[{}]{buff}{}\end{DoxyParamCaption})~(((buff.\+end\+Idx + 1) \% buff.\+size) == buff.\+start\+Idx ? true\+: false)}
+
+\Hypertarget{fdrs__lora_8h_a78ae43f69a4405c4c3f1927930c8bf3e}\index{fdrs\_lora.h@{fdrs\_lora.h}!LORA\_BUSY@{LORA\_BUSY}}
+\index{LORA\_BUSY@{LORA\_BUSY}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{LORA\_BUSY}{LORA\_BUSY}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a78ae43f69a4405c4c3f1927930c8bf3e} 
+\#define LORA\+\_\+\+BUSY~RADIOLIB\+\_\+\+NC}
+
+\Hypertarget{fdrs__lora_8h_a364091ba725ebfafacaf152abe6a6398}\index{fdrs\_lora.h@{fdrs\_lora.h}!LORASIZE@{LORASIZE}}
+\index{LORASIZE@{LORASIZE}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{LORASIZE}{LORASIZE}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a364091ba725ebfafacaf152abe6a6398} 
+\#define LORASIZE~(250 / sizeof(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}}))}
+
+\Hypertarget{fdrs__lora_8h_a3cef938fb755d77891188e33ff5cabce}\index{fdrs\_lora.h@{fdrs\_lora.h}!SPBUFFSIZE@{SPBUFFSIZE}}
+\index{SPBUFFSIZE@{SPBUFFSIZE}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{SPBUFFSIZE}{SPBUFFSIZE}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a3cef938fb755d77891188e33ff5cabce} 
+\#define SPBUFFSIZE~10}
+
+\Hypertarget{fdrs__lora_8h_a4e8988ccf8df847db6ee047234d63718}\index{fdrs\_lora.h@{fdrs\_lora.h}!TXDELAYMS@{TXDELAYMS}}
+\index{TXDELAYMS@{TXDELAYMS}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{TXDELAYMS}{TXDELAYMS}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a4e8988ccf8df847db6ee047234d63718} 
+\#define TXDELAYMS~300}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fdrs__lora_8h_a891be47f9b62be2d0335d591e4f3fc0e}\index{fdrs\_lora.h@{fdrs\_lora.h}!begin\_lora@{begin\_lora}}
+\index{begin\_lora@{begin\_lora}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{begin\_lora()}{begin\_lora()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a891be47f9b62be2d0335d591e4f3fc0e} 
+void begin\+\_\+lora (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_adbc61d9a3623cc657286bfc8405a7f1a}\index{fdrs\_lora.h@{fdrs\_lora.h}!broadcastLoRa@{broadcastLoRa}}
+\index{broadcastLoRa@{broadcastLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{broadcastLoRa()}{broadcastLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_adbc61d9a3623cc657286bfc8405a7f1a} 
+void broadcast\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_afcfa506ffe12e69a13e036bf2c186df8}\index{fdrs\_lora.h@{fdrs\_lora.h}!handleLoRa@{handleLoRa}}
+\index{handleLoRa@{handleLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{handleLoRa()}{handleLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_afcfa506ffe12e69a13e036bf2c186df8} 
+void handle\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a094456191931f3c05e93a11d8a6e51f9}\index{fdrs\_lora.h@{fdrs\_lora.h}!LoRaTxRxOperation@{LoRaTxRxOperation}}
+\index{LoRaTxRxOperation@{LoRaTxRxOperation}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{LoRaTxRxOperation()}{LoRaTxRxOperation()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a094456191931f3c05e93a11d8a6e51f9} 
+\mbox{\hyperlink{fdrs__datatypes_8h_a837c0fc43b79ca95e0a7141424043560}{crc\+Result}} Lo\+Ra\+Tx\+Rx\+Operation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_acc09bae7abef05baefa389035bcc1b9b}\index{fdrs\_lora.h@{fdrs\_lora.h}!pingReplyLoRa@{pingReplyLoRa}}
+\index{pingReplyLoRa@{pingReplyLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{pingReplyLoRa()}{pingReplyLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_acc09bae7abef05baefa389035bcc1b9b} 
+bool ping\+Reply\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{address}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_acb6e120ce92a8851fe1cb471da64409d}\index{fdrs\_lora.h@{fdrs\_lora.h}!pingRequestLoRa@{pingRequestLoRa}}
+\index{pingRequestLoRa@{pingRequestLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{pingRequestLoRa()}{pingRequestLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_acb6e120ce92a8851fe1cb471da64409d} 
+int ping\+Request\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{address}{, }\item[{uint32\+\_\+t}]{timeout}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_af6c66e36d41879b7be1b1249c254e66b}\index{fdrs\_lora.h@{fdrs\_lora.h}!printLoraPacket@{printLoraPacket}}
+\index{printLoraPacket@{printLoraPacket}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{printLoraPacket()}{printLoraPacket()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_af6c66e36d41879b7be1b1249c254e66b} 
+void print\+Lora\+Packet (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{p}{, }\item[{int}]{size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_abcacf76f32a98451684e7a2ed4a353a5}\index{fdrs\_lora.h@{fdrs\_lora.h}!receiveLoRa@{receiveLoRa}}
+\index{receiveLoRa@{receiveLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{receiveLoRa()}{receiveLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_abcacf76f32a98451684e7a2ed4a353a5} 
+\mbox{\hyperlink{fdrs__datatypes_8h_a837c0fc43b79ca95e0a7141424043560}{crc\+Result}} receive\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a1dbf8358f6b651f668b09459d6a43cd8}\index{fdrs\_lora.h@{fdrs\_lora.h}!reqTimeLoRa@{reqTimeLoRa}}
+\index{reqTimeLoRa@{reqTimeLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{reqTimeLoRa()}{reqTimeLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a1dbf8358f6b651f668b09459d6a43cd8} 
+bool req\+Time\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a1a7268338826ad6bb40a70f615c730a8}\index{fdrs\_lora.h@{fdrs\_lora.h}!sendLoRaNbr@{sendLoRaNbr}}
+\index{sendLoRaNbr@{sendLoRaNbr}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{sendLoRaNbr()}{sendLoRaNbr()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a1a7268338826ad6bb40a70f615c730a8} 
+void send\+Lo\+Ra\+Nbr (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{interface}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a181e287094b776a5461ee501144b60de}\index{fdrs\_lora.h@{fdrs\_lora.h}!sendTimeLoRa@{sendTimeLoRa}}
+\index{sendTimeLoRa@{sendTimeLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{sendTimeLoRa()}{sendTimeLoRa()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a181e287094b776a5461ee501144b60de} 
+void send\+Time\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a755568970109aafbdc45e703620f3e9a}\index{fdrs\_lora.h@{fdrs\_lora.h}!sendTimeLoRa@{sendTimeLoRa}}
+\index{sendTimeLoRa@{sendTimeLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{sendTimeLoRa()}{sendTimeLoRa()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a755568970109aafbdc45e703620f3e9a} 
+void send\+Time\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{addr}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a4949bc2533dea211ffee4479c9ea246e}\index{fdrs\_lora.h@{fdrs\_lora.h}!setFlag@{setFlag}}
+\index{setFlag@{setFlag}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{setFlag()}{setFlag()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a4949bc2533dea211ffee4479c9ea246e} 
+void set\+Flag (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a9ceffe7af0f9922bf5c7003ee8fe0972}\index{fdrs\_lora.h@{fdrs\_lora.h}!transmitLoRa@{transmitLoRa}}
+\index{transmitLoRa@{transmitLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{transmitLoRa()}{transmitLoRa()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a9ceffe7af0f9922bf5c7003ee8fe0972} 
+void transmit\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{dest\+Mac}{, }\item[{\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \texorpdfstring{$\ast$}{*}}]{packet}{, }\item[{uint8\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a16c974c13fc07891b333db42dd814f5d}\index{fdrs\_lora.h@{fdrs\_lora.h}!transmitLoRa@{transmitLoRa}}
+\index{transmitLoRa@{transmitLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{transmitLoRa()}{transmitLoRa()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a16c974c13fc07891b333db42dd814f5d} 
+void transmit\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{dest\+Mac}{, }\item[{\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{System\+Packet}} \texorpdfstring{$\ast$}{*}}]{packet}{, }\item[{uint8\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_add395facca0afd156a0d4a562684702f}\index{fdrs\_lora.h@{fdrs\_lora.h}!transmitLoRaAsync@{transmitLoRaAsync}}
+\index{transmitLoRaAsync@{transmitLoRaAsync}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{transmitLoRaAsync()}{transmitLoRaAsync()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_add395facca0afd156a0d4a562684702f} 
+bool transmit\+Lo\+Ra\+Async (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{dest\+Addr}{, }\item[{\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \texorpdfstring{$\ast$}{*}}]{dr}{, }\item[{uint8\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a6c7409e91d4bbc41a6fba6852be9ed42}\index{fdrs\_lora.h@{fdrs\_lora.h}!transmitLoRaAsync@{transmitLoRaAsync}}
+\index{transmitLoRaAsync@{transmitLoRaAsync}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{transmitLoRaAsync()}{transmitLoRaAsync()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a6c7409e91d4bbc41a6fba6852be9ed42} 
+bool transmit\+Lo\+Ra\+Async (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{dest\+Addr}{, }\item[{\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{System\+Packet}} \texorpdfstring{$\ast$}{*}}]{sp}{, }\item[{uint8\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__lora_8h_a966f72b5662abef538f8611d6e50798f}\index{fdrs\_lora.h@{fdrs\_lora.h}!transmitSameAddrLoRa@{transmitSameAddrLoRa}}
+\index{transmitSameAddrLoRa@{transmitSameAddrLoRa}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{transmitSameAddrLoRa()}{transmitSameAddrLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a966f72b5662abef538f8611d6e50798f} 
+uint transmit\+Same\+Addr\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{fdrs__lora_8h_aee9399e0ee90a2982d7de00ac826f097}\index{fdrs\_lora.h@{fdrs\_lora.h}!ack@{ack}}
+\index{ack@{ack}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{ack}{ack}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_aee9399e0ee90a2982d7de00ac826f097} 
+bool ack = false}
+
+\Hypertarget{fdrs__lora_8h_a887ff2e2650aba2f11e13d7849284209}\index{fdrs\_lora.h@{fdrs\_lora.h}!drBuff@{drBuff}}
+\index{drBuff@{drBuff}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{drBuff}{drBuff}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a887ff2e2650aba2f11e13d7849284209} 
+\mbox{\hyperlink{struct_d_r_ring_buffer}{DRRing\+Buffer}} dr\+Buff}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.dr\ =\ (\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}}*)calloc(\mbox{\hyperlink{fdrs__lora_8h_a2998b6458318bdacc096e5456f256711}{DRBUFFSIZE}},\textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{DataReading}})),\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .address\ =\ (uint16\_t*)calloc(\mbox{\hyperlink{fdrs__lora_8h_a2998b6458318bdacc096e5456f256711}{DRBUFFSIZE}},\textcolor{keyword}{sizeof}(uint16\_t)),\ .startIdx\ =\ 0,\ .endIdx\ =\ 0,\ .size\ =\ \mbox{\hyperlink{fdrs__lora_8h_a2998b6458318bdacc096e5456f256711}{DRBUFFSIZE}}\}}
+
+\end{DoxyCode}
+\Hypertarget{fdrs__lora_8h_af78d7af059e439bcd8015ed07513499b}\index{fdrs\_lora.h@{fdrs\_lora.h}!enableFDRSInterrupt@{enableFDRSInterrupt}}
+\index{enableFDRSInterrupt@{enableFDRSInterrupt}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{enableFDRSInterrupt}{enableFDRSInterrupt}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_af78d7af059e439bcd8015ed07513499b} 
+volatile bool enable\+FDRSInterrupt = true}
+
+\Hypertarget{fdrs__lora_8h_a171826655215796b93f9fdf1be7c12a4}\index{fdrs\_lora.h@{fdrs\_lora.h}!loraAckState@{loraAckState}}
+\index{loraAckState@{loraAckState}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{loraAckState}{loraAckState}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a171826655215796b93f9fdf1be7c12a4} 
+int lora\+Ack\+State = \mbox{\hyperlink{fdrs__datatypes_8h_a7278d16487e30af3bfe098dab93e3a15a115a67279b5c113df80f6b7e6b42a90c}{st\+Ready}}}
+
+\Hypertarget{fdrs__lora_8h_a69a087bfc34b62d53dbba9720f0bad87}\index{fdrs\_lora.h@{fdrs\_lora.h}!loraAckTimeout@{loraAckTimeout}}
+\index{loraAckTimeout@{loraAckTimeout}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{loraAckTimeout}{loraAckTimeout}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a69a087bfc34b62d53dbba9720f0bad87} 
+unsigned long lora\+Ack\+Timeout = 0}
+
+\Hypertarget{fdrs__lora_8h_accd94183b4e296b919c89fa4240404cb}\index{fdrs\_lora.h@{fdrs\_lora.h}!loraPing@{loraPing}}
+\index{loraPing@{loraPing}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{loraPing}{loraPing}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_accd94183b4e296b919c89fa4240404cb} 
+\mbox{\hyperlink{struct_ping}{Ping}} lora\+Ping}
+
+\Hypertarget{fdrs__lora_8h_ac51d637ae9396d144760d4e3e09143c2}\index{fdrs\_lora.h@{fdrs\_lora.h}!loraTxState@{loraTxState}}
+\index{loraTxState@{loraTxState}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{loraTxState}{loraTxState}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_ac51d637ae9396d144760d4e3e09143c2} 
+int lora\+Tx\+State = \mbox{\hyperlink{fdrs__datatypes_8h_a7278d16487e30af3bfe098dab93e3a15a115a67279b5c113df80f6b7e6b42a90c}{st\+Ready}}}
+
+\Hypertarget{fdrs__lora_8h_a48b52f719835d08f27b20cad3069d5f5}\index{fdrs\_lora.h@{fdrs\_lora.h}!netTimeOffset@{netTimeOffset}}
+\index{netTimeOffset@{netTimeOffset}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{netTimeOffset}{netTimeOffset}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a48b52f719835d08f27b20cad3069d5f5} 
+time\+\_\+t net\+Time\+Offset = UINT32\+\_\+\+MAX}
+
+\Hypertarget{fdrs__lora_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}\index{fdrs\_lora.h@{fdrs\_lora.h}!now@{now}}
+\index{now@{now}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{now}{now}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5} 
+time\+\_\+t now\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{fdrs__lora_8h_a53896c79caaa5baeab6a96ab3365dcaf}\index{fdrs\_lora.h@{fdrs\_lora.h}!operationDone@{operationDone}}
+\index{operationDone@{operationDone}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{operationDone}{operationDone}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a53896c79caaa5baeab6a96ab3365dcaf} 
+volatile bool operation\+Done = false}
+
+\Hypertarget{fdrs__lora_8h_ad06a65e54e876d013b735043dbdf5005}\index{fdrs\_lora.h@{fdrs\_lora.h}!radio@{radio}}
+\index{radio@{radio}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{radio}{radio}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_ad06a65e54e876d013b735043dbdf5005} 
+RADIOLIB\+\_\+\+MODULE radio = new Module(LORA\+\_\+\+SS, LORA\+\_\+\+DIO, LORA\+\_\+\+RST, \mbox{\hyperlink{fdrs__lora_8h_a78ae43f69a4405c4c3f1927930c8bf3e}{LORA\+\_\+\+BUSY}})}
+
+\Hypertarget{fdrs__lora_8h_ae9f7e5dca7e70b1946e0f125f72f5126}\index{fdrs\_lora.h@{fdrs\_lora.h}!rxCountCrcOk@{rxCountCrcOk}}
+\index{rxCountCrcOk@{rxCountCrcOk}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{rxCountCrcOk}{rxCountCrcOk}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_ae9f7e5dca7e70b1946e0f125f72f5126} 
+unsigned long rx\+Count\+Crc\+Ok = 0}
+
+\Hypertarget{fdrs__lora_8h_a95837beac679b370b386022cd310d1b7}\index{fdrs\_lora.h@{fdrs\_lora.h}!rxCountDR@{rxCountDR}}
+\index{rxCountDR@{rxCountDR}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{rxCountDR}{rxCountDR}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a95837beac679b370b386022cd310d1b7} 
+unsigned long rx\+Count\+DR = 0}
+
+\Hypertarget{fdrs__lora_8h_abd895bcd719e719cbbe6b8427e7b4eae}\index{fdrs\_lora.h@{fdrs\_lora.h}!rxCountSP@{rxCountSP}}
+\index{rxCountSP@{rxCountSP}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{rxCountSP}{rxCountSP}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_abd895bcd719e719cbbe6b8427e7b4eae} 
+unsigned long rx\+Count\+SP = 0}
+
+\Hypertarget{fdrs__lora_8h_a9adc4024f41366316f4e3981126c5964}\index{fdrs\_lora.h@{fdrs\_lora.h}!spBuff@{spBuff}}
+\index{spBuff@{spBuff}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{spBuff}{spBuff}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a9adc4024f41366316f4e3981126c5964} 
+\mbox{\hyperlink{struct_s_p_ring_buffer}{SPRing\+Buffer}} sp\+Buff}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.sp\ =\ (\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}}*)calloc(\mbox{\hyperlink{fdrs__lora_8h_a3cef938fb755d77891188e33ff5cabce}{SPBUFFSIZE}},\textcolor{keyword}{sizeof}(\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{SystemPacket}})),\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .address\ =\ (uint16\_t*)calloc(\mbox{\hyperlink{fdrs__lora_8h_a3cef938fb755d77891188e33ff5cabce}{SPBUFFSIZE}},\textcolor{keyword}{sizeof}(uint16\_t)),\ .startIdx\ =\ 0,\ .endIdx\ =\ 0,\ .size\ =\ \mbox{\hyperlink{fdrs__lora_8h_a3cef938fb755d77891188e33ff5cabce}{SPBUFFSIZE}}\}}
+
+\end{DoxyCode}
+\Hypertarget{fdrs__lora_8h_a09fc5ccb165c85a893083f66bcf6707e}\index{fdrs\_lora.h@{fdrs\_lora.h}!transmitFlag@{transmitFlag}}
+\index{transmitFlag@{transmitFlag}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{transmitFlag}{transmitFlag}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a09fc5ccb165c85a893083f66bcf6707e} 
+volatile bool transmit\+Flag = false}
+
+\Hypertarget{fdrs__lora_8h_ad32e5278380d7510ef27e528d32a3672}\index{fdrs\_lora.h@{fdrs\_lora.h}!tx\_start\_time@{tx\_start\_time}}
+\index{tx\_start\_time@{tx\_start\_time}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{tx\_start\_time}{tx\_start\_time}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_ad32e5278380d7510ef27e528d32a3672} 
+unsigned long tx\+\_\+start\+\_\+time = 0}
+
+\Hypertarget{fdrs__lora_8h_af1ff085b3dd4a61d04fd806ad43dbfa9}\index{fdrs\_lora.h@{fdrs\_lora.h}!txCountDR@{txCountDR}}
+\index{txCountDR@{txCountDR}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{txCountDR}{txCountDR}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_af1ff085b3dd4a61d04fd806ad43dbfa9} 
+unsigned long tx\+Count\+DR = 0}
+
+\Hypertarget{fdrs__lora_8h_a2d5be132cf96e263372a18dbac40389a}\index{fdrs\_lora.h@{fdrs\_lora.h}!txCountSP@{txCountSP}}
+\index{txCountSP@{txCountSP}!fdrs\_lora.h@{fdrs\_lora.h}}
+\doxysubsubsection{\texorpdfstring{txCountSP}{txCountSP}}
+{\footnotesize\ttfamily \label{fdrs__lora_8h_a2d5be132cf96e263372a18dbac40389a} 
+unsigned long tx\+Count\+SP = 0}
+

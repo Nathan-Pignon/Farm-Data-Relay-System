@@ -1,0 +1,90 @@
+\doxysection{SSD1306\+Wire Class Reference}
+\hypertarget{class_s_s_d1306_wire}{}\label{class_s_s_d1306_wire}\index{SSD1306Wire@{SSD1306Wire}}
+
+
+{\ttfamily \#include $<$SSD1306\+Wire.\+h$>$}
+
+Inheritance diagram for SSD1306\+Wire\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_s_s_d1306_wire}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_s_d1306_wire_aeee99d990cbf5c7e9360e63c45a963b2}{SSD1306\+Wire}} (uint8\+\_\+t \+\_\+address, int \+\_\+sda=-\/1, int \+\_\+scl=-\/1, \mbox{\hyperlink{_o_l_e_d_display_8h_a0891d4518513c40cc5e13624b2fcce9c}{OLEDDISPLAY\+\_\+\+GEOMETRY}} g=\mbox{\hyperlink{_o_l_e_d_display_8h_a0891d4518513c40cc5e13624b2fcce9cad2f82dc049d1f45855b04457f694de44}{GEOMETRY\+\_\+128\+\_\+64}}, \mbox{\hyperlink{_o_l_e_d_display_8h_a5e83691420929a80847cf738ea34b896}{HW\+\_\+\+I2C}} \+\_\+i2c\+Bus=\mbox{\hyperlink{_o_l_e_d_display_8h_a5e83691420929a80847cf738ea34b896ad4a2675489f9f3aeb2a0f11f571cd62e}{I2\+C\+\_\+\+ONE}}, int \+\_\+frequency=700000)
+\item 
+bool \mbox{\hyperlink{class_s_s_d1306_wire_a78e038acb633d34e8be17cf140dc939e}{connect}} ()
+\item 
+void \mbox{\hyperlink{class_s_s_d1306_wire_a809eb41dd24c2d977144ce97d9acb8ec}{display}} (void)
+\item 
+void \mbox{\hyperlink{class_s_s_d1306_wire_a0ab8256948d4b000dcda5f9825a057db}{set\+I2c\+Auto\+Init}} (bool do\+I2c\+Auto\+Init)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The MIT License (MIT)
+
+Copyright (c) 2018 by Thing\+Pulse, Daniel Eichhorn Copyright (c) 2018 by Fabrice Weinberg
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Thing\+Pulse invests considerable time and money to develop these open source libraries. Please support us by buying our products (and not the clones) from \href{https://thingpulse.com}{\texttt{ https\+://thingpulse.\+com}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_s_s_d1306_wire_aeee99d990cbf5c7e9360e63c45a963b2}\index{SSD1306Wire@{SSD1306Wire}!SSD1306Wire@{SSD1306Wire}}
+\index{SSD1306Wire@{SSD1306Wire}!SSD1306Wire@{SSD1306Wire}}
+\doxysubsubsection{\texorpdfstring{SSD1306Wire()}{SSD1306Wire()}}
+{\footnotesize\ttfamily \label{class_s_s_d1306_wire_aeee99d990cbf5c7e9360e63c45a963b2} 
+SSD1306\+Wire\+::\+SSD1306\+Wire (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+address}{, }\item[{int}]{\+\_\+sda}{ = {\ttfamily -\/1}, }\item[{int}]{\+\_\+scl}{ = {\ttfamily -\/1}, }\item[{\mbox{\hyperlink{_o_l_e_d_display_8h_a0891d4518513c40cc5e13624b2fcce9c}{OLEDDISPLAY\+\_\+\+GEOMETRY}}}]{g}{ = {\ttfamily \mbox{\hyperlink{_o_l_e_d_display_8h_a0891d4518513c40cc5e13624b2fcce9cad2f82dc049d1f45855b04457f694de44}{GEOMETRY\+\_\+128\+\_\+64}}}, }\item[{\mbox{\hyperlink{_o_l_e_d_display_8h_a5e83691420929a80847cf738ea34b896}{HW\+\_\+\+I2C}}}]{\+\_\+i2c\+Bus}{ = {\ttfamily \mbox{\hyperlink{_o_l_e_d_display_8h_a5e83691420929a80847cf738ea34b896ad4a2675489f9f3aeb2a0f11f571cd62e}{I2\+C\+\_\+\+ONE}}}, }\item[{int}]{\+\_\+frequency}{ = {\ttfamily 700000}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Create and initialize the Display using Wire library
+
+Beware for retro-\/compatibility default values are provided for all parameters see below. Please note that if you don\textquotesingle{}t wan\textquotesingle{}t SD1306\+Wire to initialize and change frequency speed ot need to ensure -\/1 value are specified for all 3 parameters. This can be usefull to control Two\+Wire with multiple device on the same bus.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+address} & I2C Display address \\
+\hline
+{\em \+\_\+sda} & I2C SDA pin number, default to -\/1 to skip Wire begin call \\
+\hline
+{\em \+\_\+scl} & I2C SCL pin number, default to -\/1 (only SDA = -\/1 is considered to skip Wire begin call) \\
+\hline
+{\em g} & display geometry dafault to generic GEOMETRY\+\_\+128\+\_\+64, see OLEDDISPLAY\+\_\+\+GEOMETRY definition for other options \\
+\hline
+{\em \+\_\+i2c\+Bus} & on ESP32 with 2 I2C HW buses, I2\+C\+\_\+\+ONE for 1st Bus, I2\+C\+\_\+\+TWO fot 2nd bus, default I2\+C\+\_\+\+ONE \\
+\hline
+{\em \+\_\+frequency} & for Frequency by default Let\textquotesingle{}s use \texorpdfstring{$\sim$}{\string~}700khz if ESP8266 is in 160Mhz mode, this will be limited to \texorpdfstring{$\sim$}{\string~}400khz if the ESP8266 in 80Mhz mode \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_s_s_d1306_wire_a78e038acb633d34e8be17cf140dc939e}\index{SSD1306Wire@{SSD1306Wire}!connect@{connect}}
+\index{connect@{connect}!SSD1306Wire@{SSD1306Wire}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily \label{class_s_s_d1306_wire_a78e038acb633d34e8be17cf140dc939e} 
+bool SSD1306\+Wire\+::connect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_s_s_d1306_wire_a809eb41dd24c2d977144ce97d9acb8ec}\index{SSD1306Wire@{SSD1306Wire}!display@{display}}
+\index{display@{display}!SSD1306Wire@{SSD1306Wire}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily \label{class_s_s_d1306_wire_a809eb41dd24c2d977144ce97d9acb8ec} 
+void SSD1306\+Wire\+::display (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_s_s_d1306_wire_a0ab8256948d4b000dcda5f9825a057db}\index{SSD1306Wire@{SSD1306Wire}!setI2cAutoInit@{setI2cAutoInit}}
+\index{setI2cAutoInit@{setI2cAutoInit}!SSD1306Wire@{SSD1306Wire}}
+\doxysubsubsection{\texorpdfstring{setI2cAutoInit()}{setI2cAutoInit()}}
+{\footnotesize\ttfamily \label{class_s_s_d1306_wire_a0ab8256948d4b000dcda5f9825a057db} 
+void SSD1306\+Wire\+::set\+I2c\+Auto\+Init (\begin{DoxyParamCaption}\item[{bool}]{do\+I2c\+Auto\+Init}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ESP8266\+\_\+and\+\_\+\+ESP32\+\_\+\+OLED\+\_\+driver\+\_\+for\+\_\+\+SSD1306\+\_\+displays/src/\mbox{\hyperlink{_s_s_d1306_wire_8h}{SSD1306\+Wire.\+h}}\end{DoxyCompactItemize}

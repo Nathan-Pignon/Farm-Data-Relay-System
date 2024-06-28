@@ -1,0 +1,414 @@
+\doxysection{src/fdrs\+\_\+gateway.h File Reference}
+\hypertarget{fdrs__gateway_8h}{}\label{fdrs__gateway_8h}\index{src/fdrs\_gateway.h@{src/fdrs\_gateway.h}}
+{\ttfamily \#include "{}fdrs\+\_\+datatypes.\+h"{}}\newline
+{\ttfamily \#include "{}fdrs\+\_\+globals.\+h"{}}\newline
+{\ttfamily \#include "{}fdrs\+\_\+debug.\+h"{}}\newline
+{\ttfamily \#include "{}fdrs\+\_\+time.\+h"{}}\newline
+{\ttfamily \#include "{}fdrs\+\_\+gateway\+\_\+serial.\+h"{}}\newline
+{\ttfamily \#include "{}fdrs\+\_\+gateway\+\_\+scheduler.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a127dc5f946d05ee76b6e88f593588863}{FDRS\+\_\+\+GATEWAY}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a73b9a5f9f8956bcb130b582f805b01bc}{ESPNOWG\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a5a5622d9e14ead241abb064d770b7b67}{ESPNOW1\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a92ba3c6024b60fdd3b5af94c65f59c05}{ESPNOW2\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a408994f4d0df299e2cd409faaa365f97}{SERIAL\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a792282070fb5239ef539cc89ee8b4be1}{MQTT\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a52e697b67ca36f2814676475f06bce18}{LORAG\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_afd7d89c8d63dec293c1f8444cb59e2d7}{LORA1\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_a65a8e56d0a334a05920f4436916b9c5f}{LORA2\+\_\+\+ACT}}
+\item 
+\#define \mbox{\hyperlink{fdrs__gateway_8h_af0d3d80580b38dde495f80b18309a5da}{INTERNAL\+\_\+\+ACT}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_adbc61d9a3623cc657286bfc8405a7f1a}{broadcast\+Lo\+Ra}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_aad063c5f71fa2a8153784bab38f8c195}{send\+Lo\+Ra\+Nbr}} (uint8\+\_\+t)
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_ad0ac2addb4d6c0e0eb297e1a4d6e993b}{time\+FDRSLo\+Ra}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*})
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_ad71271945fd6a07ec5bcd2fdaf5fbb02}{send\+ESPNow\+Nbr}} (uint8\+\_\+t)
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a1328766f5705ddd0737776c1deb0e5f6}{send\+ESPNow\+Peers}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a8e640456591327da64ed68e14c6b5bf6}{send\+ESPNow}} (uint8\+\_\+t)
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a34baf31b0b954403e1432d3cdb85a90d}{send\+Time\+Serial}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_afcfa506ffe12e69a13e036bf2c186df8}{handle\+Lo\+Ra}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a926aeaa7d52ebd60e289af8d6ef98600}{handle\+MQTT}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a3caeaca3fcbd288827f42df9af8b7f08}{handle\+OTA}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a38149ac048bc6636d72a01059a0192a8}{send\+MQTT}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_af49f1d20bc8979204f6e0f7463acff57}{send\+Log}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_ad1e2e9c6c4a727ccc0e444a45a2ab164}{resend\+Log}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a5aa6723dbc24e11089c599f8a5e95dfd}{release\+Log\+Buffer}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_afe7ec16ae2e0548a62fa59811498b327}{print\+FDRS}} (\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \texorpdfstring{$\ast$}{*}dr, int len)
+\begin{DoxyCompactList}\small\item\em Affiche les données de type Data\+Reading pour les besoins de débogage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a7cf662ce759565dc67359cf062045c86}{send\+FDRS}} ()
+\begin{DoxyCompactList}\small\item\em Envoie les données FDRS si elles sont disponibles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_acc44a183a8a7e1383f44e8664ca8f56c}{load\+FDRS}} (float d, uint8\+\_\+t t, uint16\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Charge les données FDRS dans le tampon. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_ac431b68b62858d6c5b98c6ead232c19c}{begin\+FDRS}} ()
+\begin{DoxyCompactList}\small\item\em Initialise la passerelle FDRS. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_af43e79adf9a574f2f79b67f80070aaea}{handle\+Commands}} ()
+\begin{DoxyCompactList}\small\item\em Gère les commandes reçues. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a55643e1484daa76116ad39af03a8d492}{handle\+Actions}} ()
+\begin{DoxyCompactList}\small\item\em Gère les actions en fonction des événements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a6f2cba0bda6e085f28dc8fbca81f67e2}{loop\+FDRS}} ()
+\begin{DoxyCompactList}\small\item\em Boucle principale pour le fonctionnement continu de la passerelle FDRS. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_a181e287094b776a5461ee501144b60de}{send\+Time\+Lo\+Ra}} ()
+\item 
+bool \mbox{\hyperlink{fdrs__gateway_8h_a1fb181d8ecdba52fdc3110b3b2bd0168}{ping\+Lo\+Ra\+Time\+Source}} ()
+\item 
+void \mbox{\hyperlink{fdrs__gateway_8h_afb90cf9ea3db7231162916e917de501e}{send\+ESPnow}} (uint8\+\_\+t address)
+\item 
+\mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\+\_\+err\+\_\+t}} \mbox{\hyperlink{fdrs__gateway_8h_a4a3493bd7c048fd6a4d72800abf84549}{send\+Time\+ESPNow}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{System\+Packet}} \mbox{\hyperlink{fdrs__gateway_8h_a09e50746f692a85d268b2d1ae9c0a92e}{the\+Cmd}}
+\item 
+\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \mbox{\hyperlink{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}{the\+Data}} \mbox{[}256\mbox{]}
+\item 
+\mbox{\hyperlink{struct_time_source}{Time\+Source}} \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{time\+Source}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{fdrs__gateway_8h_aabf3459d6bb55f6124eaba25e6ad6609}{ln}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{fdrs__gateway_8h_a21b4ef48eaa41b25a7933ead71d376c4}{new\+Data}} = \mbox{\hyperlink{fdrs__datatypes_8h_a06fc87d81c62e9abb8790b6e5713c55ba9698f47448b941c623678667bae750f4}{event\+\_\+clear}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{fdrs__gateway_8h_ab4b1e0d9ff5e0d5deffd5a5237ee0fb1}{new\+Cmd}} = \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7abc147388df4b62661902eeecb746faa1}{cmd\+\_\+clear}}
+\item 
+\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \mbox{\hyperlink{fdrs__gateway_8h_a7b44f73d01de480c8153eb7dcc14792f}{fdrs\+Data}} \mbox{[}256\mbox{]}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{fdrs__gateway_8h_ac3b7d313e05d69579ffdb37e62ba56ee}{data\+\_\+count}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{fdrs__gateway_8h_a5a5622d9e14ead241abb064d770b7b67}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!ESPNOW1\_ACT@{ESPNOW1\_ACT}}
+\index{ESPNOW1\_ACT@{ESPNOW1\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{ESPNOW1\_ACT}{ESPNOW1\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a5a5622d9e14ead241abb064d770b7b67} 
+\#define ESPNOW1\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_a92ba3c6024b60fdd3b5af94c65f59c05}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!ESPNOW2\_ACT@{ESPNOW2\_ACT}}
+\index{ESPNOW2\_ACT@{ESPNOW2\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{ESPNOW2\_ACT}{ESPNOW2\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a92ba3c6024b60fdd3b5af94c65f59c05} 
+\#define ESPNOW2\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_a73b9a5f9f8956bcb130b582f805b01bc}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!ESPNOWG\_ACT@{ESPNOWG\_ACT}}
+\index{ESPNOWG\_ACT@{ESPNOWG\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{ESPNOWG\_ACT}{ESPNOWG\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a73b9a5f9f8956bcb130b582f805b01bc} 
+\#define ESPNOWG\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_a127dc5f946d05ee76b6e88f593588863}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!FDRS\_GATEWAY@{FDRS\_GATEWAY}}
+\index{FDRS\_GATEWAY@{FDRS\_GATEWAY}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_GATEWAY}{FDRS\_GATEWAY}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a127dc5f946d05ee76b6e88f593588863} 
+\#define FDRS\+\_\+\+GATEWAY}
+
+\Hypertarget{fdrs__gateway_8h_af0d3d80580b38dde495f80b18309a5da}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!INTERNAL\_ACT@{INTERNAL\_ACT}}
+\index{INTERNAL\_ACT@{INTERNAL\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{INTERNAL\_ACT}{INTERNAL\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_af0d3d80580b38dde495f80b18309a5da} 
+\#define INTERNAL\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_afd7d89c8d63dec293c1f8444cb59e2d7}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!LORA1\_ACT@{LORA1\_ACT}}
+\index{LORA1\_ACT@{LORA1\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{LORA1\_ACT}{LORA1\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_afd7d89c8d63dec293c1f8444cb59e2d7} 
+\#define LORA1\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_a65a8e56d0a334a05920f4436916b9c5f}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!LORA2\_ACT@{LORA2\_ACT}}
+\index{LORA2\_ACT@{LORA2\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{LORA2\_ACT}{LORA2\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a65a8e56d0a334a05920f4436916b9c5f} 
+\#define LORA2\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_a52e697b67ca36f2814676475f06bce18}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!LORAG\_ACT@{LORAG\_ACT}}
+\index{LORAG\_ACT@{LORAG\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{LORAG\_ACT}{LORAG\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a52e697b67ca36f2814676475f06bce18} 
+\#define LORAG\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_a792282070fb5239ef539cc89ee8b4be1}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!MQTT\_ACT@{MQTT\_ACT}}
+\index{MQTT\_ACT@{MQTT\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{MQTT\_ACT}{MQTT\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a792282070fb5239ef539cc89ee8b4be1} 
+\#define MQTT\+\_\+\+ACT}
+
+\Hypertarget{fdrs__gateway_8h_a408994f4d0df299e2cd409faaa365f97}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!SERIAL\_ACT@{SERIAL\_ACT}}
+\index{SERIAL\_ACT@{SERIAL\_ACT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{SERIAL\_ACT}{SERIAL\_ACT}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a408994f4d0df299e2cd409faaa365f97} 
+\#define SERIAL\+\_\+\+ACT}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fdrs__gateway_8h_ac431b68b62858d6c5b98c6ead232c19c}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!beginFDRS@{beginFDRS}}
+\index{beginFDRS@{beginFDRS}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{beginFDRS()}{beginFDRS()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_ac431b68b62858d6c5b98c6ead232c19c} 
+void begin\+FDRS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initialise la passerelle FDRS. 
+
+\Hypertarget{fdrs__gateway_8h_adbc61d9a3623cc657286bfc8405a7f1a}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!broadcastLoRa@{broadcastLoRa}}
+\index{broadcastLoRa@{broadcastLoRa}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{broadcastLoRa()}{broadcastLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_adbc61d9a3623cc657286bfc8405a7f1a} 
+void broadcast\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a55643e1484daa76116ad39af03a8d492}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!handleActions@{handleActions}}
+\index{handleActions@{handleActions}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{handleActions()}{handleActions()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a55643e1484daa76116ad39af03a8d492} 
+void handle\+Actions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gère les actions en fonction des événements. 
+
+\Hypertarget{fdrs__gateway_8h_af43e79adf9a574f2f79b67f80070aaea}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!handleCommands@{handleCommands}}
+\index{handleCommands@{handleCommands}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{handleCommands()}{handleCommands()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_af43e79adf9a574f2f79b67f80070aaea} 
+void handle\+Commands (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gère les commandes reçues. 
+
+\Hypertarget{fdrs__gateway_8h_afcfa506ffe12e69a13e036bf2c186df8}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!handleLoRa@{handleLoRa}}
+\index{handleLoRa@{handleLoRa}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{handleLoRa()}{handleLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_afcfa506ffe12e69a13e036bf2c186df8} 
+void handle\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a926aeaa7d52ebd60e289af8d6ef98600}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!handleMQTT@{handleMQTT}}
+\index{handleMQTT@{handleMQTT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{handleMQTT()}{handleMQTT()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a926aeaa7d52ebd60e289af8d6ef98600} 
+void handle\+MQTT (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a3caeaca3fcbd288827f42df9af8b7f08}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!handleOTA@{handleOTA}}
+\index{handleOTA@{handleOTA}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{handleOTA()}{handleOTA()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a3caeaca3fcbd288827f42df9af8b7f08} 
+void handle\+OTA (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_acc44a183a8a7e1383f44e8664ca8f56c}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!loadFDRS@{loadFDRS}}
+\index{loadFDRS@{loadFDRS}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{loadFDRS()}{loadFDRS()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_acc44a183a8a7e1383f44e8664ca8f56c} 
+void load\+FDRS (\begin{DoxyParamCaption}\item[{float}]{d}{, }\item[{uint8\+\_\+t}]{t}{, }\item[{uint16\+\_\+t}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Charge les données FDRS dans le tampon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & Donnée à charger. \\
+\hline
+{\em t} & Type de donnée. \\
+\hline
+{\em id} & Identifiant de la donnée. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fdrs__gateway_8h_a6f2cba0bda6e085f28dc8fbca81f67e2}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!loopFDRS@{loopFDRS}}
+\index{loopFDRS@{loopFDRS}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{loopFDRS()}{loopFDRS()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a6f2cba0bda6e085f28dc8fbca81f67e2} 
+void loop\+FDRS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Boucle principale pour le fonctionnement continu de la passerelle FDRS. 
+
+\Hypertarget{fdrs__gateway_8h_a1fb181d8ecdba52fdc3110b3b2bd0168}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!pingLoRaTimeSource@{pingLoRaTimeSource}}
+\index{pingLoRaTimeSource@{pingLoRaTimeSource}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{pingLoRaTimeSource()}{pingLoRaTimeSource()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a1fb181d8ecdba52fdc3110b3b2bd0168} 
+bool ping\+Lo\+Ra\+Time\+Source (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_afe7ec16ae2e0548a62fa59811498b327}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!printFDRS@{printFDRS}}
+\index{printFDRS@{printFDRS}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{printFDRS()}{printFDRS()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_afe7ec16ae2e0548a62fa59811498b327} 
+void print\+FDRS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} \texorpdfstring{$\ast$}{*}}]{dr}{, }\item[{int}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Affiche les données de type Data\+Reading pour les besoins de débogage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dr} & Pointeur vers un tableau de Data\+Reading. \\
+\hline
+{\em len} & Longueur du tableau de Data\+Reading. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fdrs__gateway_8h_a5aa6723dbc24e11089c599f8a5e95dfd}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!releaseLogBuffer@{releaseLogBuffer}}
+\index{releaseLogBuffer@{releaseLogBuffer}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{releaseLogBuffer()}{releaseLogBuffer()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a5aa6723dbc24e11089c599f8a5e95dfd} 
+void release\+Log\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_ad1e2e9c6c4a727ccc0e444a45a2ab164}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!resendLog@{resendLog}}
+\index{resendLog@{resendLog}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{resendLog()}{resendLog()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_ad1e2e9c6c4a727ccc0e444a45a2ab164} 
+void resend\+Log (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a8e640456591327da64ed68e14c6b5bf6}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendESPNow@{sendESPNow}}
+\index{sendESPNow@{sendESPNow}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendESPNow()}{sendESPNow()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a8e640456591327da64ed68e14c6b5bf6} 
+void send\+ESPNow (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_afb90cf9ea3db7231162916e917de501e}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendESPnow@{sendESPnow}}
+\index{sendESPnow@{sendESPnow}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendESPnow()}{sendESPnow()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_afb90cf9ea3db7231162916e917de501e} 
+void send\+ESPnow (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_ad71271945fd6a07ec5bcd2fdaf5fbb02}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendESPNowNbr@{sendESPNowNbr}}
+\index{sendESPNowNbr@{sendESPNowNbr}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendESPNowNbr()}{sendESPNowNbr()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_ad71271945fd6a07ec5bcd2fdaf5fbb02} 
+void send\+ESPNow\+Nbr (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{interface}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a1328766f5705ddd0737776c1deb0e5f6}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendESPNowPeers@{sendESPNowPeers}}
+\index{sendESPNowPeers@{sendESPNowPeers}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendESPNowPeers()}{sendESPNowPeers()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a1328766f5705ddd0737776c1deb0e5f6} 
+void send\+ESPNow\+Peers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a7cf662ce759565dc67359cf062045c86}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendFDRS@{sendFDRS}}
+\index{sendFDRS@{sendFDRS}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendFDRS()}{sendFDRS()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a7cf662ce759565dc67359cf062045c86} 
+void send\+FDRS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Envoie les données FDRS si elles sont disponibles. 
+
+\Hypertarget{fdrs__gateway_8h_af49f1d20bc8979204f6e0f7463acff57}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendLog@{sendLog}}
+\index{sendLog@{sendLog}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendLog()}{sendLog()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_af49f1d20bc8979204f6e0f7463acff57} 
+void send\+Log (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_aad063c5f71fa2a8153784bab38f8c195}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendLoRaNbr@{sendLoRaNbr}}
+\index{sendLoRaNbr@{sendLoRaNbr}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendLoRaNbr()}{sendLoRaNbr()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_aad063c5f71fa2a8153784bab38f8c195} 
+void send\+Lo\+Ra\+Nbr (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a38149ac048bc6636d72a01059a0192a8}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendMQTT@{sendMQTT}}
+\index{sendMQTT@{sendMQTT}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendMQTT()}{sendMQTT()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a38149ac048bc6636d72a01059a0192a8} 
+void send\+MQTT (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a4a3493bd7c048fd6a4d72800abf84549}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendTimeESPNow@{sendTimeESPNow}}
+\index{sendTimeESPNow@{sendTimeESPNow}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendTimeESPNow()}{sendTimeESPNow()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a4a3493bd7c048fd6a4d72800abf84549} 
+\mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\+\_\+err\+\_\+t}} send\+Time\+ESPNow (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a181e287094b776a5461ee501144b60de}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendTimeLoRa@{sendTimeLoRa}}
+\index{sendTimeLoRa@{sendTimeLoRa}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendTimeLoRa()}{sendTimeLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a181e287094b776a5461ee501144b60de} 
+void send\+Time\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_a34baf31b0b954403e1432d3cdb85a90d}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!sendTimeSerial@{sendTimeSerial}}
+\index{sendTimeSerial@{sendTimeSerial}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{sendTimeSerial()}{sendTimeSerial()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a34baf31b0b954403e1432d3cdb85a90d} 
+void send\+Time\+Serial (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__gateway_8h_ad0ac2addb4d6c0e0eb297e1a4d6e993b}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!timeFDRSLoRa@{timeFDRSLoRa}}
+\index{timeFDRSLoRa@{timeFDRSLoRa}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{timeFDRSLoRa()}{timeFDRSLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_ad0ac2addb4d6c0e0eb297e1a4d6e993b} 
+void time\+FDRSLo\+Ra (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{address}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{fdrs__gateway_8h_ac3b7d313e05d69579ffdb37e62ba56ee}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!data\_count@{data\_count}}
+\index{data\_count@{data\_count}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{data\_count}{data\_count}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_ac3b7d313e05d69579ffdb37e62ba56ee} 
+uint8\+\_\+t data\+\_\+count = 0}
+
+\Hypertarget{fdrs__gateway_8h_a7b44f73d01de480c8153eb7dcc14792f}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!fdrsData@{fdrsData}}
+\index{fdrsData@{fdrsData}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{fdrsData}{fdrsData}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a7b44f73d01de480c8153eb7dcc14792f} 
+\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} fdrs\+Data\mbox{[}256\mbox{]}}
+
+\Hypertarget{fdrs__gateway_8h_aabf3459d6bb55f6124eaba25e6ad6609}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!ln@{ln}}
+\index{ln@{ln}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{ln}{ln}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_aabf3459d6bb55f6124eaba25e6ad6609} 
+uint8\+\_\+t ln}
+
+\Hypertarget{fdrs__gateway_8h_ab4b1e0d9ff5e0d5deffd5a5237ee0fb1}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!newCmd@{newCmd}}
+\index{newCmd@{newCmd}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{newCmd}{newCmd}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_ab4b1e0d9ff5e0d5deffd5a5237ee0fb1} 
+uint8\+\_\+t new\+Cmd = \mbox{\hyperlink{fdrs__datatypes_8h_a00d51b3cb2e1fa09bdba2968e0cf7ac7abc147388df4b62661902eeecb746faa1}{cmd\+\_\+clear}}}
+
+\Hypertarget{fdrs__gateway_8h_a21b4ef48eaa41b25a7933ead71d376c4}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!newData@{newData}}
+\index{newData@{newData}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{newData}{newData}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a21b4ef48eaa41b25a7933ead71d376c4} 
+uint8\+\_\+t new\+Data = \mbox{\hyperlink{fdrs__datatypes_8h_a06fc87d81c62e9abb8790b6e5713c55ba9698f47448b941c623678667bae750f4}{event\+\_\+clear}}}
+
+\Hypertarget{fdrs__gateway_8h_a09e50746f692a85d268b2d1ae9c0a92e}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!theCmd@{theCmd}}
+\index{theCmd@{theCmd}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{theCmd}{theCmd}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a09e50746f692a85d268b2d1ae9c0a92e} 
+\mbox{\hyperlink{fdrs__datatypes_8h_a4e94df1a3d0c53bbaf8d6fb6e8eb4898}{System\+Packet}} the\+Cmd}
+
+\Hypertarget{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!theData@{theData}}
+\index{theData@{theData}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{theData}{theData}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a718ba593017f95b5e4a74c39d9ad852f} 
+\mbox{\hyperlink{fdrs__datatypes_8h_a7b09e766d667a010c474eeb88632d1d5}{Data\+Reading}} the\+Data\mbox{[}256\mbox{]}}
+
+\Hypertarget{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}\index{fdrs\_gateway.h@{fdrs\_gateway.h}!timeSource@{timeSource}}
+\index{timeSource@{timeSource}!fdrs\_gateway.h@{fdrs\_gateway.h}}
+\doxysubsubsection{\texorpdfstring{timeSource}{timeSource}}
+{\footnotesize\ttfamily \label{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9} 
+\mbox{\hyperlink{struct_time_source}{Time\+Source}} time\+Source}
+

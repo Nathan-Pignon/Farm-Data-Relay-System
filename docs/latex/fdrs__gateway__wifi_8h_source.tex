@@ -1,0 +1,281 @@
+\doxysection{fdrs\+\_\+gateway\+\_\+wifi.\+h}
+\hypertarget{fdrs__gateway__wifi_8h_source}{}\label{fdrs__gateway__wifi_8h_source}\index{src/fdrs\_gateway\_wifi.h@{src/fdrs\_gateway\_wifi.h}}
+\mbox{\hyperlink{fdrs__gateway__wifi_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <WiFiUdp.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifdef\ ESP8266}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <ESP8266WiFi.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#elif\ defined(ESP32)}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <WiFi.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <esp\_wifi.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#elif\ defined(ARDUINO\_ARCH\_RP2040)}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <WiFi.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#endif\ \ }}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifdef\ USE\_ETHERNET}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <ETH.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ select\ WiFi\ SSID\ configuration}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#if\ defined(WIFI\_SSID)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ FDRS\_WIFI\_SSID\ WIFI\_SSID}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_WIFI\_SSID)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ FDRS\_WIFI\_SSID\ GLOBAL\_WIFI\_SSID}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ ASSERT("{}NO\ WiFi\ SSID\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{});}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WIFI\_SSID}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ select\ WiFi\ password}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#if\ defined(WIFI\_PASS)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ FDRS\_WIFI\_PASS\ WIFI\_PASS}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_WIFI\_PASS)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ FDRS\_WIFI\_PASS\ GLOBAL\_WIFI\_PASS}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ ASSERT("{}NO\ WiFi\ password\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_node\_config.h"{});}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WIFI\_PASS}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ select\ Host\ IP\ Address}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#if\ defined(HOST\_IPADDRESS)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ FDRS\_HOST\_IPADDRESS\ HOST\_IPADDRESS}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_HOST\_IPADDRESS)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ FDRS\_HOST\_IPADDRESS\ GLOBAL\_HOST\_IPADDRESS}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HOST\_IPADDRESS}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ select\ Gateway\ IP\ Address}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#if\ defined(GW\_IPADDRESS)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ FDRS\_GW\_IPADDRESS\ GW\_IPADDRESS}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_GW\_IPADDRESS)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ FDRS\_GW\_IPADDRESS\ GLOBAL\_GW\_IPADDRESS}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GW\_IPADDRESS}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ select\ Subnet\ Address}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#if\ defined(SUBNET\_ADDRESS)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ FDRS\_SUBNET\_ADDRESS\ SUBNET\_ADDRESS}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_SUBNET\_ADDRESS)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ FDRS\_SUBNET\_ADDRESS\ GLOBAL\_SUBNET\_ADDRESS}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SUBNET\_ADDRESS}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ select\ DNS1\ IP\ Address\ configuration}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#if\ defined(DNS1\_IPADDRESS)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ FDRS\_DNS1\_IPADDRESS\ DNS1\_IPADDRESS}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_DNS1\_IPADDRESS)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ FDRS\_DNS1\_IPADDRESS\ GLOBAL\_DNS1\_IPADDRESS}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ ASSERT("{}NO\ DNS1\ IP\ Address\ defined!\ Please\ define\ in\ fdrs\_globals.h\ (recommended)\ or\ in\ fdrs\_gateway\_config.h"{});}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DNS1\_IPADDRESS}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ select\ DNS2\ IP\ Address\ configuration}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#if\ defined(DNS2\_IPADDRESS)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ FDRS\_DNS2\_IPADDRESS\ DNS2\_IPADDRESS}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#elif\ defined(GLOBAL\_DNS2\_IPADDRESS)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ FDRS\_DNS2\_IPADDRESS\ GLOBAL\_DNS2\_IPADDRESS}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DNS2\_IPADDRESS}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ select\ NTP\ Time\ Server\ configuration}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#if\ defined(TIME\_SERVER)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ FDRS\_TIME\_SERVER\ TIME\_SERVER}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ FDRS\_TIME\_SERVER\ GLOBAL\_TIME\_SERVER}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TIME\_SERVER}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ select\ Time,\ in\ minutes,\ between\ NTP\ time\ server\ queries\ configuration}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#if\ defined(TIME\_FETCHNTP)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ FDRS\_TIME\_FETCHNTP\ TIME\_FETCHNTP}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ FDRS\_TIME\_FETCHNTP\ GLOBAL\_TIME\_FETCHNTP}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TIME\_FETCHNTP}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ WiFiUDP\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ab7148c03749e10a7573f67ac54f7f47d}{FDRSNtp}};}
+\DoxyCodeLine{00089\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ac240824c9b35035b41bc24ee200565a2}{localPort}}\ =\ 8888;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ local\ port\ to\ listen\ for\ UDP\ packets}}
+\DoxyCodeLine{00090\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a9ed13f63a3a1fcee842cc5ca51e6c8b1}{timeServer}}[]\ =\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a24f6082e8e7586594da9b19bf800174a}{FDRS\_TIME\_SERVER}};\ \textcolor{comment}{//\ NTP\ server}}
+\DoxyCodeLine{00091\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ae2843b6487d71a38433763495c106346}{NTP\_PACKET\_SIZE}}\ =\ 48;\ \ \ \ \ \ \ \textcolor{comment}{//\ NTP\ time\ stamp\ is\ in\ the\ first\ 48\ bytes\ of\ the\ message}}
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[\mbox{\hyperlink{fdrs__gateway__wifi_8h_ae2843b6487d71a38433763495c106346}{NTP\_PACKET\_SIZE}}];\ \ \ \textcolor{comment}{//buffer\ to\ hold\ incoming\ and\ outgoing\ packets}}
+\DoxyCodeLine{00093\ uint\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37092998c55ecbdd99c6b8c717c507e5}{NTPFetchFail}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ consecutive\ NTP\ fetch\ failures}}
+\DoxyCodeLine{00094\ \textcolor{keyword}{extern}\ time\_t\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{fdrs__gateway__wifi_8h_a587ba0cb07f02913598610049a3bbb79}{ssid}}\ =\ FDRS\_WIFI\_SSID;}
+\DoxyCodeLine{00097\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{fdrs__gateway__wifi_8h_aa4a2ebcb494493f648ae1e6975672575}{password}}\ =\ FDRS\_WIFI\_PASS;}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#ifdef\ USE\_STATIC\_IPADDRESS}}
+\DoxyCodeLine{00099\ \ \ uint8\_t\ hostIpAddress[4],\ \mbox{\hyperlink{fdrs__node_8h_a62994e4f9af5770586faddf3c4d2b084}{gatewayAddress}}[4],\ subnetAddress[4],\ dns1Address[4],\ dns2Address[4];\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#ifdef\ USE\_ETHERNET}}
+\DoxyCodeLine{00103\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ eth\_connected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keywordtype}{void}\ WiFiEvent(WiFiEvent\_t\ event)}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordflow}{switch}\ (event)\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{case}\ ARDUINO\_EVENT\_ETH\_START:}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ETH\ Started"{}});}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \textcolor{comment}{//set\ eth\ hostname\ here}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ ETH.setHostname(\textcolor{stringliteral}{"{}esp32-\/ethernet"{}});}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{case}\ ARDUINO\_EVENT\_ETH\_CONNECTED:}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ETH\ Connected"{}});}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{case}\ ARDUINO\_EVENT\_ETH\_GOT\_IP:}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}ETH\ MAC:\ "{}});}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ Serial.print(ETH.macAddress());}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ IPv4:\ "{}});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ Serial.print(ETH.localIP());}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ETH.fullDuplex())\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ FULL\_DUPLEX"{}});}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ Serial.print(ETH.linkSpeed());}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Mbps"{}});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ eth\_connected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{case}\ ARDUINO\_EVENT\_ETH\_DISCONNECTED:}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ETH\ Disconnected"{}});}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ eth\_connected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{case}\ ARDUINO\_EVENT\_ETH\_STOP:}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ETH\ Stopped"{}});}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ eth\_connected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00139\ \ \ \}}
+\DoxyCodeLine{00140\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ USE\_ETHERNET}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ Convert\ IP\ Addresses\ from\ strings\ to\ byte\ arrays\ of\ 4\ bytes}}
+\DoxyCodeLine{00145\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37862625a8dbe93ee01ff97fce91a10a}{stringToByteArray}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{char}\ sep,\ \textcolor{keywordtype}{byte}*\ bytes,\ \textcolor{keywordtype}{int}\ maxBytes,\ \textcolor{keywordtype}{int}\ base)\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ maxBytes;\ i++)\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ bytes[i]\ =\ strtoul(str,\ NULL,\ base);\ \ \textcolor{comment}{//\ Convert\ byte}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ str\ =\ strchr(str,\ sep);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ next\ separator}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (str\ ==\ NULL\ ||\ *str\ ==\ \textcolor{charliteral}{'\(\backslash\)0'})\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ more\ separators,\ exit}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ str++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Point\ to\ next\ character\ after\ separator}}
+\DoxyCodeLine{00153\ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a514ad0937aa5c68d70e8bce723633405}{begin\_wifi}}()}
+\DoxyCodeLine{00157\ \{}
+\DoxyCodeLine{00158\ \ \ delay(10);}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#ifdef\ USE\_ETHERNET}}
+\DoxyCodeLine{00160\ \ \ WiFi.onEvent(WiFiEvent);}
+\DoxyCodeLine{00161\ \ \ ETH.begin();}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{while}\ (!eth\_connected)}
+\DoxyCodeLine{00163\ \ \ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Connecting\ ethernet..."{}});}
+\DoxyCodeLine{00165\ \ \ \ \ delay(500);}
+\DoxyCodeLine{00166\ \ \ \}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#ifdef\ USE\_STATIC\_IPADDRESS}}
+\DoxyCodeLine{00169\ \ \ \textcolor{comment}{//\ Convert\ from\ String\ to\ byte\ array}}
+\DoxyCodeLine{00170\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37862625a8dbe93ee01ff97fce91a10a}{stringToByteArray}}(FDRS\_HOST\_IPADDRESS,\ \textcolor{charliteral}{'.'},\ hostIpAddress,\ 4,\ 10);}
+\DoxyCodeLine{00171\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37862625a8dbe93ee01ff97fce91a10a}{stringToByteArray}}(FDRS\_GW\_IPADDRESS,\ \textcolor{charliteral}{'.'},\ \mbox{\hyperlink{fdrs__node_8h_a62994e4f9af5770586faddf3c4d2b084}{gatewayAddress}},\ 4,\ 10);}
+\DoxyCodeLine{00172\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37862625a8dbe93ee01ff97fce91a10a}{stringToByteArray}}(FDRS\_SUBNET\_ADDRESS,\ \textcolor{charliteral}{'.'},\ subnetAddress,\ 4,\ 10);}
+\DoxyCodeLine{00173\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37862625a8dbe93ee01ff97fce91a10a}{stringToByteArray}}(FDRS\_DNS1\_IPADDRESS,\ \textcolor{charliteral}{'.'},\ dns1Address,\ 4,\ 10);}
+\DoxyCodeLine{00174\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37862625a8dbe93ee01ff97fce91a10a}{stringToByteArray}}(FDRS\_DNS2\_IPADDRESS,\ \textcolor{charliteral}{'.'},\ dns2Address,\ 4,\ 10);}
+\DoxyCodeLine{00175\ \ \ WiFi.config(hostIpAddress,\ \mbox{\hyperlink{fdrs__node_8h_a62994e4f9af5770586faddf3c4d2b084}{gatewayAddress}},\ subnetAddress,\ dns1Address,\ dns2Address);}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00177\ \ \ WiFi.begin(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a587ba0cb07f02913598610049a3bbb79}{ssid}},\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_aa4a2ebcb494493f648ae1e6975672575}{password}});}
+\DoxyCodeLine{00178\ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Connecting\ to\ WiFi\ SSID:\ "{}}\ +\ String(FDRS\_WIFI\_SSID));}
+\DoxyCodeLine{00179\ \ \ \textcolor{keywordtype}{int}\ connectTries\ =\ 0;}
+\DoxyCodeLine{00180\ \ \ \textcolor{keywordflow}{while}\ (WiFi.status()\ !=\ WL\_CONNECTED)}
+\DoxyCodeLine{00181\ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ connectTries++;}
+\DoxyCodeLine{00183\ \ \ \ \ delay(1000);}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{if}(connectTries\ >=\ 10)\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_adf135b87caf84f55fccdf33f614415ae}{DBG}}(\textcolor{stringliteral}{"{}Couldn't\ connect!\ Retrying..."{}});}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ WiFi.reconnect();}
+\DoxyCodeLine{00187\ \ \ \ \ \}}
+\DoxyCodeLine{00188\ \ \ \}}
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ USE\_ETHERNET}}
+\DoxyCodeLine{00190\ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \textcolor{comment}{//\ send\ an\ NTP\ request\ to\ the\ time\ server\ at\ the\ given\ address}}
+\DoxyCodeLine{00193\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a0b3b69b6f5b703a195d57d5122b15291}{sendNTPpacket}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ address)\ \{}
+\DoxyCodeLine{00194\ \ \ \textcolor{comment}{//\ set\ all\ bytes\ in\ the\ buffer\ to\ 0}}
+\DoxyCodeLine{00195\ \ \ memset(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}},\ 0,\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ae2843b6487d71a38433763495c106346}{NTP\_PACKET\_SIZE}});}
+\DoxyCodeLine{00196\ \ \ \textcolor{comment}{//\ Initialize\ values\ needed\ to\ form\ NTP\ request}}
+\DoxyCodeLine{00197\ \ \ \textcolor{comment}{//\ (see\ URL\ above\ for\ details\ on\ the\ packets)}}
+\DoxyCodeLine{00198\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[0]\ =\ 0b11100011;\ \ \ \textcolor{comment}{//\ LI,\ Version,\ Mode}}
+\DoxyCodeLine{00199\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[1]\ =\ 0;\ \ \ \ \ \textcolor{comment}{//\ Stratum,\ or\ type\ of\ clock}}
+\DoxyCodeLine{00200\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[2]\ =\ 6;\ \ \ \ \ \textcolor{comment}{//\ Polling\ Interval}}
+\DoxyCodeLine{00201\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[3]\ =\ 0xEC;\ \ \textcolor{comment}{//\ Peer\ Clock\ Precision}}
+\DoxyCodeLine{00202\ \ \ \textcolor{comment}{//\ 8\ bytes\ of\ zero\ for\ Root\ Delay\ \&\ Root\ Dispersion}}
+\DoxyCodeLine{00203\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[12]\ \ =\ 49;}
+\DoxyCodeLine{00204\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[13]\ \ =\ 0x4E;}
+\DoxyCodeLine{00205\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[14]\ \ =\ 49;}
+\DoxyCodeLine{00206\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[15]\ \ =\ 52;}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \textcolor{comment}{//\ all\ NTP\ fields\ have\ been\ given\ values,\ now}}
+\DoxyCodeLine{00209\ \ \ \textcolor{comment}{//\ you\ can\ send\ a\ packet\ requesting\ a\ timestamp:}}
+\DoxyCodeLine{00210\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ab7148c03749e10a7573f67ac54f7f47d}{FDRSNtp}}.beginPacket(address,\ 123);\ \textcolor{comment}{//\ NTP\ requests\ are\ to\ port\ 123}}
+\DoxyCodeLine{00211\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ab7148c03749e10a7573f67ac54f7f47d}{FDRSNtp}}.write(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}},\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ae2843b6487d71a38433763495c106346}{NTP\_PACKET\_SIZE}});}
+\DoxyCodeLine{00212\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ab7148c03749e10a7573f67ac54f7f47d}{FDRSNtp}}.endPacket();}
+\DoxyCodeLine{00213\ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a3919cd05f28fb3820d3e17b45d2c00f0}{fetchNtpTime}}()\ \{}
+\DoxyCodeLine{00216\ \textcolor{comment}{//DBG("{}GetTime\ Function"{});}}
+\DoxyCodeLine{00217\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aade6613821732512338366ebfd320f00}{tmSource}}\ <=\ \mbox{\hyperlink{fdrs__datatypes_8h_af74fa2f072a46f0f62317e415a6d3d2ca34d0776bd4aa580bfd67b1b0ea136dc3}{TMS\_NTP}})\ \{}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#ifdef\ USE\_ETHERNET}}
+\DoxyCodeLine{00219\ \ \ \textcolor{keywordflow}{if}(eth\_connected)\ \{}
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\#elif\ defined(USE\_WIFI)}}
+\DoxyCodeLine{00221\ \ \ \textcolor{keywordflow}{if}(WiFi.status()\ ==\ WL\_CONNECTED)\ \{}
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//DBG("{}Calling\ .begin\ function"{});}}
+\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ab7148c03749e10a7573f67ac54f7f47d}{FDRSNtp}}.begin(\mbox{\hyperlink{fdrs__gateway__wifi_8h_ac240824c9b35035b41bc24ee200565a2}{localPort}});}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a0b3b69b6f5b703a195d57d5122b15291}{sendNTPpacket}}(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a9ed13f63a3a1fcee842cc5ca51e6c8b1}{timeServer}});\ \textcolor{comment}{//\ send\ an\ NTP\ packet\ to\ a\ time\ server}}
+\DoxyCodeLine{00227\ \ \ \ \ uint\ i\ =\ 0;}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordflow}{for}(i\ =\ 0;\ i\ <\ 800;\ i++)\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__gateway__wifi_8h_ab7148c03749e10a7573f67ac54f7f47d}{FDRSNtp}}.parsePacket())}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ delay(10);}
+\DoxyCodeLine{00232\ \ \ \ \ \}}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordflow}{if}(i\ <\ 800)\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_a3710656646b77d04495c18395a69549a}{DBG2}}(\textcolor{stringliteral}{"{}Took\ "{}}\ +\ String(i\ *\ 10)\ +\ \textcolor{stringliteral}{"{}ms\ to\ get\ NTP\ response\ from\ "{}}\ +\ String(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a9ed13f63a3a1fcee842cc5ca51e6c8b1}{timeServer}})\ +\ \textcolor{stringliteral}{"{}."{}});}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a37092998c55ecbdd99c6b8c717c507e5}{NTPFetchFail}}\ =\ 0;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \textcolor{comment}{//\ We've\ received\ a\ packet,\ read\ the\ data\ from\ it}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ab7148c03749e10a7573f67ac54f7f47d}{FDRSNtp}}.read(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}},\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ae2843b6487d71a38433763495c106346}{NTP\_PACKET\_SIZE}});\ \textcolor{comment}{//\ read\ the\ packet\ into\ the\ buffer}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \textcolor{comment}{//\ the\ timestamp\ starts\ at\ byte\ 40\ of\ the\ received\ packet\ and\ is\ four\ bytes,}}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \textcolor{comment}{//\ or\ two\ words,\ long.\ First,\ extract\ the\ two\ words:}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ highWord\ =\ word(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[40],\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[41]);}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ lowWord\ =\ word(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[42],\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a64bc3d70081888ef346f466f8cffcaa9}{packetBuffer}}[43]);}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \textcolor{comment}{//\ combine\ the\ four\ bytes\ (two\ words)\ into\ a\ long\ integer}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \textcolor{comment}{//\ this\ is\ NTP\ time\ (seconds\ since\ Jan\ 1\ 1900):}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ secsSince1900\ =\ highWord\ <<\ 16\ |\ lowWord;}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \textcolor{comment}{//DBG("{}Seconds\ since\ Jan\ 1\ 1900\ =\ "{}\ +\ String(secsSince1900));}}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \textcolor{comment}{//\ now\ convert\ NTP\ time\ into\ everyday\ time:}}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \textcolor{comment}{//\ Unix\ time\ starts\ on\ Jan\ 1\ 1970.\ In\ seconds,\ that's\ 2208988800:}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ seventyYears\ =\ 2208988800UL;}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \textcolor{comment}{//\ subtract\ seventy\ years:}}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \textcolor{comment}{//\ now\ is\ epoch\ format\ -\/\ seconds\ since\ Jan\ 1\ 1970}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}}\ =\ secsSince1900\ -\/\ seventyYears;}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{fdrs__time_8h_af35daa77797bfa09ee892fbeef694e2d}{setTime}}(\mbox{\hyperlink{fdrs__gateway__wifi_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}}))\ \{}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_a94d9f4625ede8aeb5191e8a9463b18bc}{tmNetIf}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_ac11f08c2870e2d2711e6ad57b57b81e0ad9399250711e688fb005fbe87db9ace4}{TMIF\_LOCAL}};}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aec3ea3d9186e839fa7915c6518cf4ab3}{tmAddress}}\ =\ 0xFFFF;}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aade6613821732512338366ebfd320f00}{tmSource}}\ =\ \mbox{\hyperlink{fdrs__datatypes_8h_af74fa2f072a46f0f62317e415a6d3d2ca34d0776bd4aa580bfd67b1b0ea136dc3}{TMS\_NTP}};}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__gateway_8h_a527cdff0000383c77ef8828e6210e9c9}{timeSource}}.\mbox{\hyperlink{struct_time_source_aaa6414b912b7ed0d9f66f52acf28acc7}{tmLastTimeSet}}\ =\ millis();}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Time\ source\ is\ now\ local\ NTP"{}});}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ UTC\ time}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \mbox{\hyperlink{fdrs__debug_8h_ab6996efcae0768c394bb02b0d2951ffb}{DBG1}}(\textcolor{stringliteral}{"{}Timeout\ getting\ a\ NTP\ response."{}});}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00266\ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \}}
+\DoxyCodeLine{00268\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00269\ \}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fdrs__gateway__wifi_8h_ae9fab5537b3e2572cf3ee18223d41e11}{begin\_ntp}}()\ \{}
+\DoxyCodeLine{00272\ \ \ \mbox{\hyperlink{fdrs__gateway__wifi_8h_a3919cd05f28fb3820d3e17b45d2c00f0}{fetchNtpTime}}();}
+\DoxyCodeLine{00273\ \ \ \mbox{\hyperlink{fdrs__time_8h_ad0e793229e13e28a85d7e7065130beee}{handleTime}}();}
+\DoxyCodeLine{00274\ \ \ \mbox{\hyperlink{fdrs__time_8h_ac78edd18ba18ffa2288ef058728b6c18}{printTime}}();}
+\DoxyCodeLine{00275\ \}}
+
+\end{DoxyCode}

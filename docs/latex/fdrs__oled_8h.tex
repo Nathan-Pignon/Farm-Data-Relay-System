@@ -1,0 +1,133 @@
+\doxysection{src/fdrs\+\_\+oled.h File Reference}
+\hypertarget{fdrs__oled_8h}{}\label{fdrs__oled_8h}\index{src/fdrs\_oled.h@{src/fdrs\_oled.h}}
+{\ttfamily \#include $<$ESP8266\+\_\+and\+\_\+\+ESP32\+\_\+\+OLED\+\_\+driver\+\_\+for\+\_\+\+SSD1306\+\_\+displays/src/\+SSD1306\+Wire.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fdrs__oled_8h_a3d6e8679a1868c4a294ced76461260ec}{DISPLAY\+\_\+\+PAGES}}~4
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_s_d1306_wire}{SSD1306\+Wire}} \mbox{\hyperlink{fdrs__oled_8h_ada631ab794e4819c20add73d811e8151}{display}} (0x3c, I2\+C\+\_\+\+SDA, I2\+C\+\_\+\+SCL)
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_ac7be4ddf050f11a4a0320275346e64e8}{draw\+\_\+\+OLED\+\_\+header}} ()
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_a65682b10931a3fc9dc8d7ca3051f7e34}{draw\+Debug\+Page}} ()
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_ac5dea342d4396f9a234142286f6beec6}{debug\+\_\+\+OLED}} (String debug\+\_\+text)
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_a83f5e46084b7a331ba51da2cebaa2224}{draw\+Blank\+Page}} ()
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_ac3247ac7b2dfd289698938eaf00a89d7}{draw\+Status\+Page}} ()
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_abc2a3141ebd9bed252c600f01e33c25b}{draw\+Page2}} ()
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_a7a419998418401c8e5330ec2690cb14a}{draw\+Page3}} ()
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_aede8688c940237ef6b03bbf2cf369175}{draw\+Page\+OLED}} (bool nextpage)
+\item 
+void \mbox{\hyperlink{fdrs__oled_8h_a7146bcf63d6f02cf65be385af76565ed}{init\+\_\+oled}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de}{debug\+\_\+buffer}} \mbox{[}5\mbox{]} = \{"{}"{}, "{}"{}, "{}"{}, "{}"{}, "{}"{}\}
+\item 
+unsigned long \mbox{\hyperlink{fdrs__oled_8h_af5aa86b3476d0868b38717bb58330106}{display\+Event}} = 0
+\item 
+uint8\+\_\+t \mbox{\hyperlink{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}{display\+Page}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{fdrs__oled_8h_a3d6e8679a1868c4a294ced76461260ec}\index{fdrs\_oled.h@{fdrs\_oled.h}!DISPLAY\_PAGES@{DISPLAY\_PAGES}}
+\index{DISPLAY\_PAGES@{DISPLAY\_PAGES}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{DISPLAY\_PAGES}{DISPLAY\_PAGES}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_a3d6e8679a1868c4a294ced76461260ec} 
+\#define DISPLAY\+\_\+\+PAGES~4}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fdrs__oled_8h_ac5dea342d4396f9a234142286f6beec6}\index{fdrs\_oled.h@{fdrs\_oled.h}!debug\_OLED@{debug\_OLED}}
+\index{debug\_OLED@{debug\_OLED}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{debug\_OLED()}{debug\_OLED()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_ac5dea342d4396f9a234142286f6beec6} 
+void debug\+\_\+\+OLED (\begin{DoxyParamCaption}\item[{String}]{debug\+\_\+text}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_ada631ab794e4819c20add73d811e8151}\index{fdrs\_oled.h@{fdrs\_oled.h}!display@{display}}
+\index{display@{display}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_ada631ab794e4819c20add73d811e8151} 
+\mbox{\hyperlink{class_s_s_d1306_wire}{SSD1306\+Wire}} display (\begin{DoxyParamCaption}\item[{0x3c}]{}{, }\item[{I2\+C\+\_\+\+SDA}]{}{, }\item[{I2\+C\+\_\+\+SCL}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_ac7be4ddf050f11a4a0320275346e64e8}\index{fdrs\_oled.h@{fdrs\_oled.h}!draw\_OLED\_header@{draw\_OLED\_header}}
+\index{draw\_OLED\_header@{draw\_OLED\_header}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{draw\_OLED\_header()}{draw\_OLED\_header()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_ac7be4ddf050f11a4a0320275346e64e8} 
+void draw\+\_\+\+OLED\+\_\+header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_a83f5e46084b7a331ba51da2cebaa2224}\index{fdrs\_oled.h@{fdrs\_oled.h}!drawBlankPage@{drawBlankPage}}
+\index{drawBlankPage@{drawBlankPage}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{drawBlankPage()}{drawBlankPage()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_a83f5e46084b7a331ba51da2cebaa2224} 
+void draw\+Blank\+Page (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_a65682b10931a3fc9dc8d7ca3051f7e34}\index{fdrs\_oled.h@{fdrs\_oled.h}!drawDebugPage@{drawDebugPage}}
+\index{drawDebugPage@{drawDebugPage}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{drawDebugPage()}{drawDebugPage()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_a65682b10931a3fc9dc8d7ca3051f7e34} 
+void draw\+Debug\+Page (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_abc2a3141ebd9bed252c600f01e33c25b}\index{fdrs\_oled.h@{fdrs\_oled.h}!drawPage2@{drawPage2}}
+\index{drawPage2@{drawPage2}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{drawPage2()}{drawPage2()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_abc2a3141ebd9bed252c600f01e33c25b} 
+void draw\+Page2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_a7a419998418401c8e5330ec2690cb14a}\index{fdrs\_oled.h@{fdrs\_oled.h}!drawPage3@{drawPage3}}
+\index{drawPage3@{drawPage3}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{drawPage3()}{drawPage3()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_a7a419998418401c8e5330ec2690cb14a} 
+void draw\+Page3 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_aede8688c940237ef6b03bbf2cf369175}\index{fdrs\_oled.h@{fdrs\_oled.h}!drawPageOLED@{drawPageOLED}}
+\index{drawPageOLED@{drawPageOLED}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{drawPageOLED()}{drawPageOLED()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_aede8688c940237ef6b03bbf2cf369175} 
+void draw\+Page\+OLED (\begin{DoxyParamCaption}\item[{bool}]{nextpage}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_ac3247ac7b2dfd289698938eaf00a89d7}\index{fdrs\_oled.h@{fdrs\_oled.h}!drawStatusPage@{drawStatusPage}}
+\index{drawStatusPage@{drawStatusPage}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{drawStatusPage()}{drawStatusPage()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_ac3247ac7b2dfd289698938eaf00a89d7} 
+void draw\+Status\+Page (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__oled_8h_a7146bcf63d6f02cf65be385af76565ed}\index{fdrs\_oled.h@{fdrs\_oled.h}!init\_oled@{init\_oled}}
+\index{init\_oled@{init\_oled}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{init\_oled()}{init\_oled()}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_a7146bcf63d6f02cf65be385af76565ed} 
+void init\+\_\+oled (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de}\index{fdrs\_oled.h@{fdrs\_oled.h}!debug\_buffer@{debug\_buffer}}
+\index{debug\_buffer@{debug\_buffer}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{debug\_buffer}{debug\_buffer}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_a0142221f8a7323dad21f06a4acebc1de} 
+String debug\+\_\+buffer\mbox{[}5\mbox{]} = \{"{}"{}, "{}"{}, "{}"{}, "{}"{}, "{}"{}\}}
+
+\Hypertarget{fdrs__oled_8h_af5aa86b3476d0868b38717bb58330106}\index{fdrs\_oled.h@{fdrs\_oled.h}!displayEvent@{displayEvent}}
+\index{displayEvent@{displayEvent}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{displayEvent}{displayEvent}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_af5aa86b3476d0868b38717bb58330106} 
+unsigned long display\+Event = 0}
+
+\Hypertarget{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87}\index{fdrs\_oled.h@{fdrs\_oled.h}!displayPage@{displayPage}}
+\index{displayPage@{displayPage}!fdrs\_oled.h@{fdrs\_oled.h}}
+\doxysubsubsection{\texorpdfstring{displayPage}{displayPage}}
+{\footnotesize\ttfamily \label{fdrs__oled_8h_a1985e94ebc015e9e011b8294d6c49e87} 
+uint8\+\_\+t display\+Page = 0}
+

@@ -1,0 +1,105 @@
+\chapter{Upgrade from 2.0 to 3.0}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80}{}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80}\index{Upgrade from 2.0 to 3.0@{Upgrade from 2.0 to 3.0}}
+\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md33}%
+\Hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md33}%
+ While developing version 3.\+0 we made some breaking changes to the public API of this library. This document will help you update your code to work with version 3.\+0\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md34}{}\doxysection{\texorpdfstring{Font Definitions}{Font Definitions}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md34}
+To get better performance and a smaller font definition format, we change the memory layout of the font definition format. If you are using custom fonts not included in this library we updated the font generator \href{http://oleddisplay.squix.ch/\#/home}{\texttt{ here}}. Please update your fonts to be working with 3.\+0 by selecting the respective version in the dropdown.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md35}{}\doxysection{\texorpdfstring{Architectural Changes}{Architectural Changes}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md35}
+To become a more versatile library for the SSD1306 chipset we abstracted the hardware connection into subclasses of the base display class now called {\ttfamily OLEDDisplay}. This library is currently shipping with three implementations\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{class_s_s_d1306_wire}{SSD1306\+Wire}} implementing the I2C protocol using the Wire Library. ~\newline
+
+\item {\ttfamily \doxylink{class_s_s_d1306_brzo}{SSD1306\+Brzo}} implementing the I2C protocol using the faster \href{https://github.com/pasko-zh/brzo_i2c}{\texttt{ {\ttfamily brzo\+\_\+i2c}}} library.
+\item {\ttfamily \doxylink{class_s_s_d1306_spi}{SSD1306\+Spi}} implementing the SPI protocol.
+\end{DoxyItemize}
+
+To keep backwards compatiblity with the old API {\ttfamily SSD1306} is an alias of {\ttfamily \doxylink{class_s_s_d1306_wire}{SSD1306\+Wire}}. If you are not using the UI components you don\textquotesingle{}t have to change anything to keep your code working.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md36}{}\doxysection{\texorpdfstring{Name Changes}{Name Changes}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md36}
+\href{http://martinfowler.com/bliki/TwoHardThings.html}{\texttt{ Naming things is hard}}, to better reflect our intention with this library we changed the name of the base class to {\ttfamily OLEDDisplay} and the UI library accordingly to {\ttfamily \doxylink{class_o_l_e_d_display_ui}{OLEDDisplay\+Ui}}. As a consequence the type definitions of all frame and overlay related functions changed. This means that you have to update all your frame drawing callbacks from\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ frame1(\mbox{\hyperlink{class_s_s_d1306_wire}{SSD1306}}\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \ SSD1306UiState*\ state,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+
+\end{DoxyCode}
+
+
+too
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ frame1(OLEDDisplay\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}*\ state,\ int16\_t\ x,\ int16\_t\ y);}
+
+\end{DoxyCode}
+
+
+And your overlay drawing functions from\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ overlay1(\mbox{\hyperlink{class_s_s_d1306_wire}{SSD1306}}\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \ SSD1306UiState*\ state);}
+
+\end{DoxyCode}
+
+
+too
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ overlay1(OLEDDisplay\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \ \mbox{\hyperlink{struct_o_l_e_d_display_ui_state}{OLEDDisplayUiState}}*\ state);}
+
+\end{DoxyCode}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md37}{}\doxysection{\texorpdfstring{New Features}{New Features}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md37}
+\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md38}{}\doxysubsection{\texorpdfstring{Loading Animation}{Loading Animation}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md38}
+While using this library ourself we noticed a pattern emerging. We want to drawing a loading progress while connecting to Wi\+Fi and updating weather data etc.
+
+The simplest thing was to add the function {\ttfamily draw\+Progress\+Bar(x, y, width,  height, progress)} ,where {\ttfamily progress} is between {\ttfamily 0} and {\ttfamily 100}, right to the {\ttfamily OLEDDisplay} class.
+
+But we didn\textquotesingle{}t stop there. We added a new feature to the {\ttfamily \doxylink{class_o_l_e_d_display_ui}{OLEDDisplay\+Ui}} called {\ttfamily Loading\+Stages}. You can define your loading process like this\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ ++}
+\DoxyCodeLine{\mbox{\hyperlink{struct_loading_stage}{LoadingStage}}\ loadingStages[]\ =\ \{}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ .\mbox{\hyperlink{struct_loading_stage_a501d834686186e717bf63ae76b789212}{process}}\ =\ \textcolor{stringliteral}{"{}Connect\ to\ WiFi"{}},}
+\DoxyCodeLine{\ \ \ \ .callback\ =\ []()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Connect\ to\ WiFi}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ .process\ =\ \textcolor{stringliteral}{"{}Get\ time\ from\ NTP"{}},}
+\DoxyCodeLine{\ \ \ \ .callback\ =\ []()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ current\ time\ via\ NTP}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ more\ steps}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ LOADING\_STAGES\_COUNT\ =\ \textcolor{keyword}{sizeof}(loadingStages)\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_loading_stage}{LoadingStage}});}
+
+\end{DoxyCode}
+
+
+After defining your array of {\ttfamily Loading\+Stages} you can then run the loading process by using {\ttfamily ui.\+run\+Loading\+Process(loading\+Stages, LOADING\+\_\+\+STAGES\+\_\+\+COUNT)}. This will give you a nice little loading animation you can see in the beginning of \href{https://vimeo.com/168362918}{\texttt{ this}} video.
+
+To further customize this you are free to define your own {\ttfamily Loading\+Draw\+Function} like this\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ myLoadingDraw(OLEDDisplay\ *\mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}},\ \mbox{\hyperlink{struct_loading_stage}{LoadingStage}}*\ stage,\ uint8\_t\ progress)\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}-\/>setTextAlignment(\mbox{\hyperlink{_o_l_e_d_display_8h_a5763ddde39a1e43963c21f2780c21e5aa4da3c85cde615e7442df8ef17d0753ba}{TEXT\_ALIGN\_CENTER}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}-\/>setFont(ArialMT\_Plain\_10);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ stage-\/>process\ contains\ the\ text\ of\ the\ current\ progress\ e.q.\ "{}Connect\ to\ WiFi"{}}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}-\/>drawString(64,\ 18,\ stage-\/>\mbox{\hyperlink{struct_loading_stage_a501d834686186e717bf63ae76b789212}{process}});}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ you\ could\ just\ print\ the\ current\ process\ without\ the\ progress\ bar}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display}}-\/>drawString(64,\ 28,\ progress);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+After defining a function like that, you can pass it to the Ui library by use {\ttfamily ui.\+set\+Loading\+Draw\+Function(my\+Loading\+Draw)}.\hypertarget{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md39}{}\doxysubsection{\texorpdfstring{Text Logging}{Text Logging}}\label{md_src_2_e_s_p8266__and___e_s_p32___o_l_e_d__driver__for___s_s_d1306__displays_2_u_p_g_r_a_d_e-3_80_autotoc_md39}
+It is always useful to display some text on the display without worrying to much where it goes and managing it. In 3.\+0 we made the {\ttfamily OLEDDisplay} class implement \href{https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/cores/arduino/Print.h}{\texttt{ {\ttfamily Print}}} so you can use it like you would use {\ttfamily Serial}. We calls this feature {\ttfamily Log\+Buffer} and the only thing you have to do is to define how many lines you want to display and how many characters there are on average on each. This is done by calling {\ttfamily set\+Log\+Buffer(lines, chars);}. If there is not enough memory the function will return false.
+
+After that you can draw the {\ttfamily Log\+Buffer} anywhere you want by calling {\ttfamily draw\+Log\+Buffer(x, y)}. (Note\+: You have to call {\ttfamily \doxylink{_o_l_e_d_display_8h_a843628a7aa0280bb966fd8950aab55a1}{display()}} to update the screen) We made a \href{https://www.youtube.com/watch?v=8Fiss77A3TE}{\texttt{ video}} showing this feature in action. 

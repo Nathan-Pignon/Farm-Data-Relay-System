@@ -1,0 +1,309 @@
+\doxysection{src/fdrs\+\_\+time.h File Reference}
+\hypertarget{fdrs__time_8h}{}\label{fdrs__time_8h}\index{src/fdrs\_time.h@{src/fdrs\_time.h}}
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_a0cc72cae6afbbca11ed1c2bef9c727e6}{MIN\+\_\+\+TS}}~1718000000
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_ae1f24f66116f3bbcb54f41157a70b1ef}{MAX\+\_\+\+TS}}~3318000000
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_abf0f51dd0ff9a78c484a2fa0d5f50702}{VALID\+\_\+\+TS}}(\+\_\+unixts)~( (\+\_\+unixts $>$ \mbox{\hyperlink{fdrs__time_8h_a0cc72cae6afbbca11ed1c2bef9c727e6}{MIN\+\_\+\+TS}} \&\& \+\_\+unixts $<$ \mbox{\hyperlink{fdrs__time_8h_ae1f24f66116f3bbcb54f41157a70b1ef}{MAX\+\_\+\+TS}}) ? true \+: false )
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_a21663dd18026eef043bcf3e1467bf8ae}{TDIFF}}(prev\+Ms,  duration\+Ms)~(millis() -\/ prev\+Ms $>$ duration\+Ms)
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_ab32800906171b20c176261a9df375699}{TDIFFRAND}}(prev\+Ms,  duration\+Ms)~(millis() -\/ prev\+Ms $>$ (duration\+Ms + random(0,10000)))
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_af2ea72994067f7522f3aadd69899c701}{TDIFFSEC}}(prev\+Ms,  duration\+Sec)~(millis() -\/ prev\+Ms $>$ (duration\+Sec \texorpdfstring{$\ast$}{*} 1000))
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_adbb44fde32f342c98a304566f0e5c913}{TDIFFMIN}}(prev\+Ms,  duration\+Min)~(millis() -\/ prev\+Ms $>$ (duration\+Min \texorpdfstring{$\ast$}{*} 60 \texorpdfstring{$\ast$}{*} 1000))
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_a565304ad027aeeea02c9480c5564c98e}{USDST}}~0
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_ab66d538c69b10859a6d0460dabd0a4d4}{EUDST}}~1
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_af2ad81539ae258f99b256e2f52670783}{FDRS\+\_\+\+DST\+\_\+\+RULE}}~\mbox{\hyperlink{fdrs__globals_8h_a06d698376941cc5aa897bef5098da90d}{GLOBAL\+\_\+\+DST\+\_\+\+RULE}}
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_af3c69e82187827e9bcb752015d952b33}{FDRS\+\_\+\+STD\+\_\+\+OFFSET}}~\mbox{\hyperlink{fdrs__globals_8h_aa4d39719b9dbfa23e8c8577dd2690d8d}{GLOBAL\+\_\+\+STD\+\_\+\+OFFSET}}
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_afaf9d025c59be5bfc43e93d3fd3da5d6}{FDRS\+\_\+\+DST\+\_\+\+OFFSET}}~\mbox{\hyperlink{fdrs__globals_8h_a6b0139de95983c94776d92fd24a39f37}{GLOBAL\+\_\+\+DST\+\_\+\+OFFSET}}
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_ab3b37f5632f054d4ae3c724839bb03b2}{FDRS\+\_\+\+TIME\+\_\+\+PRINTTIME}}~\mbox{\hyperlink{fdrs__globals_8h_ad5b1fdbadcb8e0a3b38a01c8b72fe259}{GLOBAL\+\_\+\+TIME\+\_\+\+PRINTTIME}}
+\item 
+\#define \mbox{\hyperlink{fdrs__time_8h_a8b8f4c7b242bbcca5d5bdd26f1f8eaac}{FDRS\+\_\+\+TIME\+\_\+\+SEND\+\_\+\+INTERVAL}}~\mbox{\hyperlink{fdrs__globals_8h_a28c02bb704396a61391971bbba01ab72}{GLOBAL\+\_\+\+TIME\+\_\+\+SEND\+\_\+\+INTERVAL}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fdrs__time_8h_a181e287094b776a5461ee501144b60de}{send\+Time\+Lo\+Ra}} ()
+\item 
+void \mbox{\hyperlink{fdrs__time_8h_ac78edd18ba18ffa2288ef058728b6c18}{print\+Time}} ()
+\item 
+\mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\+\_\+err\+\_\+t}} \mbox{\hyperlink{fdrs__time_8h_a4a3493bd7c048fd6a4d72800abf84549}{send\+Time\+ESPNow}} ()
+\item 
+bool \mbox{\hyperlink{fdrs__time_8h_af35daa77797bfa09ee892fbeef694e2d}{set\+Time}} (time\+\_\+t)
+\item 
+bool \mbox{\hyperlink{fdrs__time_8h_a06cf678cad5b48003a8d6fd9a537e4b9}{valid\+Time}} ()
+\item 
+void \mbox{\hyperlink{fdrs__time_8h_ae5787ff89be5cf4297ce0aa039a4b72c}{check\+DST}} ()
+\item 
+void \mbox{\hyperlink{fdrs__time_8h_aea63008117f83899eb4b53a0624217ae}{send\+Time}} ()
+\item 
+void \mbox{\hyperlink{fdrs__time_8h_ad0e793229e13e28a85d7e7065130beee}{handle\+Time}} ()
+\item 
+void \mbox{\hyperlink{fdrs__time_8h_ab69180d59e85de0e3c4cdedcb5ab74c7}{adj\+Timefor\+Net\+Delay}} (time\+\_\+t new\+Offset)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+time\+\_\+t \mbox{\hyperlink{fdrs__time_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}{now}}
+\item 
+struct tm \mbox{\hyperlink{fdrs__time_8h_a0fe23e6116ec3d23cb699f4c1b49579c}{timeinfo}}
+\item 
+struct timeval \mbox{\hyperlink{fdrs__time_8h_a9cf96982557d56650f0f4cd3762f05a0}{tv}}
+\item 
+bool \mbox{\hyperlink{fdrs__time_8h_a8cfe4db356f08875d8cdb8f004e5f0db}{valid\+Time\+Flag}} = false
+\item 
+bool \mbox{\hyperlink{fdrs__time_8h_acfe400e128aade4cfc0479767bdb70b2}{valid\+Rtc\+Flag}} = false
+\item 
+bool \mbox{\hyperlink{fdrs__time_8h_aab8f32504a135e473fd49f9120587d82}{is\+DST}}
+\item 
+long \mbox{\hyperlink{fdrs__time_8h_a87dfb2dcef24dd14e312dd61087dae5a}{slew\+Secs}} = 0
+\item 
+double \mbox{\hyperlink{fdrs__time_8h_a1f8a7e5dae5aabf8a480e39bebfee6a1}{std\+Offset}} = (\mbox{\hyperlink{fdrs__time_8h_af3c69e82187827e9bcb752015d952b33}{FDRS\+\_\+\+STD\+\_\+\+OFFSET}} \texorpdfstring{$\ast$}{*} 60 \texorpdfstring{$\ast$}{*} 60)
+\item 
+double \mbox{\hyperlink{fdrs__time_8h_a95ba98e41e902f4cb2a73c4cb57159c4}{dst\+Offset}} = (\mbox{\hyperlink{fdrs__time_8h_afaf9d025c59be5bfc43e93d3fd3da5d6}{FDRS\+\_\+\+DST\+\_\+\+OFFSET}} \texorpdfstring{$\ast$}{*} 60 \texorpdfstring{$\ast$}{*} 60)
+\item 
+time\+\_\+t \mbox{\hyperlink{fdrs__time_8h_a9bffa827c59c8627ee010ae9af9fce88}{last\+Dst\+Check}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__time_8h_a769effdae79884c6728808b2c2ca2dd7}{last\+Time\+Send}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__time_8h_ad6752c83e60f77d89dad98dc613147a6}{last\+Rtc\+Check}} = 0
+\item 
+unsigned long \mbox{\hyperlink{fdrs__time_8h_a2a20e659a1966a858c1e50bf31e5690f}{last\+Rtc\+Time\+Set\+Min}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{fdrs__time_8h_ab66d538c69b10859a6d0460dabd0a4d4}\index{fdrs\_time.h@{fdrs\_time.h}!EUDST@{EUDST}}
+\index{EUDST@{EUDST}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{EUDST}{EUDST}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ab66d538c69b10859a6d0460dabd0a4d4} 
+\#define EUDST~1}
+
+\Hypertarget{fdrs__time_8h_afaf9d025c59be5bfc43e93d3fd3da5d6}\index{fdrs\_time.h@{fdrs\_time.h}!FDRS\_DST\_OFFSET@{FDRS\_DST\_OFFSET}}
+\index{FDRS\_DST\_OFFSET@{FDRS\_DST\_OFFSET}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_DST\_OFFSET}{FDRS\_DST\_OFFSET}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_afaf9d025c59be5bfc43e93d3fd3da5d6} 
+\#define FDRS\+\_\+\+DST\+\_\+\+OFFSET~\mbox{\hyperlink{fdrs__globals_8h_a6b0139de95983c94776d92fd24a39f37}{GLOBAL\+\_\+\+DST\+\_\+\+OFFSET}}}
+
+\Hypertarget{fdrs__time_8h_af2ad81539ae258f99b256e2f52670783}\index{fdrs\_time.h@{fdrs\_time.h}!FDRS\_DST\_RULE@{FDRS\_DST\_RULE}}
+\index{FDRS\_DST\_RULE@{FDRS\_DST\_RULE}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_DST\_RULE}{FDRS\_DST\_RULE}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_af2ad81539ae258f99b256e2f52670783} 
+\#define FDRS\+\_\+\+DST\+\_\+\+RULE~\mbox{\hyperlink{fdrs__globals_8h_a06d698376941cc5aa897bef5098da90d}{GLOBAL\+\_\+\+DST\+\_\+\+RULE}}}
+
+\Hypertarget{fdrs__time_8h_af3c69e82187827e9bcb752015d952b33}\index{fdrs\_time.h@{fdrs\_time.h}!FDRS\_STD\_OFFSET@{FDRS\_STD\_OFFSET}}
+\index{FDRS\_STD\_OFFSET@{FDRS\_STD\_OFFSET}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_STD\_OFFSET}{FDRS\_STD\_OFFSET}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_af3c69e82187827e9bcb752015d952b33} 
+\#define FDRS\+\_\+\+STD\+\_\+\+OFFSET~\mbox{\hyperlink{fdrs__globals_8h_aa4d39719b9dbfa23e8c8577dd2690d8d}{GLOBAL\+\_\+\+STD\+\_\+\+OFFSET}}}
+
+\Hypertarget{fdrs__time_8h_ab3b37f5632f054d4ae3c724839bb03b2}\index{fdrs\_time.h@{fdrs\_time.h}!FDRS\_TIME\_PRINTTIME@{FDRS\_TIME\_PRINTTIME}}
+\index{FDRS\_TIME\_PRINTTIME@{FDRS\_TIME\_PRINTTIME}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_TIME\_PRINTTIME}{FDRS\_TIME\_PRINTTIME}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ab3b37f5632f054d4ae3c724839bb03b2} 
+\#define FDRS\+\_\+\+TIME\+\_\+\+PRINTTIME~\mbox{\hyperlink{fdrs__globals_8h_ad5b1fdbadcb8e0a3b38a01c8b72fe259}{GLOBAL\+\_\+\+TIME\+\_\+\+PRINTTIME}}}
+
+\Hypertarget{fdrs__time_8h_a8b8f4c7b242bbcca5d5bdd26f1f8eaac}\index{fdrs\_time.h@{fdrs\_time.h}!FDRS\_TIME\_SEND\_INTERVAL@{FDRS\_TIME\_SEND\_INTERVAL}}
+\index{FDRS\_TIME\_SEND\_INTERVAL@{FDRS\_TIME\_SEND\_INTERVAL}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{FDRS\_TIME\_SEND\_INTERVAL}{FDRS\_TIME\_SEND\_INTERVAL}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a8b8f4c7b242bbcca5d5bdd26f1f8eaac} 
+\#define FDRS\+\_\+\+TIME\+\_\+\+SEND\+\_\+\+INTERVAL~\mbox{\hyperlink{fdrs__globals_8h_a28c02bb704396a61391971bbba01ab72}{GLOBAL\+\_\+\+TIME\+\_\+\+SEND\+\_\+\+INTERVAL}}}
+
+\Hypertarget{fdrs__time_8h_ae1f24f66116f3bbcb54f41157a70b1ef}\index{fdrs\_time.h@{fdrs\_time.h}!MAX\_TS@{MAX\_TS}}
+\index{MAX\_TS@{MAX\_TS}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TS}{MAX\_TS}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ae1f24f66116f3bbcb54f41157a70b1ef} 
+\#define MAX\+\_\+\+TS~3318000000}
+
+\Hypertarget{fdrs__time_8h_a0cc72cae6afbbca11ed1c2bef9c727e6}\index{fdrs\_time.h@{fdrs\_time.h}!MIN\_TS@{MIN\_TS}}
+\index{MIN\_TS@{MIN\_TS}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_TS}{MIN\_TS}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a0cc72cae6afbbca11ed1c2bef9c727e6} 
+\#define MIN\+\_\+\+TS~1718000000}
+
+\Hypertarget{fdrs__time_8h_a21663dd18026eef043bcf3e1467bf8ae}\index{fdrs\_time.h@{fdrs\_time.h}!TDIFF@{TDIFF}}
+\index{TDIFF@{TDIFF}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{TDIFF}{TDIFF}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a21663dd18026eef043bcf3e1467bf8ae} 
+\#define TDIFF(\begin{DoxyParamCaption}\item[{}]{prev\+Ms}{, }\item[{}]{duration\+Ms}{}\end{DoxyParamCaption})~(millis() -\/ prev\+Ms $>$ duration\+Ms)}
+
+\Hypertarget{fdrs__time_8h_adbb44fde32f342c98a304566f0e5c913}\index{fdrs\_time.h@{fdrs\_time.h}!TDIFFMIN@{TDIFFMIN}}
+\index{TDIFFMIN@{TDIFFMIN}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{TDIFFMIN}{TDIFFMIN}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_adbb44fde32f342c98a304566f0e5c913} 
+\#define TDIFFMIN(\begin{DoxyParamCaption}\item[{}]{prev\+Ms}{, }\item[{}]{duration\+Min}{}\end{DoxyParamCaption})~(millis() -\/ prev\+Ms $>$ (duration\+Min \texorpdfstring{$\ast$}{*} 60 \texorpdfstring{$\ast$}{*} 1000))}
+
+\Hypertarget{fdrs__time_8h_ab32800906171b20c176261a9df375699}\index{fdrs\_time.h@{fdrs\_time.h}!TDIFFRAND@{TDIFFRAND}}
+\index{TDIFFRAND@{TDIFFRAND}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{TDIFFRAND}{TDIFFRAND}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ab32800906171b20c176261a9df375699} 
+\#define TDIFFRAND(\begin{DoxyParamCaption}\item[{}]{prev\+Ms}{, }\item[{}]{duration\+Ms}{}\end{DoxyParamCaption})~(millis() -\/ prev\+Ms $>$ (duration\+Ms + random(0,10000)))}
+
+\Hypertarget{fdrs__time_8h_af2ea72994067f7522f3aadd69899c701}\index{fdrs\_time.h@{fdrs\_time.h}!TDIFFSEC@{TDIFFSEC}}
+\index{TDIFFSEC@{TDIFFSEC}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{TDIFFSEC}{TDIFFSEC}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_af2ea72994067f7522f3aadd69899c701} 
+\#define TDIFFSEC(\begin{DoxyParamCaption}\item[{}]{prev\+Ms}{, }\item[{}]{duration\+Sec}{}\end{DoxyParamCaption})~(millis() -\/ prev\+Ms $>$ (duration\+Sec \texorpdfstring{$\ast$}{*} 1000))}
+
+\Hypertarget{fdrs__time_8h_a565304ad027aeeea02c9480c5564c98e}\index{fdrs\_time.h@{fdrs\_time.h}!USDST@{USDST}}
+\index{USDST@{USDST}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{USDST}{USDST}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a565304ad027aeeea02c9480c5564c98e} 
+\#define USDST~0}
+
+\Hypertarget{fdrs__time_8h_abf0f51dd0ff9a78c484a2fa0d5f50702}\index{fdrs\_time.h@{fdrs\_time.h}!VALID\_TS@{VALID\_TS}}
+\index{VALID\_TS@{VALID\_TS}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{VALID\_TS}{VALID\_TS}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_abf0f51dd0ff9a78c484a2fa0d5f50702} 
+\#define VALID\+\_\+\+TS(\begin{DoxyParamCaption}\item[{}]{\+\_\+unixts}{}\end{DoxyParamCaption})~( (\+\_\+unixts $>$ \mbox{\hyperlink{fdrs__time_8h_a0cc72cae6afbbca11ed1c2bef9c727e6}{MIN\+\_\+\+TS}} \&\& \+\_\+unixts $<$ \mbox{\hyperlink{fdrs__time_8h_ae1f24f66116f3bbcb54f41157a70b1ef}{MAX\+\_\+\+TS}}) ? true \+: false )}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fdrs__time_8h_ab69180d59e85de0e3c4cdedcb5ab74c7}\index{fdrs\_time.h@{fdrs\_time.h}!adjTimeforNetDelay@{adjTimeforNetDelay}}
+\index{adjTimeforNetDelay@{adjTimeforNetDelay}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{adjTimeforNetDelay()}{adjTimeforNetDelay()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ab69180d59e85de0e3c4cdedcb5ab74c7} 
+void adj\+Timefor\+Net\+Delay (\begin{DoxyParamCaption}\item[{time\+\_\+t}]{new\+Offset}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_ae5787ff89be5cf4297ce0aa039a4b72c}\index{fdrs\_time.h@{fdrs\_time.h}!checkDST@{checkDST}}
+\index{checkDST@{checkDST}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{checkDST()}{checkDST()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ae5787ff89be5cf4297ce0aa039a4b72c} 
+void check\+DST (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_ad0e793229e13e28a85d7e7065130beee}\index{fdrs\_time.h@{fdrs\_time.h}!handleTime@{handleTime}}
+\index{handleTime@{handleTime}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{handleTime()}{handleTime()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ad0e793229e13e28a85d7e7065130beee} 
+void handle\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_ac78edd18ba18ffa2288ef058728b6c18}\index{fdrs\_time.h@{fdrs\_time.h}!printTime@{printTime}}
+\index{printTime@{printTime}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{printTime()}{printTime()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ac78edd18ba18ffa2288ef058728b6c18} 
+void print\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_aea63008117f83899eb4b53a0624217ae}\index{fdrs\_time.h@{fdrs\_time.h}!sendTime@{sendTime}}
+\index{sendTime@{sendTime}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{sendTime()}{sendTime()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_aea63008117f83899eb4b53a0624217ae} 
+void send\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_a4a3493bd7c048fd6a4d72800abf84549}\index{fdrs\_time.h@{fdrs\_time.h}!sendTimeESPNow@{sendTimeESPNow}}
+\index{sendTimeESPNow@{sendTimeESPNow}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{sendTimeESPNow()}{sendTimeESPNow()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a4a3493bd7c048fd6a4d72800abf84549} 
+\mbox{\hyperlink{fdrs__datatypes_8h_a8bc4f6626a2d4ebd67533c56064ccda8}{esp\+\_\+err\+\_\+t}} send\+Time\+ESPNow (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_a181e287094b776a5461ee501144b60de}\index{fdrs\_time.h@{fdrs\_time.h}!sendTimeLoRa@{sendTimeLoRa}}
+\index{sendTimeLoRa@{sendTimeLoRa}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{sendTimeLoRa()}{sendTimeLoRa()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a181e287094b776a5461ee501144b60de} 
+void send\+Time\+Lo\+Ra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_af35daa77797bfa09ee892fbeef694e2d}\index{fdrs\_time.h@{fdrs\_time.h}!setTime@{setTime}}
+\index{setTime@{setTime}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{setTime()}{setTime()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_af35daa77797bfa09ee892fbeef694e2d} 
+bool set\+Time (\begin{DoxyParamCaption}\item[{time\+\_\+t}]{current\+Time}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdrs__time_8h_a06cf678cad5b48003a8d6fd9a537e4b9}\index{fdrs\_time.h@{fdrs\_time.h}!validTime@{validTime}}
+\index{validTime@{validTime}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{validTime()}{validTime()}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a06cf678cad5b48003a8d6fd9a537e4b9} 
+bool valid\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{fdrs__time_8h_a95ba98e41e902f4cb2a73c4cb57159c4}\index{fdrs\_time.h@{fdrs\_time.h}!dstOffset@{dstOffset}}
+\index{dstOffset@{dstOffset}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{dstOffset}{dstOffset}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a95ba98e41e902f4cb2a73c4cb57159c4} 
+double dst\+Offset = (\mbox{\hyperlink{fdrs__time_8h_afaf9d025c59be5bfc43e93d3fd3da5d6}{FDRS\+\_\+\+DST\+\_\+\+OFFSET}} \texorpdfstring{$\ast$}{*} 60 \texorpdfstring{$\ast$}{*} 60)}
+
+\Hypertarget{fdrs__time_8h_aab8f32504a135e473fd49f9120587d82}\index{fdrs\_time.h@{fdrs\_time.h}!isDST@{isDST}}
+\index{isDST@{isDST}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{isDST}{isDST}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_aab8f32504a135e473fd49f9120587d82} 
+bool is\+DST}
+
+\Hypertarget{fdrs__time_8h_a9bffa827c59c8627ee010ae9af9fce88}\index{fdrs\_time.h@{fdrs\_time.h}!lastDstCheck@{lastDstCheck}}
+\index{lastDstCheck@{lastDstCheck}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{lastDstCheck}{lastDstCheck}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a9bffa827c59c8627ee010ae9af9fce88} 
+time\+\_\+t last\+Dst\+Check = 0}
+
+\Hypertarget{fdrs__time_8h_ad6752c83e60f77d89dad98dc613147a6}\index{fdrs\_time.h@{fdrs\_time.h}!lastRtcCheck@{lastRtcCheck}}
+\index{lastRtcCheck@{lastRtcCheck}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{lastRtcCheck}{lastRtcCheck}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_ad6752c83e60f77d89dad98dc613147a6} 
+unsigned long last\+Rtc\+Check = 0}
+
+\Hypertarget{fdrs__time_8h_a2a20e659a1966a858c1e50bf31e5690f}\index{fdrs\_time.h@{fdrs\_time.h}!lastRtcTimeSetMin@{lastRtcTimeSetMin}}
+\index{lastRtcTimeSetMin@{lastRtcTimeSetMin}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{lastRtcTimeSetMin}{lastRtcTimeSetMin}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a2a20e659a1966a858c1e50bf31e5690f} 
+unsigned long last\+Rtc\+Time\+Set\+Min = 0}
+
+\Hypertarget{fdrs__time_8h_a769effdae79884c6728808b2c2ca2dd7}\index{fdrs\_time.h@{fdrs\_time.h}!lastTimeSend@{lastTimeSend}}
+\index{lastTimeSend@{lastTimeSend}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{lastTimeSend}{lastTimeSend}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a769effdae79884c6728808b2c2ca2dd7} 
+unsigned long last\+Time\+Send = 0}
+
+\Hypertarget{fdrs__time_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5}\index{fdrs\_time.h@{fdrs\_time.h}!now@{now}}
+\index{now@{now}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{now}{now}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a3c3ca8cc859a31aec6578f0dcf1b32a5} 
+time\+\_\+t now}
+
+\Hypertarget{fdrs__time_8h_a87dfb2dcef24dd14e312dd61087dae5a}\index{fdrs\_time.h@{fdrs\_time.h}!slewSecs@{slewSecs}}
+\index{slewSecs@{slewSecs}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{slewSecs}{slewSecs}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a87dfb2dcef24dd14e312dd61087dae5a} 
+long slew\+Secs = 0}
+
+\Hypertarget{fdrs__time_8h_a1f8a7e5dae5aabf8a480e39bebfee6a1}\index{fdrs\_time.h@{fdrs\_time.h}!stdOffset@{stdOffset}}
+\index{stdOffset@{stdOffset}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{stdOffset}{stdOffset}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a1f8a7e5dae5aabf8a480e39bebfee6a1} 
+double std\+Offset = (\mbox{\hyperlink{fdrs__time_8h_af3c69e82187827e9bcb752015d952b33}{FDRS\+\_\+\+STD\+\_\+\+OFFSET}} \texorpdfstring{$\ast$}{*} 60 \texorpdfstring{$\ast$}{*} 60)}
+
+\Hypertarget{fdrs__time_8h_a0fe23e6116ec3d23cb699f4c1b49579c}\index{fdrs\_time.h@{fdrs\_time.h}!timeinfo@{timeinfo}}
+\index{timeinfo@{timeinfo}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{timeinfo}{timeinfo}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a0fe23e6116ec3d23cb699f4c1b49579c} 
+struct tm timeinfo}
+
+\Hypertarget{fdrs__time_8h_a9cf96982557d56650f0f4cd3762f05a0}\index{fdrs\_time.h@{fdrs\_time.h}!tv@{tv}}
+\index{tv@{tv}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{tv}{tv}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a9cf96982557d56650f0f4cd3762f05a0} 
+struct timeval tv}
+
+\Hypertarget{fdrs__time_8h_acfe400e128aade4cfc0479767bdb70b2}\index{fdrs\_time.h@{fdrs\_time.h}!validRtcFlag@{validRtcFlag}}
+\index{validRtcFlag@{validRtcFlag}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{validRtcFlag}{validRtcFlag}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_acfe400e128aade4cfc0479767bdb70b2} 
+bool valid\+Rtc\+Flag = false}
+
+\Hypertarget{fdrs__time_8h_a8cfe4db356f08875d8cdb8f004e5f0db}\index{fdrs\_time.h@{fdrs\_time.h}!validTimeFlag@{validTimeFlag}}
+\index{validTimeFlag@{validTimeFlag}!fdrs\_time.h@{fdrs\_time.h}}
+\doxysubsubsection{\texorpdfstring{validTimeFlag}{validTimeFlag}}
+{\footnotesize\ttfamily \label{fdrs__time_8h_a8cfe4db356f08875d8cdb8f004e5f0db} 
+bool valid\+Time\+Flag = false}
+

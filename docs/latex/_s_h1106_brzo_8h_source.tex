@@ -1,0 +1,118 @@
+\doxysection{SH1106\+Brzo.\+h}
+\hypertarget{_s_h1106_brzo_8h_source}{}\label{_s_h1106_brzo_8h_source}\index{src/ESP8266\_and\_ESP32\_OLED\_driver\_for\_SSD1306\_displays/src/SH1106Brzo.h@{src/ESP8266\_and\_ESP32\_OLED\_driver\_for\_SSD1306\_displays/src/SH1106Brzo.h}}
+\mbox{\hyperlink{_s_h1106_brzo_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifndef\ SH1106Brzo\_h}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ SH1106Brzo\_h}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_o_l_e_d_display_8h}{OLEDDisplay.h}}"{}}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <brzo\_i2c.h>}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#if\ F\_CPU\ ==\ 160000000L}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \#define\ BRZO\_I2C\_SPEED\ 1000}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \#define\ BRZO\_I2C\_SPEED\ 800}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_h1106_brzo}{SH1106Brzo}}\ :\ \textcolor{keyword}{public}\ OLEDDisplay\ \{}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \_address;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \_sda;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \_scl;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{class_s_h1106_brzo_a4284f8e47f91db31f6950558f4e08741}{SH1106Brzo}}(uint8\_t\ \_address,\ uint8\_t\ \_sda,\ uint8\_t\ \_scl,\ \mbox{\hyperlink{_o_l_e_d_display_8h_a0891d4518513c40cc5e13624b2fcce9c}{OLEDDISPLAY\_GEOMETRY}}\ g\ =\ \mbox{\hyperlink{_o_l_e_d_display_8h_a0891d4518513c40cc5e13624b2fcce9cad2f82dc049d1f45855b04457f694de44}{GEOMETRY\_128\_64}})\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_a42edbab7d27b73c987feb7669aa01e78}{setGeometry}}(g);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ this-\/>\_address\ =\ \_address;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ this-\/>\_sda\ =\ \_sda;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ this-\/>\_scl\ =\ \_scl;}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_s_h1106_brzo_a33b6bef7ba255db049066682b690cc21}{connect}}()\{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ brzo\_i2c\_setup(\_sda,\ \_scl,\ 0);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_s_h1106_brzo_a781ccdab76da0c8e00aa1e7fcd7ffb3e}{display}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ OLEDDISPLAY\_DOUBLE\_BUFFER}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ uint8\_t\ minBoundY\ =\ UINT8\_MAX;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ uint8\_t\ maxBoundY\ =\ 0;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ uint8\_t\ minBoundX\ =\ UINT8\_MAX;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ uint8\_t\ maxBoundX\ =\ 0;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ uint8\_t\ x,\ y;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ the\ Y\ bounding\ box\ of\ changes}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ copy\ buffer[pos]\ to\ buffer\_back[pos];}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ 0;\ y\ <\ (\mbox{\hyperlink{_o_l_e_d_display_8h_a106d4e43d3edecb0f0aac5db224c58c6}{displayHeight}}\ /\ 8);\ y++)\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ 0;\ x\ <\ \mbox{\hyperlink{_o_l_e_d_display_8h_a211a543ab4f1aed135b81a5e258883e1}{displayWidth}};\ x++)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ uint16\_t\ pos\ =\ x\ +\ y\ *\ \mbox{\hyperlink{_o_l_e_d_display_8h_a211a543ab4f1aed135b81a5e258883e1}{displayWidth}};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_o_l_e_d_display_8h_a56ed84df35de10bdb65e72b184309497}{buffer}}[pos]\ !=\ \mbox{\hyperlink{_o_l_e_d_display_8h_aa4e6c9aa9fb35a83075b69e136d301e2}{buffer\_back}}[pos])\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ minBoundY\ =\ \_min(minBoundY,\ y);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ maxBoundY\ =\ \_max(maxBoundY,\ y);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ minBoundX\ =\ \_min(minBoundX,\ x);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ maxBoundX\ =\ \_max(maxBoundX,\ x);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_o_l_e_d_display_8h_aa4e6c9aa9fb35a83075b69e136d301e2}{buffer\_back}}[pos]\ =\ \mbox{\hyperlink{_o_l_e_d_display_8h_a56ed84df35de10bdb65e72b184309497}{buffer}}[pos];}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ yield();}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ minBoundY\ wasn't\ updated}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \textcolor{comment}{//\ we\ can\ savely\ assume\ that\ buffer\_back[pos]\ ==\ buffer[pos]}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \textcolor{comment}{//\ holdes\ true\ for\ all\ values\ of\ pos}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (minBoundY\ ==\ UINT8\_MAX)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ k\ =\ 0;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ uint8\_t\ sendBuffer[17];}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ sendBuffer[0]\ =\ 0x40;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ the\ colum\ offset}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ uint8\_t\ minBoundXp2H\ =\ (minBoundX\ +\ 2)\ \&\ 0x0F;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ uint8\_t\ minBoundXp2L\ =\ 0x10\ |\ ((minBoundX\ +\ 2)\ >>\ 4\ );}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ brzo\_i2c\_start\_transaction(this-\/>\_address,\ \mbox{\hyperlink{_s_h1106_brzo_8h_a96453d98cca24229b5f0c816eb76e766}{BRZO\_I2C\_SPEED}});}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ minBoundY;\ y\ <=\ maxBoundY;\ y++)\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ sendCommand(0xB0\ +\ y);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ sendCommand(minBoundXp2H);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ sendCommand(minBoundXp2L);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ minBoundX;\ x\ <=\ maxBoundX;\ x++)\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ k++;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ sendBuffer[k]\ =\ \mbox{\hyperlink{_o_l_e_d_display_8h_a56ed84df35de10bdb65e72b184309497}{buffer}}[x\ +\ y\ *\ \mbox{\hyperlink{_o_l_e_d_display_8h_a211a543ab4f1aed135b81a5e258883e1}{displayWidth}}];}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (k\ ==\ 16)\ \ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ brzo\_i2c\_write(sendBuffer,\ 17,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ 0;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (k\ !=\ 0)\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ brzo\_i2c\_write(sendBuffer,\ k\ +\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ k\ =\ 0;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ yield();}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (k\ !=\ 0)\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ brzo\_i2c\_write(sendBuffer,\ k\ +\ 1,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ brzo\_i2c\_end\_transaction();}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\ \ \ \ \ \#else}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\ \ \ \ \ \#endif}}
+\DoxyCodeLine{00127\ \ \ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{int}\ getBufferOffset(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00132\ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ sendCommand(uint8\_t\ com)\ \mbox{\hyperlink{fdrs__datatypes_8h_a02fb7a21fe1e9b0eee994c4f6cc33486}{\_\_attribute\_\_}}((always\_inline))\{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ uint8\_t\ command[2]\ =\ \{0x80\ \textcolor{comment}{/*\ command\ mode\ */},\ com\};}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ brzo\_i2c\_start\_transaction(\_address,\ \mbox{\hyperlink{_s_h1106_brzo_8h_a96453d98cca24229b5f0c816eb76e766}{BRZO\_I2C\_SPEED}});}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ brzo\_i2c\_write(command,\ 2,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ brzo\_i2c\_end\_transaction();}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
