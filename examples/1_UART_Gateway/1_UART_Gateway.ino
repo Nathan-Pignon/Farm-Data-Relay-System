@@ -1,26 +1,26 @@
 /**
  * @file gateway_main.cpp
- * @brief Point d'entrée principal pour la passerelle du système Farm Data Relay System (FDRS) version 2.000.
+ * @brief Main entry point for the Farm Data Relay System (FDRS) gateway version 2.000.
  *
- * Développé par Timm Bogner (timmbogner@gmail.com) à Urbana, Illinois, USA.
+ * Developed by Timm Bogner (timmbogner@gmail.com) in Urbana, Illinois, USA.
  */
 
 #include "fdrs_gateway_config.h"
 #include <fdrs_gateway.h>
 
 /**
- * @brief Fonction de configuration initiale.
+ * @brief Initial setup function.
  *
- * Initialise le système FDRS en appelant la fonction `beginFDRS`.
+ * Initializes the FDRS system by calling the `beginFDRS` function.
  */
 void setup() {
     beginFDRS();
 }
 
 /**
- * @brief Boucle principale.
+ * @brief Main loop.
  *
- * Exécute continuellement la fonction `loopFDRS` pour maintenir le fonctionnement de la passerelle.
+ * Continuously runs the `loopFDRS` function to maintain gateway operation.
  */
 void loop() {
     loopFDRS();

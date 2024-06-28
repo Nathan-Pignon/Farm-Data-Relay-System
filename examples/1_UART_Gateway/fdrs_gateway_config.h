@@ -1,92 +1,92 @@
 /**
  * @file gateway_config.h
- * @brief Configuration de la passerelle du système Farm Data Relay System (FDRS).
+ * @brief Configuration for the Farm Data Relay System (FDRS) gateway.
  */
 
 // FARM DATA RELAY SYSTEM
 //
 // GATEWAY CONFIGURATION
 
-/// Adresse de cette passerelle.
+/// Address of this gateway.
 #define UNIT_MAC           0x01
 
-/// Adresse du voisin ESP-NOW #1.
+/// Address of ESP-NOW neighbor #1.
 #define ESPNOW_NEIGHBOR_1  0x00
-/// Adresse du voisin ESP-NOW #2.
+/// Address of ESP-NOW neighbor #2.
 #define ESPNOW_NEIGHBOR_2  0x02
-/// Adresse du voisin LoRa #1.
+/// Address of LoRa neighbor #1.
 #define LORA_NEIGHBOR_1    0x00
-/// Adresse du voisin LoRa #2.
+/// Address of LoRa neighbor #2.
 #define LORA_NEIGHBOR_2    0x03
 
 // Interfaces
 #define USE_ESPNOW
 //#define USE_LORA
-//#define USE_WIFI  // Provoquera des erreurs si utilisé avec ESP-NOW. Utilisez un lien série à la place !
+//#define USE_WIFI  // Will cause errors if used with ESP-NOW. Use a serial link instead!
 //#define USE_ETHERNET
 
-// Routage
-// Options: sendESPNowNbr(1 ou 2); sendESPNowPeers(); sendLoRaNbr(1 ou 2); broadcastLoRa(); sendSerial(); sendMQTT();
-/// Action de routage pour ESPNOWG.
+// Routing
+// Options: sendESPNowNbr(1 or 2); sendESPNowPeers(); sendLoRaNbr(1 or 2); broadcastLoRa(); sendSerial(); sendMQTT();
+/// Routing action for ESPNOWG.
 #define ESPNOWG_ACT    sendSerial();
-/// Action de routage pour LORAG.
+/// Routing action for LORAG.
 #define LORAG_ACT      sendSerial();
-/// Action de routage pour SERIAL.
+/// Routing action for SERIAL.
 #define SERIAL_ACT     sendESPNowNbr(2); sendESPNowPeers(); sendLoRaNbr(2); broadcastLoRa();
-/// Action de routage pour MQTT.
+/// Routing action for MQTT.
 #define MQTT_ACT
-/// Action de routage pour INTERNAL.
+/// Routing action for INTERNAL.
 #define INTERNAL_ACT   sendSerial();
-/// Action de routage pour ESPNOW1.
+/// Routing action for ESPNOW1.
 #define ESPNOW1_ACT
-/// Action de routage pour ESPNOW2.
+/// Routing action for ESPNOW2.
 #define ESPNOW2_ACT    sendSerial();
-/// Action de routage pour LORA1.
+/// Routing action for LORA1.
 #define LORA1_ACT
-/// Action de routage pour LORA2.
+/// Routing action for LORA2.
 #define LORA2_ACT      sendSerial();
 
-// Configuration LoRa
-/// Module RadioLib utilisé.
+// LoRa Configuration
+/// RadioLib module used.
 #define RADIOLIB_MODULE SX1276
-/// Broche SS pour LoRa.
+/// SS pin for LoRa.
 #define LORA_SS    18
-/// Broche RST pour LoRa.
+/// RST pin for LoRa.
 #define LORA_RST   14
-/// Broche DIO pour LoRa.
+/// DIO pin for LoRa.
 #define LORA_DIO   26
-/// Broche BUSY pour LoRa.
+/// BUSY pin for LoRa.
 #define LORA_BUSY  33
 //#define USE_SX126X
 
-/// Puissance TX de LoRa en dBm.
+/// LoRa TX power in dBm.
 #define LORA_TXPWR 17
 
 //#define CUSTOM_SPI
-/// Broche SCK pour SPI LoRa.
+/// SCK pin for LoRa SPI.
 #define LORA_SPI_SCK  5
-/// Broche MISO pour SPI LoRa.
+/// MISO pin for LoRa SPI.
 #define LORA_SPI_MISO 19
-/// Broche MOSI pour SPI LoRa.
+/// MOSI pin for LoRa SPI.
 #define LORA_SPI_MOSI 27
 
-/// Active le débogage USB-Série.
+/// Enable USB-Serial debugging.
 #define FDRS_DEBUG
-//#define DBG_LEVEL 0    // 0 pour un minimum de messages, 1 pour le dépannage, 2 pour le développement
+//#define DBG_LEVEL 0    // 0 for minimal messages, 1 for troubleshooting, 2 for development
 
-// I2C - OLED ou RTC
-/// Broche SDA pour I2C.
+// I2C - OLED or RTC
+/// SDA pin for I2C.
 #define I2C_SDA 4
-/// Broche SCL pour I2C.
+/// SCL pin for I2C.
 #define I2C_SCL 15
 
-// OLED -- Affiche les messages de débogage de la console sur un OLED I²C SSD1306
+// OLED -- Displays console debug messages on an I²C SSD1306 OLED
 ///#define USE_OLED
-/// En-tête pour OLED.
+/// Header for OLED.
 #define OLED_HEADER "FDRS"
-/// Intervalle de changement de page pour OLED en secondes.
+/// OLED page change interval in seconds.
 #define OLED_PAGE_SECS 30
-/// Broche RST pour OLED.
+/// RST pin for OLED.
 #define OLED_RST 16
 
 // RTC - I2C
@@ -95,17 +95,17 @@
 // #define USE_RTC_DS1307
 // #define RTC_ADDR 0x68
 
-// Broches de l'interface de données UART (ESP32 uniquement)
+// UART data interface pins (ESP32 only)
 //#define RXD2 14
 //#define TXD2 15
 
-//#define USE_LR  // Utiliser le mode ESP-NOW LR (ESP32 uniquement)
+//#define USE_LR  // Use ESP-NOW LR mode (ESP32 only)
 
-// Crédits WiFi et MQTT -- Ces paramètres remplaceront les paramètres globaux
+// WiFi and MQTT credentials -- These settings will override global settings
 //#define WIFI_SSID   "Your SSID"
 //#define WIFI_PASS   "Your Password"
 
-// Utiliser une adresse IP statique pour les connexions WiFi
+// Use a static IP address for WiFi connections
 // #define USE_STATIC_IPADDRESS
 // #define HOST_IPADDRESS      "192.168.0.100"
 // #define GW_IPADDRESS        "192.168.0.1"
@@ -113,28 +113,28 @@
 // #define DNS1_IPADDRESS      "192.168.0.1"
 // #define DNS2_IPADDRESS      "192.168.0.2"
 
-// Paramètres MQTT
+// MQTT settings
 // #define MQTT_ADDR   "192.168.0.8"
-// #define MQTT_PORT   1883 // Le port MQTT par défaut est 1883
-// #define MQTT_AUTH   // Activer l'authentification MQTT
+// #define MQTT_PORT   1883 // Default MQTT port is 1883
+// #define MQTT_AUTH   // Enable MQTT authentication
 // #define MQTT_USER   "Your MQTT Username"
 // #define MQTT_PASS   "Your MQTT Password"
 // #define TOPIC_DATA    "fdrs/data"
 // #define TOPIC_STATUS  "fdrs/status"
 // #define TOPIC_COMMAND "fdrs/command"
 
-// Paramètres de l'heure NTP pour les passerelles
-/// Règles de l'heure d'été : utiliser USDST pour les règles des États-Unis, EUDST pour l'Union Européenne.
+// NTP time settings for gateways
+/// Daylight saving time rules: use USDST for US rules, EUDST for European Union.
 #define DST_RULE        USDST
-/// Serveur de temps NTP.
+/// NTP time server.
 #define TIME_SERVER       "0.us.pool.ntp.org"
-/// Décalage standard en heures par rapport à UTC.
+/// Standard offset in hours from UTC.
 #define STD_OFFSET      (-6)
-/// Décalage de l'heure d'été en heures par rapport à UTC.
+/// Daylight saving time offset in hours from UTC.
 #define DST_OFFSET      (STD_OFFSET + 1)
-/// Intervalle en minutes entre les requêtes NTP.
+/// Interval in minutes between NTP requests.
 #define TIME_FETCHNTP     60
-/// Intervalle en minutes entre l'affichage de l'heure locale dans le débogage.
+/// Interval in minutes between local time display in debugging.
 #define TIME_PRINTTIME    15
-/// Intervalle en minutes entre les envois de temps aux appareils distants.
+/// Interval in minutes between time broadcasts to remote devices.
 #define TIME_SEND_INTERVAL 10
